@@ -44,7 +44,7 @@ export default [
     },
     rules: {
       semi: ['error', 'never'],
-      "@typescript-eslint/semi": "off",
+      '@typescript-eslint/semi': 'off',
       'prettier/prettier': ['error', { semi: false }],
       'simple-import-sort/imports': 'warn',
       'simple-import-sort/exports': 'warn',
@@ -53,6 +53,12 @@ export default [
     settings: {
       react: {
         version: 'detect',
+      },
+      'import/resolver': {
+        alias: {
+          map: [['@', './src']],
+          extensions: ['.ts', '.tsx', '.js', '.jsx'],
+        },
       },
     },
   },
