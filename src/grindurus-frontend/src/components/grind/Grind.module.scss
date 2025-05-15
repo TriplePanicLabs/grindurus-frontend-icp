@@ -96,6 +96,7 @@
 @media screen and (max-width: 730px) {
   .grind-form {
     width: fit-content;
+    height: fit-content;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -151,6 +152,14 @@
       width: 200px;
       height: 200px;
     }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
