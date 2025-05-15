@@ -1,5 +1,6 @@
 import react from '@vitejs/plugin-react'
 import * as dotenv from 'dotenv'
+import * as path from 'path'
 import { fileURLToPath, URL } from 'url'
 import { defineConfig } from 'vite'
 import environment from 'vite-plugin-environment'
@@ -35,6 +36,10 @@ export default defineConfig({
       {
         find: 'declarations',
         replacement: fileURLToPath(new URL('../declarations', import.meta.url)),
+      },
+      {
+        find: '@',
+        replacement: path.resolve(__dirname, 'src'),
       },
     ],
     dedupe: ['@dfinity/agent'],
