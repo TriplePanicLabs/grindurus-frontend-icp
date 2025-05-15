@@ -5,6 +5,7 @@ import ConnectWallet from './components/connect/ConnectWallet'
 import Dashboard from './components/dashboard/Dashboard'
 import GrAI from './components/grAI/GrAI'
 import GrETH from './components/grETH/GrETH'
+import Grind from './components/grind/Grind'
 import GrinderAI from './components/grinderAI/GrinderAI'
 import Header from './components/header/Header'
 import Pool from './components/pool/Pool'
@@ -65,6 +66,14 @@ function App() {
             element={
               <RouterGuard networkConfig={networkConfig} isConnected={isConnected}>
                 <GrAI />
+              </RouterGuard>
+            }
+          />
+          <Route
+            path="/grind"
+            element={
+              <RouterGuard networkConfig={networkConfig} isConnected={isConnected}>
+                <Grind />
               </RouterGuard>
             }
           />

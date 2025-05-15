@@ -1,0 +1,169 @@
+@import '../../styles/mixins';
+
+.grind-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  height: 100%;
+}
+
+.grind-section, .container {
+  height: 100%;
+}
+
+.grind {
+  position: relative;
+  padding-right: 10px;
+  padding-bottom: 40px;
+  outline: none;
+  stroke: none;
+
+  &:active, &:focus {
+    outline: none;
+    stroke: none;
+  }
+
+  &-button {
+    position: relative;
+    z-index: 10;
+    width: 30vw;
+    height: 30vw;
+    background-color: #933dc9;
+    border: 1px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 50%;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    @include adaptiveValue("font-size", 60, 0);
+
+    &.active {
+      transform: translate(10px, 20px);
+    }
+  }
+
+  .background {
+    z-index: 1;
+    position: absolute;
+    width: 30vw;
+    height: 30vw;
+    top: 20px;
+    left: 10px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.content {
+  padding: 20px;
+  border: 1px solid #fff;
+  border-radius: 8px;
+}
+
+.content, .grinder-ai, .tokens-infos {
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}
+
+.tokens-infos {
+  text-align: right;
+}
+
+.token-info {
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+}
+
+.grinder-ai {
+  display: flex;
+  gap: 15px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button {
+  width: 100%;
+}
+
+@media screen and (max-width: 730px) {
+  .grind-form {
+    width: fit-content;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  
+  .grind-section, .container {
+    height: 100%;
+  }
+  
+  .grind {
+    margin: 0 auto;
+  
+    &-button {
+      width: 40vw;
+      height: 40vw;
+      @include adaptiveValue("font-size", 60, 20);
+  
+      &.active {
+        transform: translate(10px, 20px);
+      }
+    }
+  
+    .background {
+      width: 40vw;
+      height: 40vw;
+    }
+  }
+  
+  .content {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .grind {
+    margin: 0 auto;
+    padding-bottom: 10px;
+  
+    &-button {
+      font-size: 20px;
+      width: 200px;
+      height: 200px;
+    }
+  
+    .background {
+      width: 200px;
+      height: 200px;
+    }
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  .grind {
+    &-button {
+      width: 400px;
+      height: 400px;
+    }
+  
+    .background {
+      width: 400px;
+      height: 400px;
+    }
+  }
+}

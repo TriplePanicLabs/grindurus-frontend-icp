@@ -1,0 +1,59 @@
+@function to-rem($px, $current: 16) {
+	$result: ($px / $current) + rem;
+	@return $result;
+}
+
+@function to-em($px, $current: 16) {
+	$result: ($px / $current) + em;
+	@return $result;
+}
+
+@mixin adaptiveValue($property, $startSize, $minSize, $keepSize: 0, $widthFrom: 1480, $widthTo: 320) {
+  @if $startSize == 0 {
+    $startSize: 0.000001;
+  }
+  @if $minSize == 0 {
+    $minSize: 0.000001;
+  }
+
+  $addSize: ($startSize - $minSize) / 16;
+  $widthFromMedia: to-em($widthFrom);
+  $widthToMedia: to-em($widthTo);
+  $slope: ($startSize - $minSize) / ($widthFrom - $widthTo);
+  $yIntersection: -$widthTo * $slope + $minSize;
+  @if $yIntersection == 0 {
+    $yIntersection: 0.000001;
+  }
+
+  $flyValue: #{to-rem($yIntersection)}" + "#{$slope * 100}vw;
+  $propertyValue: #{"clamp(" to-rem($minSize) "," $flyValue "," to-rem($startSize) ")"};
+
+  @if $minSize > $startSize {
+    $propertyValue: #{"clamp(" to-rem($startSize) "," $flyValue "," to-rem($minSize) ")"};
+  }
+
+  @if $keepSize != 1 and $keepSize != 3 {
+    @media (min-width: $widthFromMedia) {
+      #{$property}: to-rem($startSize);
+    }
+  }
+
+  @media (min-width: $widthToMedia) and (max-width: $widthFromMedia) {
+    @supports (#{$property}: $propertyValue) {
+      #{$property}: $propertyValue;
+    }
+
+    @supports not (#{$property}: $propertyValue) {
+      $fromRem: $widthFrom / 16;
+      $to-rem: $widthTo / 16;
+
+      #{$property}: calc(#{to-rem($minSize)} + #{$addSize} * (100vw - #{to-rem($widthTo)}) / #{($fromRem - $to-rem)});
+    }
+  }
+
+  @if $keepSize != 1 and $keepSize != 2 {
+    @media (max-width: $widthToMedia) {
+      #{$property}: to-rem($minSize);
+    }
+  }
+}
