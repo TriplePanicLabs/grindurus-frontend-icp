@@ -21,7 +21,7 @@ GrindURUS is a decentralized protocol with multiple components. This frontend pr
    - Includes:
       - **TotalInfo**: Shows total agents created, funds deposited, pools minted, grETH grinded
       - **IntentNFT Form**: Allows users to mint an `IntentNFT` which allow to auto grinds pools.
-      - **Deposit Form**: Enables users to deposit tokens and mint a new isolated pool.
+      - **Create Form**: Enables users to deposit tokens and mint a new isolated pool or agent.
 - **Tables Section**:
    - Allow to choose and view table
    - Includes:
