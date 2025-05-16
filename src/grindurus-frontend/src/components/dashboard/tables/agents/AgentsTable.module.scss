@@ -135,7 +135,7 @@
   }
 }
 
-@media screen and (width <= 1230px) {
+@media screen and (max-width: 1230px) {
   .body {
     flex-direction: column;
   }
@@ -151,7 +151,7 @@
   }
 }
 
-@media screen and (width <= 1000px) {
+@media screen and (max-width: 1000px) {
   .content {
     align-items: flex-start;
     flex-direction: column;
@@ -162,13 +162,13 @@
   }
 }
 
-@media screen and (width <= 880px) {
+@media screen and (max-width: 880px) {
   .pools {
     max-width: 455px;
   }
 }
 
-@media screen and (width <= 650px) {
+@media screen and (max-width: 650px) {
   .agent-header {
     flex-direction: column;
     align-items: flex-start;
@@ -189,7 +189,7 @@
   }
 }
 
-@media screen and (width <= 550px) {
+@media screen and (max-width: 550px) {
   .info-params {
     display: none;
 

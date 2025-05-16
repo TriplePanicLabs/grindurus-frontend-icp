@@ -80,7 +80,7 @@
   }
 }
 
-@media screen and (width <= 1050px) {
+@media screen and (max-width: 1050px) {
   .pool {
     display: block;
   }
@@ -101,7 +101,7 @@
   }
 }
 
-@media screen and (width <= 815px) {
+@media screen and (max-width: 815px) {
   .body {
     flex-direction: column-reverse;
     align-items: flex-start;
@@ -112,7 +112,7 @@
   }
 }
 
-@media screen and (width <= 650px) {
+@media screen and (max-width: 650px) {
   .header {
     align-items: flex-start;
     flex-direction: column;
@@ -145,7 +145,7 @@
   }
 }
 
-@media screen and (width <= 510px) {
+@media screen and (max-width: 510px) {
   .infos {
     gap: 20px;
   }
