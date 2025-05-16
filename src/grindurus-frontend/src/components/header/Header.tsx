@@ -39,6 +39,11 @@ function Header() {
                 grAI
               </Link>
             </li>
+            <li onClick={() => setIsMenuOpen(!isMenuOpen)} className={styles['menu-item']}>
+              <Link to="grind" className={styles['menu-link']}>
+                Grind
+              </Link>
+            </li>
           </ul>
           <div className={styles['navigation-buttons']}>
             <button
