@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import logoArbitrum from '@/assets/images/logoArbitrum.png'
+import logoArbitrum from '@/assets/tokens/logoArbitrum.png'
 import { CopiedAddress } from '@/components/ui'
 import { useProtocolContext } from '@/context/ProtocolContext'
 import { useIsMobile } from '@/hooks'

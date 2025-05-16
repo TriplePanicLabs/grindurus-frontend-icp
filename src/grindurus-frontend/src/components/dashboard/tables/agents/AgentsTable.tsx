@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import visible from '@/assets/images/eye.svg'
-import logoArbitrum from '@/assets/images/logoArbitrum.png'
+import visible from '@/assets/icons/eye.svg'
+import logoArbitrum from '@/assets/tokens/logoArbitrum.png'
 
 import styles from './AgentsTable.module.scss'
 
