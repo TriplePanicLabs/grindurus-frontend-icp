@@ -2,8 +2,9 @@ import { useAppKitAccount } from '@reown/appkit/react'
 import { ethers } from 'ethers'
 import React, { useEffect, useState } from 'react'
 
-import { useProtocolContext } from '../../../context/ProtocolContext'
-import { Checkbox, FormGroup, Option, Select } from '../../ui'
+import { Checkbox, FormGroup, Option, Select } from '@/components/ui'
+import { useProtocolContext } from '@/context/ProtocolContext'
+
 import styles from './Burn.module.scss'
 
 function Burn() {

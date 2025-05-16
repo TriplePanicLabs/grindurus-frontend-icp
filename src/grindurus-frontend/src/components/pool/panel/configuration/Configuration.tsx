@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 
-import { useProtocolContext } from '../../../../context/ProtocolContext'
-import { Strategy, Strategy__factory } from '../../../../typechain-types'
-import { IPoolsNFTLens } from '../../../../typechain-types/PoolsNFT'
-import { FormGroup, Option, Select } from '../../../ui'
+import { FormGroup, Option, Select } from '@/components/ui'
+import { useProtocolContext } from '@/context/ProtocolContext'
+import { Strategy, Strategy__factory } from '@/typechain-types'
+import { IPoolsNFTLens } from '@/typechain-types/PoolsNFT'
+
 import styles from './Configuration.module.scss'
 
 type ConfigurationProps = {

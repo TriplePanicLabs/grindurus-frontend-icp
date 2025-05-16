@@ -3,11 +3,11 @@ import { debounce } from 'lodash'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import visible from '../../../../assets/images/eye.svg'
-import logoArbitrum from '../../../../assets/images/logoArbitrum.png'
-import { useProtocolContext } from '../../../../context/ProtocolContext'
-import { IPoolsNFTLens } from '../../../../typechain-types/PoolsNFT'
-import { Table } from '../../../ui'
+import visible from '@/assets/images/eye.svg'
+import logoArbitrum from '@/assets/images/logoArbitrum.png'
+import { useProtocolContext } from '@/context/ProtocolContext'
+import { IPoolsNFTLens } from '@/typechain-types/PoolsNFT'
+
 import styles from './PoolsTable.module.scss'
 
 interface PoolData {

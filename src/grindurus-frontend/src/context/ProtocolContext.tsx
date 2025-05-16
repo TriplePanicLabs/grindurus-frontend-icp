@@ -2,7 +2,7 @@ import { useAppKitAccount, useAppKitNetwork, useAppKitProvider } from '@reown/ap
 import { BrowserProvider, Eip1193Provider, JsonRpcSigner } from 'ethers'
 import React, { createContext, ReactNode, useContext, useEffect, useMemo, useState } from 'react'
 
-import config from '../config'
+import config from '@/config'
 import {
   GrAI,
   GrAI__factory,
@@ -14,8 +14,8 @@ import {
   PoolsNFT__factory,
   Registry,
   Registry__factory,
-} from '../typechain-types'
-import { convertDecimalToHex } from '../utils/numbers'
+} from '@/typechain-types'
+import { convertDecimalToHex } from '@/utils/numbers'
 
 type NetworkConfig = (typeof config)[keyof typeof config]
 

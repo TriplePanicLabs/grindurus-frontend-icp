@@ -1,6 +1,7 @@
 import { useAppKit, useAppKitAccount } from '@reown/appkit/react'
 
-import { shortenAddress } from '../../utils/addresses'
+import { shortenAddress } from '@/utils/addresses'
+
 import styles from './ConnectButton.module.scss'
 
 interface ConnectButtonProps {

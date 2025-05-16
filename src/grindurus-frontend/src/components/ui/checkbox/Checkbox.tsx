@@ -1,6 +1,7 @@
 import React, { ReactNode, useState } from 'react'
 
-import checkIcon from '../../../assets/images/checkBlack.svg'
+import checkIcon from '@/assets/images/checkBlack.svg'
+
 import styles from './Checkbox.module.scss'
 
 type CheckboxProps = {

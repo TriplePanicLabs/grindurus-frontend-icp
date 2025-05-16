@@ -2,9 +2,10 @@ import { useAppKitAccount } from '@reown/appkit/react'
 import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 
-import { useProtocolContext } from '../../../../context/ProtocolContext'
-import { useIsMobile } from '../../../../hooks'
-import { Checkbox, FormGroup, InputModal } from '../../../ui'
+import { Checkbox, FormGroup } from '@/components/ui'
+import { useProtocolContext } from '@/context/ProtocolContext'
+import { useIsMobile } from '@/hooks'
+
 import styles from './MintIntent.module.scss'
 
 const GRIND_AMOUNT_MAP = [1, 5, 10, 20, 50, 75, 100]

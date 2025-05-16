@@ -2,10 +2,11 @@ import { useAppKitAccount } from '@reown/appkit/react'
 import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 
-import { useProtocolContext } from '../../../../context/ProtocolContext'
-import { ERC20__factory, Strategy__factory } from '../../../../typechain-types'
-import { IPoolsNFTLens } from '../../../../typechain-types/PoolsNFT'
-import { FormGroup, Switcher } from '../../../ui'
+import { FormGroup, Switcher } from '@/components/ui'
+import { useProtocolContext } from '@/context/ProtocolContext'
+import { ERC20__factory, Strategy__factory } from '@/typechain-types'
+import { IPoolsNFTLens } from '@/typechain-types/PoolsNFT'
+
 import styles from './Interaction.module.scss'
 
 type InteractionProps = {

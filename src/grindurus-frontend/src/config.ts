@@ -1,10 +1,10 @@
-import logoArbitrum from '../src/assets/images/logoArbitrum.png'
-import logoBase from '../src/assets/images/logoBase.png'
-import logoOptimism from '../src/assets/images/logoOptimism.png'
-import logoPolygon from '../src/assets/images/logoPolygon.png'
-import logoUSDC from '../src/assets/images/logoUSDC.png'
-import logoUSDT from '../src/assets/images/logoUSDT.png'
-import logoWETH from '../src/assets/images/logoWETH.png'
+import logoArbitrum from '@/assets/images/logoArbitrum.png'
+import logoBase from '@/assets/images/logoBase.png'
+import logoOptimism from '@/assets/images/logoOptimism.png'
+import logoPolygon from '@/assets/images/logoPolygon.png'
+import logoUSDC from '@/assets/images/logoUSDC.png'
+import logoUSDT from '@/assets/images/logoUSDT.png'
+import logoWETH from '@/assets/images/logoWETH.png'
 
 export interface Token {
   symbol: string

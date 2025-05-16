@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 
-import logoArbitrum from '../../../../assets/images/logoArbitrum.png'
-import { useProtocolContext } from '../../../../context/ProtocolContext'
-import { useIsMobile } from '../../../../hooks'
-import { IIntentsNFT } from '../../../../typechain-types/IntentsNFT'
-import { shortenAddress } from '../../../../utils/addresses'
-import { CopiedAddress } from '../../../ui'
+import logoArbitrum from '@/assets/images/logoArbitrum.png'
+import { CopiedAddress } from '@/components/ui'
+import { useProtocolContext } from '@/context/ProtocolContext'
+import { useIsMobile } from '@/hooks'
+import { IIntentsNFT } from '@/typechain-types/IntentsNFT'
+import { shortenAddress } from '@/utils/addresses'
+
 import styles from './IntentsTable.module.scss'
 
 interface IntentData {

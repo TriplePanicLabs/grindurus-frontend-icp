@@ -2,11 +2,12 @@ import { useAppKitAccount } from '@reown/appkit/react'
 import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 
-import { Token } from '../../../../config'
-import { useProtocolContext } from '../../../../context/ProtocolContext'
-import { useIsMobile } from '../../../../hooks'
-import { ERC20, ERC20__factory } from '../../../../typechain-types'
-import { FormGroup, Option, Select } from '../../../ui'
+import { FormGroup, Option, Select } from '@/components/ui'
+import { Token } from '@/config'
+import { useProtocolContext } from '@/context/ProtocolContext'
+import { useIsMobile } from '@/hooks'
+import { ERC20, ERC20__factory } from '@/typechain-types'
+
 import styles from './MintPool.module.scss'
 
 function MintPool() {

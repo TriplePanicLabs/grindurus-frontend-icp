@@ -1,7 +1,8 @@
 import { formatUnits } from 'ethers'
 import { useEffect, useState } from 'react'
 
-import { useProtocolContext } from '../../../../context/ProtocolContext'
+import { useProtocolContext } from '@/context/ProtocolContext'
+
 import styles from './TotalInfo.module.scss'
 
 function TotalInfo() {

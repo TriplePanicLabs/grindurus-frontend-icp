@@ -1,10 +1,11 @@
 import { formatUnits } from 'ethers'
 import { useEffect, useState } from 'react'
 
-import { useProtocolContext } from '../../../../context/ProtocolContext'
-import { useIsMobile } from '../../../../hooks'
-import { IPoolsNFTLens } from '../../../../typechain-types/PoolsNFT'
-import { NumberView } from '../../../ui'
+import { NumberView } from '@/components/ui'
+import { useProtocolContext } from '@/context/ProtocolContext'
+import { useIsMobile } from '@/hooks'
+import { IPoolsNFTLens } from '@/typechain-types/PoolsNFT'
+
 import styles from './ThresholdsTable.module.scss'
 
 type ThresholdsTableProps = {

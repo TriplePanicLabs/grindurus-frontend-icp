@@ -2,10 +2,11 @@ import { useAppKit, useAppKitNetwork } from '@reown/appkit/react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import closeIcon from '../../assets/icons/close.svg'
-import menuIcon from '../../assets/icons/menu.svg'
-import logo from '../../assets/logo.svg'
-import ConnectButton from '../connect/ConnectButton'
+import closeIcon from '@/assets/icons/close.svg'
+import menuIcon from '@/assets/icons/menu.svg'
+import logo from '@/assets/logo.svg'
+import ConnectButton from '@/components/connect/ConnectButton'
+
 import styles from './Header.module.scss'
 
 function Header() {

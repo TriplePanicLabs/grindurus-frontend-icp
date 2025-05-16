@@ -1,5 +1,5 @@
-import Header from '../header/Header'
 import Configuration from './configuration/Configuration'
+import Header from './header/Header'
 import PoolInfo from './info/PoolInfo'
 import Interaction from './intercation/Interaction'
 import styles from './Panel.module.scss'

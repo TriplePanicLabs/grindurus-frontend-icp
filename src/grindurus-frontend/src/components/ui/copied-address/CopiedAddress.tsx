@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 
-import checkIcon from '../../../assets/images/check.svg'
-import copyIcon from '../../../assets/images/copy.svg'
+import checkIcon from '@/assets/images/check.svg'
+import copyIcon from '@/assets/images/copy.svg'
+
 import styles from './CopiedAddress.module.scss'
 
 type CopiedAddressProps = {

@@ -2,13 +2,14 @@ import { useAppKitAccount } from '@reown/appkit/react'
 import { ethers } from 'ethers'
 import React, { useEffect, useState } from 'react'
 
-import arbitrumLogo from '../../assets/images/logoArbitrum.png'
-import baseLogo from '../../assets/images/logoBase.png'
-import optimismLogo from '../../assets/images/logoOptimism.png'
-import polygonLogo from '../../assets/images/logoPolygon.png'
-import solanaLogo from '../../assets/images/logoSolana.png'
-import { useProtocolContext } from '../../context/ProtocolContext'
-import { Checkbox, FormGroup, Option, Select } from '../ui'
+import arbitrumLogo from '@/assets/images/logoArbitrum.png'
+import baseLogo from '@/assets/images/logoBase.png'
+import optimismLogo from '@/assets/images/logoOptimism.png'
+import polygonLogo from '@/assets/images/logoPolygon.png'
+import solanaLogo from '@/assets/images/logoSolana.png'
+import { Checkbox, FormGroup, Option, Select } from '@/components/ui'
+import { useProtocolContext } from '@/context/ProtocolContext'
+
 import styles from './GrAI.module.scss'
 
 function GrAI() {

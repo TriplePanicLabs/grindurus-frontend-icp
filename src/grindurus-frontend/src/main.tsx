@@ -4,8 +4,9 @@ import './client'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter as Router } from 'react-router-dom'
 
+import { ProtocolContextProvider } from '@/context/ProtocolContext'
+
 import App from './App'
-import { ProtocolContextProvider } from './context/ProtocolContext'
 
 const rootElement = document.getElementById('root')
 

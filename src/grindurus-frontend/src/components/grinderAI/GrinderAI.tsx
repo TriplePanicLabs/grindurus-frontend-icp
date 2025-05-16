@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 
 import styles from './GrinderAI.module.scss'
 

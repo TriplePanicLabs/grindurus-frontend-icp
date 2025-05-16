@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 
-import { useProtocolContext } from '../../../../context/ProtocolContext'
-import { useIsMobile } from '../../../../hooks'
-import { IPoolsNFTLens } from '../../../../typechain-types/PoolsNFT'
-import { shortenAddress } from '../../../../utils/addresses'
-import { CopiedAddress } from '../../../ui'
+import { CopiedAddress } from '@/components/ui'
+import { useProtocolContext } from '@/context/ProtocolContext'
+import { useIsMobile } from '@/hooks'
+import { IPoolsNFTLens } from '@/typechain-types/PoolsNFT'
+import { shortenAddress } from '@/utils/addresses'
+
 import styles from './PoolInfo.module.scss'
 
 type PoolInfoProps = {

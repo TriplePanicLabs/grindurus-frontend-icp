@@ -2,7 +2,7 @@ import { AppKitNetwork, arbitrum, base, optimism, polygon } from '@reown/appkit/
 import { createAppKit } from '@reown/appkit/react'
 import { EthersAdapter } from '@reown/appkit-adapter-ethers'
 
-import config from './config'
+import config from '@/config'
 
 type Networks = [AppKitNetwork, ...AppKitNetwork[]]
 

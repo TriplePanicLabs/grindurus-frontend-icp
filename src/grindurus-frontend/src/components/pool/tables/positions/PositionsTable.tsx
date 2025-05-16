@@ -1,9 +1,10 @@
 import { formatUnits } from 'ethers'
 import { useEffect, useState } from 'react'
 
-import { useProtocolContext } from '../../../../context/ProtocolContext'
-import { IPoolsNFTLens } from '../../../../typechain-types/PoolsNFT'
-import { NumberView, Table } from '../../../ui'
+import { NumberView, Table } from '@/components/ui'
+import { useProtocolContext } from '@/context/ProtocolContext'
+import { IPoolsNFTLens } from '@/typechain-types/PoolsNFT'
+
 import styles from './PositionsTable.module.scss'
 
 type PositionsTableProps = {

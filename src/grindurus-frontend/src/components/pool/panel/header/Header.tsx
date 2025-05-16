@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 
-import { useProtocolContext } from '../../../context/ProtocolContext'
+import { useProtocolContext } from '@/context/ProtocolContext'
+
 import styles from './Header.module.scss'
 
 type HeaderProps = {
