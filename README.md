@@ -17,26 +17,48 @@ GrindURUS is a decentralized protocol with multiple components. This frontend pr
 ### 🏠 Dashboard (Completed/Continue Development)
 
 - **Panel Section**:
-  - Displays **total minted pools** and **total minted grETH**.
-- **IntentNFT Form**:
-  - Allows users to mint an `IntentNFT` which automatically grinds pools.
-- **Deposit Form**:
-  - Enables users to deposit tokens and mint a new isolated pool.
+   - Displays main protocol features.
+   - Includes:
+      - **TotalInfo**: Shows total agents created, funds deposited, pools minted, grETH grinded
+      - **IntentNFT Form**: Allows users to mint an `IntentNFT` which allow to auto grinds pools.
+      - **Deposit Form**: Enables users to deposit tokens and mint a new isolated pool.
+- **Tables Section**:
+   - Allow to choose and view table
+   - Includes:
+      - **Pools**: Shows all minted pools, allow user to search by pool id
+      - **Intents**: Shows all minted intents, allow user to search by token id
+      - **Agents**: Shows all created agents, allow user to search by agent id
 
-### 🧪 grETH (Completed/Continue Development)
-
+### 🧪 grETH (Completed)
 - Burn `grETH` and receive tokens.
 - Mint new `grETH` at a 1:1 ratio with ETH.
 
-### 🤖 Grinder AI (Completed Demo)
+### 🧠 grAI (Completed)
+
+- Interface for the bridge `grAI` token.
+- Functionality under development.
+
+### 📦 Pool (Completed)
+
+- **Panel Section**:
+   - Displays main pool features.
+   - Includes:
+      - **PoolInfo**: Shows addresses of oracles, tokens, pool owner and royalty receiver
+      - **Interaction**: Allows to interact with pool: desposit, withdraw, exist, buy royalty.
+      - **Configuration**: Enables users to configure pool parameters.
+- **Tables Section**:
+   - Shows tables that include pool configs.
+   - Includes:
+      - **Positions**: Shows positions info
+      - **Thresholds**: Shows thresholds info
+
+### ⚙️ Agent (In Progress)
+   - Interface to interation with agent
+
+### 🤖 Grinder AI (Demo Completed/Feature Disabled)
 
 - AI-powered assistant chat.
 - Helps users navigate the protocol and get pool-related info.
-
-### 🧠 grAI (In Progress)
-
-- Interface for the upcoming `grAI` token.
-- Functionality under development.
 
 ## 🛠️ Development
 
