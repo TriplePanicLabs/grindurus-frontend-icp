@@ -62,7 +62,7 @@ function PoolsTable() {
     if (!checkRequired()) return
     setIsLoading(true)
     try {
-      const poolNFTInfos = await poolsNFT!.getPoolNFTInfosBy(poolIds)
+      const poolNFTInfos = await poolsNFT!.getPoolInfosBy(poolIds)
       const formatted = formatTableData(poolNFTInfos)
       setTableData(formatted)
     } catch (err) {

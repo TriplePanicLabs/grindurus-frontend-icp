@@ -8,10 +8,12 @@ import {
   GrAI__factory,
   GrETH,
   GrETH__factory,
-  IntentsNFT,
-  IntentsNFT__factory,
   PoolsNFT,
   PoolsNFT__factory,
+  GrinderAI,
+  GrinderAI__factory,
+  AgentsNFT,
+  AgentsNFT__factory,
   Registry,
   Registry__factory,
 } from '@/typechain-types'
@@ -23,9 +25,10 @@ interface ProtocolContextType {
   provider: BrowserProvider | null
   signer: JsonRpcSigner | null
   poolsNFT: PoolsNFT | null
-  intentsNFT: IntentsNFT | null
   grETH: GrETH | null
   grAI: GrAI | null
+  grinderAI: GrinderAI | null
+  agentsNFT: AgentsNFT | null
   registry: Registry | null
   networkConfig: Partial<NetworkConfig>
   setNetworkConfig: React.Dispatch<React.SetStateAction<Partial<NetworkConfig>>>
@@ -41,9 +44,10 @@ export const ProtocolContextProvider = ({ children }: { children: ReactNode }) =
   const [signer, setSigner] = useState<JsonRpcSigner | null>(null)
   const [networkConfig, setNetworkConfig] = useState<Partial<NetworkConfig>>({})
   const [poolsNFT, setPoolsNFT] = useState<PoolsNFT | null>(null)
-  const [intentsNFT, setIntentsNFT] = useState<IntentsNFT | null>(null)
   const [grETH, setGrETH] = useState<GrETH | null>(null)
   const [grAI, setGrAI] = useState<GrAI | null>(null)
+  const [grinderAI, setGrinderAI] = useState<GrinderAI| null>(null)
+  const [agentsNFT, setAgentsNFT] = useState<AgentsNFT | null>(null)
   const [registry, setRegistry] = useState<Registry | null>(null)
   const [visiblePoolIds, setVisiblePoolIds] = useState<number[]>([])
 
@@ -81,25 +85,28 @@ export const ProtocolContextProvider = ({ children }: { children: ReactNode }) =
   useEffect(() => {
     if (!signer) {
       setPoolsNFT(null)
-      setIntentsNFT(null)
       setGrETH(null)
       setGrAI(null)
+      setGrinderAI(null)
+      setAgentsNFT(null)
       setRegistry(null)
       return
     }
 
     const {
       poolsNFT: poolsAddress,
-      intentsNFT: intentsAddress,
       grETH: grETHAddress,
       grAI: grAIAddress,
+      grinderAI: grinderAIAddress,
+      agentsNFT: agentsNFTAddress,
       registry: registryAddress,
     } = networkConfig ?? {}
 
     setPoolsNFT(poolsAddress ? PoolsNFT__factory.connect(poolsAddress, signer) : null)
-    setIntentsNFT(intentsAddress ? IntentsNFT__factory.connect(intentsAddress, signer) : null)
     setGrETH(grETHAddress ? GrETH__factory.connect(grETHAddress, signer) : null)
     setGrAI(grAIAddress ? GrAI__factory.connect(grAIAddress, signer) : null)
+    setGrinderAI(grinderAIAddress ? GrinderAI__factory.connect(grinderAIAddress, signer): null)
+    setAgentsNFT(agentsNFTAddress ? AgentsNFT__factory.connect(agentsNFTAddress, signer): null)
     setRegistry(registryAddress ? Registry__factory.connect(registryAddress, signer) : null)
   }, [signer, networkConfig])
 
@@ -115,9 +122,10 @@ export const ProtocolContextProvider = ({ children }: { children: ReactNode }) =
       value={{
         provider,
         poolsNFT,
-        intentsNFT,
         grETH,
         grAI,
+        grinderAI,
+        agentsNFT,
         registry,
         networkConfig,
         setNetworkConfig,

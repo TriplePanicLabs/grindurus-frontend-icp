@@ -10,9 +10,9 @@ import solanaLogo from '@/assets/tokens/logoSolana.png'
 import { Checkbox, FormGroup, Option, Select } from '@/components/ui'
 import { useProtocolContext } from '@/context/ProtocolContext'
 
-import styles from './GrAI.module.scss'
+import styles from './BridgeGRAI.module.scss'
 
-function GrAI() {
+function BridgeGRAI() {
   const { grAI } = useProtocolContext()
   const { address: userAddress } = useAppKitAccount()
 
@@ -100,9 +100,9 @@ function GrAI() {
   const isFormValid = bridgeAmount > 0
 
   return (
-    <section className={styles['bridge']}>
+    <section className={styles['bridge-grai']}>
       <div className={`${styles['container']} container`}>
-        <div className={`${styles['bridge-form']} form`}>
+        <div className={`${styles['bridge-grai-form']} form`}>
           <h2 className={`${styles['title']} form-title`}>Bridge grAI</h2>
           <FormGroup label="Chain From">
             <Select
@@ -193,4 +193,4 @@ function GrAI() {
   )
 }
 
-export default GrAI
+export default BridgeGRAI

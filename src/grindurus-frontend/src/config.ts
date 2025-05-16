@@ -24,9 +24,10 @@ export interface ChainConfig {
   logo: string
   poolsNFT: string
   registry: string
-  intentsNFT?: string
   grETH?: string
   grAI?: string
+  grinderAI?: string
+  agentsNFT?: string
   strategies: Strategy[]
   quoteTokens: Token[]
   baseTokens: Token[]
@@ -41,9 +42,10 @@ const config: Record<SupportedChains, ChainConfig> = {
     logo: logoArbitrum,
     poolsNFT: '0x5B42518423A7CB79A21AF455441831F36FDe823C',
     registry: '0x54df142Ed06B7FfEbE99E16cF9FA0c055CB21fD3',
-    intentsNFT: '0x03afbDE12f4E57dbe551a2b8D7BA0F91239207Af',
     grETH: '0x28507773E924380AA02784118034aE706F57bCEb',
     grAI: '0x2cd392CC10887a258019143a710a5Ce2C5B5d88d',
+    grinderAI: '0x03afbDE12f4E57dbe551a2b8D7BA0F91239207Af',
+    agentsNFT: '0x2cd392CC10887a258019143a710a5Ce2C5B5d88d',
     strategies: [
       {
         id: 1,

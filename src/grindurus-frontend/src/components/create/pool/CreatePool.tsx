@@ -8,9 +8,9 @@ import { useProtocolContext } from '@/context/ProtocolContext'
 import { useIsMobile } from '@/hooks'
 import { ERC20, ERC20__factory } from '@/typechain-types'
 
-import styles from './MintPool.module.scss'
+import styles from './CreatePool.module.scss'
 
-function MintPool() {
+function CreatePool() {
   const { provider, networkConfig, poolsNFT } = useProtocolContext()
   const { address: userAddress } = useAppKitAccount()
 
@@ -150,28 +150,10 @@ function MintPool() {
   return (
     <div className={`${styles['form']} form`}>
       <div className={styles['header']}>
-        <h2 className={`${styles['title']} form-title`}>Create</h2>
-        <button
-          className={`${styles['autofill-button']} ${
-            mode === 'grinder' ? styles['active'] : ''
-          } button`}
-        >
-          {isMobile ? 'Autofill' : 'Autofill Fields'}
-        </button>
+        <h2 className={`${styles['title']} form-title`}>Create Pool</h2>
       </div>
-      <div className={styles['select-mode']}>
-        <button
-          onClick={() => setMode('manual')}
-          className={`${styles['mode-button']} ${mode === 'manual' ? styles['active'] : ''}`}
-        >
-          Pool
-        </button>
-        <button
-          onClick={() => setMode('grinder')}
-          className={`${styles['mode-button']} ${mode === 'grinder' ? styles['active'] : ''}`}
-        >
-          Agent
-        </button>
+      <div className={styles['subtitle']}>
+        <h2>Manual creation of pool</h2>
       </div>
       <FormGroup label="Strategy">
         <Select onChange={value => setSelectedStrategyId(value as number)}>
@@ -239,4 +221,4 @@ function MintPool() {
   )
 }
 
-export default MintPool
+export default CreatePool

@@ -3,13 +3,15 @@ import { Route, Routes } from 'react-router-dom'
 
 import ConnectWallet from '@/components/connect/ConnectWallet'
 import Dashboard from '@/components/dashboard/Dashboard'
-import GrAI from '@/components/grAI/GrAI'
+import BridgeGRAI from '@/components/grAI/bridge/BridgeGRAI'
+import Create from '@/components/create/Create'
 import GrETH from '@/components/grETH/GrETH'
 import Grind from '@/components/grind/Grind'
 import GrinderAI from '@/components/grinderAI/GrinderAI'
 import Header from '@/components/header/Header'
 import Pool from '@/components/pool/Pool'
 import { useProtocolContext } from '@/context/ProtocolContext'
+import MintGRAI from './components/grAI/mint/MintGRAI'
 
 type RouterGuardProps = {
   networkConfig: Record<string, any>
@@ -38,10 +40,27 @@ function App() {
       <main className="page">
         <Routes>
           <Route
+            path="/grind"
+            element={
+              <RouterGuard networkConfig={networkConfig} isConnected={isConnected}>
+                <Grind />
+              </RouterGuard>
+            }
+          />
+          <Route
             path="/"
             element={
               <RouterGuard networkConfig={networkConfig} isConnected={isConnected}>
                 <Dashboard />
+              </RouterGuard>
+            }
+          />
+          <Route
+            path="/create"
+            element={
+              <RouterGuard networkConfig={networkConfig} isConnected={isConnected}>
+                {/* <MintPool /> */}
+                <Create />
               </RouterGuard>
             }
           />
@@ -65,15 +84,8 @@ function App() {
             path="/grai"
             element={
               <RouterGuard networkConfig={networkConfig} isConnected={isConnected}>
-                <GrAI />
-              </RouterGuard>
-            }
-          />
-          <Route
-            path="/grind"
-            element={
-              <RouterGuard networkConfig={networkConfig} isConnected={isConnected}>
-                <Grind />
+                <MintGRAI />
+                <BridgeGRAI />
               </RouterGuard>
             }
           />

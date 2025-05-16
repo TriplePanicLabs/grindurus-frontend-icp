@@ -24,24 +24,28 @@ function Header() {
         <nav className={`${styles['navigation']} ${isMenuOpen ? styles['active'] : ''}`}>
           <ul className={styles['menu']}>
             <li onClick={() => setIsMenuOpen(!isMenuOpen)} className={styles['menu-item']}>
+              <Link to="grind" className={styles['menu-link']}>
+                Grind
+              </Link>
+            </li>
+            <li onClick={() => setIsMenuOpen(!isMenuOpen)} className={styles['menu-item']}>
               <Link to="/" className={styles['menu-link']}>
                 Dashboard
               </Link>
             </li>
             <li onClick={() => setIsMenuOpen(!isMenuOpen)} className={styles['menu-item']}>
-              <Link to="/greth" className={styles['menu-link']}>
-                grETH
+              <Link to="create" className={styles['menu-link']}>
+                Create
               </Link>
             </li>
-            {/* <li className={styles['menu-item']}><Link to="grinder-ai" className={styles['menu-link']}>GrinderAI</Link></li> */}
             <li onClick={() => setIsMenuOpen(!isMenuOpen)} className={styles['menu-item']}>
               <Link to="grai" className={styles['menu-link']}>
                 grAI
               </Link>
             </li>
             <li onClick={() => setIsMenuOpen(!isMenuOpen)} className={styles['menu-item']}>
-              <Link to="grind" className={styles['menu-link']}>
-                Grind
+              <Link to="/greth" className={styles['menu-link']}>
+                grETH
               </Link>
             </li>
           </ul>

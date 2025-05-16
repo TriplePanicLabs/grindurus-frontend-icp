@@ -3,26 +3,14 @@
     "type": "function",
     "name": "MIN_HEDGE_NUMBER_MAX",
     "inputs": [],
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint8",
-        "internalType": "uint8"
-      }
-    ],
+    "outputs": [{ "name": "", "type": "uint8", "internalType": "uint8" }],
     "stateMutability": "view"
   },
   {
     "type": "function",
     "name": "MIN_LONG_NUMBER_MAX",
     "inputs": [],
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint8",
-        "internalType": "uint8"
-      }
-    ],
+    "outputs": [{ "name": "", "type": "uint8", "internalType": "uint8" }],
     "stateMutability": "view"
   },
   {
@@ -40,11 +28,7 @@
         "type": "uint256",
         "internalType": "uint256"
       },
-      {
-        "name": "ROIPeriod",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
+      { "name": "ROIPeriod", "type": "uint256", "internalType": "uint256" }
     ],
     "stateMutability": "view"
   },
@@ -57,11 +41,7 @@
         "type": "uint256",
         "internalType": "uint256"
       },
-      {
-        "name": "newPrice",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
+      { "name": "newPrice", "type": "uint256", "internalType": "uint256" }
     ],
     "outputs": [],
     "stateMutability": "nonpayable"
@@ -71,11 +51,7 @@
     "name": "baseToken",
     "inputs": [],
     "outputs": [
-      {
-        "name": "",
-        "type": "address",
-        "internalType": "contract IToken"
-      }
+      { "name": "", "type": "address", "internalType": "contract IToken" }
     ],
     "stateMutability": "view"
   },
@@ -89,11 +65,7 @@
         "type": "uint256",
         "internalType": "uint256"
       },
-      {
-        "name": "price",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
+      { "name": "price", "type": "uint256", "internalType": "uint256" }
     ],
     "stateMutability": "nonpayable"
   },
@@ -193,11 +165,7 @@
         "type": "uint256",
         "internalType": "uint256"
       },
-      {
-        "name": "thresholdLow",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
+      { "name": "thresholdLow", "type": "uint256", "internalType": "uint256" }
     ],
     "stateMutability": "view"
   },
@@ -206,21 +174,13 @@
     "name": "calcHedgeSellThreshold",
     "inputs": [],
     "outputs": [
-      {
-        "name": "liquidity",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
+      { "name": "liquidity", "type": "uint256", "internalType": "uint256" },
       {
         "name": "quoteTokenAmountThreshold",
         "type": "uint256",
         "internalType": "uint256"
       },
-      {
-        "name": "targetPrice",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
+      { "name": "targetPrice", "type": "uint256", "internalType": "uint256" },
       {
         "name": "swapPriceThreshold",
         "type": "uint256",
@@ -240,36 +200,15 @@
       }
     ],
     "outputs": [
-      {
-        "name": "liquidity",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
+      { "name": "liquidity", "type": "uint256", "internalType": "uint256" },
       {
         "name": "quoteTokenAmountThreshold",
         "type": "uint256",
         "internalType": "uint256"
       },
-      {
-        "name": "targetPrice",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
+      { "name": "targetPrice", "type": "uint256", "internalType": "uint256" },
       {
         "name": "swapPriceThreshold",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
-    ],
-    "stateMutability": "view"
-  },
-  {
-    "type": "function",
-    "name": "calcInvestCoef",
-    "inputs": [],
-    "outputs": [
-      {
-        "name": "investCoef",
         "type": "uint256",
         "internalType": "uint256"
       }
@@ -288,19 +227,6 @@
       },
       {
         "name": "swapPriceThreshold",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
-    ],
-    "stateMutability": "view"
-  },
-  {
-    "type": "function",
-    "name": "calcMaxLiquidity",
-    "inputs": [],
-    "outputs": [
-      {
-        "name": "",
         "type": "uint256",
         "internalType": "uint256"
       }
@@ -371,11 +297,7 @@
       }
     ],
     "outputs": [
-      {
-        "name": "price",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
+      { "name": "price", "type": "uint256", "internalType": "uint256" }
     ],
     "stateMutability": "view"
   },
@@ -384,11 +306,7 @@
     "name": "calcTargetHedgePrice",
     "inputs": [],
     "outputs": [
-      {
-        "name": "targetPrice",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
+      { "name": "targetPrice", "type": "uint256", "internalType": "uint256" }
     ],
     "stateMutability": "view"
   },
@@ -396,28 +314,12 @@
     "type": "function",
     "name": "calcTargetHedgePrice",
     "inputs": [
-      {
-        "name": "hedgeNumber",
-        "type": "uint8",
-        "internalType": "uint8"
-      },
-      {
-        "name": "priceMin",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
-      {
-        "name": "priceMax",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
+      { "name": "hedgeNumber", "type": "uint8", "internalType": "uint8" },
+      { "name": "priceMin", "type": "uint256", "internalType": "uint256" },
+      { "name": "priceMax", "type": "uint256", "internalType": "uint256" }
     ],
     "outputs": [
-      {
-        "name": "targetPrice",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
+      { "name": "targetPrice", "type": "uint256", "internalType": "uint256" }
     ],
     "stateMutability": "view"
   },
@@ -466,54 +368,31 @@
   },
   {
     "type": "function",
-    "name": "deposit3",
-    "inputs": [
-      {
-        "name": "quoteTokenAmount",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
-    ],
+    "name": "evalInvestCoef",
+    "inputs": [],
     "outputs": [
-      {
-        "name": "swappedBaseTokenAmount",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
+      { "name": "investCoef", "type": "uint256", "internalType": "uint256" }
     ],
-    "stateMutability": "nonpayable"
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "evalMaxLiquidity",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "view"
   },
   {
     "type": "function",
     "name": "execute",
     "inputs": [
-      {
-        "name": "target",
-        "type": "address",
-        "internalType": "address"
-      },
-      {
-        "name": "value",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
-      {
-        "name": "data",
-        "type": "bytes",
-        "internalType": "bytes"
-      }
+      { "name": "target", "type": "address", "internalType": "address" },
+      { "name": "value", "type": "uint256", "internalType": "uint256" },
+      { "name": "data", "type": "bytes", "internalType": "bytes" }
     ],
     "outputs": [
-      {
-        "name": "success",
-        "type": "bool",
-        "internalType": "bool"
-      },
-      {
-        "name": "result",
-        "type": "bytes",
-        "internalType": "bytes"
-      }
+      { "name": "success", "type": "bool", "internalType": "bool" },
+      { "name": "result", "type": "bytes", "internalType": "bytes" }
     ],
     "stateMutability": "payable"
   },
@@ -540,11 +419,7 @@
     "name": "feeToken",
     "inputs": [],
     "outputs": [
-      {
-        "name": "",
-        "type": "address",
-        "internalType": "contract IToken"
-      }
+      { "name": "", "type": "address", "internalType": "contract IToken" }
     ],
     "stateMutability": "view"
   },
@@ -552,13 +427,7 @@
     "type": "function",
     "name": "getActiveCapital",
     "inputs": [],
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
-    ],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
     "stateMutability": "view"
   },
   {
@@ -566,11 +435,7 @@
     "name": "getBaseToken",
     "inputs": [],
     "outputs": [
-      {
-        "name": "",
-        "type": "address",
-        "internalType": "contract IToken"
-      }
+      { "name": "", "type": "address", "internalType": "contract IToken" }
     ],
     "stateMutability": "view"
   },
@@ -578,13 +443,7 @@
     "type": "function",
     "name": "getBaseTokenAmount",
     "inputs": [],
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
-    ],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
     "stateMutability": "view"
   },
   {
@@ -592,21 +451,9 @@
     "name": "getConfig",
     "inputs": [],
     "outputs": [
-      {
-        "name": "longNumberMax",
-        "type": "uint8",
-        "internalType": "uint8"
-      },
-      {
-        "name": "hedgeNumberMax",
-        "type": "uint8",
-        "internalType": "uint8"
-      },
-      {
-        "name": "extraCoef",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
+      { "name": "longNumberMax", "type": "uint8", "internalType": "uint8" },
+      { "name": "hedgeNumberMax", "type": "uint8", "internalType": "uint8" },
+      { "name": "extraCoef", "type": "uint256", "internalType": "uint256" },
       {
         "name": "priceVolatilityPercent",
         "type": "uint256",
@@ -628,6 +475,13 @@
         "internalType": "uint256"
       }
     ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getDexParams",
+    "inputs": [],
+    "outputs": [{ "name": "args", "type": "bytes", "internalType": "bytes" }],
     "stateMutability": "view"
   },
   {
@@ -658,47 +512,22 @@
     "name": "getHedge",
     "inputs": [],
     "outputs": [
-      {
-        "name": "number",
-        "type": "uint8",
-        "internalType": "uint8"
-      },
-      {
-        "name": "numberMax",
-        "type": "uint8",
-        "internalType": "uint8"
-      },
-      {
-        "name": "priceMin",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
-      {
-        "name": "liquidity",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
-      {
-        "name": "qty",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
-      {
-        "name": "price",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
-      {
-        "name": "feeQty",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
-      {
-        "name": "feePrice",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
+      { "name": "number", "type": "uint8", "internalType": "uint8" },
+      { "name": "numberMax", "type": "uint8", "internalType": "uint8" },
+      { "name": "priceMin", "type": "uint256", "internalType": "uint256" },
+      { "name": "liquidity", "type": "uint256", "internalType": "uint256" },
+      { "name": "qty", "type": "uint256", "internalType": "uint256" },
+      { "name": "price", "type": "uint256", "internalType": "uint256" },
+      { "name": "feeQty", "type": "uint256", "internalType": "uint256" },
+      { "name": "feePrice", "type": "uint256", "internalType": "uint256" }
     ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getLendingParams",
+    "inputs": [],
+    "outputs": [{ "name": "args", "type": "bytes", "internalType": "bytes" }],
     "stateMutability": "view"
   },
   {
@@ -706,52 +535,33 @@
     "name": "getLong",
     "inputs": [],
     "outputs": [
-      {
-        "name": "number",
-        "type": "uint8",
-        "internalType": "uint8"
-      },
-      {
-        "name": "numberMax",
-        "type": "uint8",
-        "internalType": "uint8"
-      },
-      {
-        "name": "priceMin",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
-      {
-        "name": "liquidity",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
-      {
-        "name": "qty",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
-      {
-        "name": "price",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
-      {
-        "name": "feeQty",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
-      {
-        "name": "feePrice",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
+      { "name": "number", "type": "uint8", "internalType": "uint8" },
+      { "name": "numberMax", "type": "uint8", "internalType": "uint8" },
+      { "name": "priceMin", "type": "uint256", "internalType": "uint256" },
+      { "name": "liquidity", "type": "uint256", "internalType": "uint256" },
+      { "name": "qty", "type": "uint256", "internalType": "uint256" },
+      { "name": "price", "type": "uint256", "internalType": "uint256" },
+      { "name": "feeQty", "type": "uint256", "internalType": "uint256" },
+      { "name": "feePrice", "type": "uint256", "internalType": "uint256" }
     ],
     "stateMutability": "view"
   },
   {
     "type": "function",
-    "name": "getPriceBaseTokensPerFeeToken",
+    "name": "getPendingYield",
+    "inputs": [
+      {
+        "name": "token",
+        "type": "address",
+        "internalType": "contract IToken"
+      }
+    ],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getPriceBaseTokenPerFeeToken",
     "inputs": [
       {
         "name": "quoteTokenPerBaseTokenPrice",
@@ -760,11 +570,7 @@
       }
     ],
     "outputs": [
-      {
-        "name": "baseTokensPerFeeTokenPrice",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
+      { "name": "price", "type": "uint256", "internalType": "uint256" }
     ],
     "stateMutability": "view"
   },
@@ -773,24 +579,16 @@
     "name": "getPriceQuoteTokenPerBaseToken",
     "inputs": [],
     "outputs": [
-      {
-        "name": "price",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
+      { "name": "price", "type": "uint256", "internalType": "uint256" }
     ],
     "stateMutability": "view"
   },
   {
     "type": "function",
-    "name": "getPriceQuoteTokensPerFeeToken",
+    "name": "getPriceQuoteTokenPerFeeToken",
     "inputs": [],
     "outputs": [
-      {
-        "name": "price",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
+      { "name": "price", "type": "uint256", "internalType": "uint256" }
     ],
     "stateMutability": "view"
   },
@@ -827,11 +625,7 @@
     "name": "getQuoteToken",
     "inputs": [],
     "outputs": [
-      {
-        "name": "",
-        "type": "address",
-        "internalType": "contract IToken"
-      }
+      { "name": "", "type": "address", "internalType": "contract IToken" }
     ],
     "stateMutability": "view"
   },
@@ -839,12 +633,55 @@
     "type": "function",
     "name": "getQuoteTokenAmount",
     "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getRealtimePnL",
+    "inputs": [
+      { "name": "spotPrice", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [
+      { "name": "longSellPnL", "type": "int256", "internalType": "int256" },
+      {
+        "name": "hedgeSellInitPnL",
+        "type": "int256",
+        "internalType": "int256"
+      },
+      { "name": "hedgeSellPnL", "type": "int256", "internalType": "int256" },
+      { "name": "hedgeRebuyPnL", "type": "int256", "internalType": "int256" }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getRealtimePnL",
+    "inputs": [],
+    "outputs": [
+      { "name": "longSellPnL", "type": "int256", "internalType": "int256" },
+      {
+        "name": "hedgeSellInitPnL",
+        "type": "int256",
+        "internalType": "int256"
+      },
+      { "name": "hedgeSellPnL", "type": "int256", "internalType": "int256" },
+      { "name": "hedgeRebuyPnL", "type": "int256", "internalType": "int256" }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getRuntime",
+    "inputs": [],
     "outputs": [
       {
-        "name": "",
+        "name": "initLiquidity",
         "type": "uint256",
         "internalType": "uint256"
-      }
+      },
+      { "name": "liquidity", "type": "uint256", "internalType": "uint256" },
+      { "name": "investCoef", "type": "uint256", "internalType": "uint256" }
     ],
     "stateMutability": "view"
   },
@@ -941,6 +778,15 @@
   },
   {
     "type": "function",
+    "name": "grind",
+    "inputs": [],
+    "outputs": [
+      { "name": "iterated", "type": "bool", "internalType": "bool" }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "hedge_rebuy",
     "inputs": [],
     "outputs": [
@@ -977,29 +823,10 @@
   },
   {
     "type": "function",
-    "name": "isLongedMax",
+    "name": "isDrawdown",
     "inputs": [],
-    "outputs": [
-      {
-        "name": "",
-        "type": "bool",
-        "internalType": "bool"
-      }
-    ],
+    "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
     "stateMutability": "view"
-  },
-  {
-    "type": "function",
-    "name": "iterate",
-    "inputs": [],
-    "outputs": [
-      {
-        "name": "iterated",
-        "type": "bool",
-        "internalType": "bool"
-      }
-    ],
-    "stateMutability": "nonpayable"
   },
   {
     "type": "function",
@@ -1042,11 +869,7 @@
     "name": "oracleQuoteTokenPerBaseToken",
     "inputs": [],
     "outputs": [
-      {
-        "name": "",
-        "type": "address",
-        "internalType": "contract AggregatorV3Interface"
-      }
+      { "name": "", "type": "address", "internalType": "contract IOracle" }
     ],
     "stateMutability": "view"
   },
@@ -1055,11 +878,7 @@
     "name": "oracleQuoteTokenPerFeeToken",
     "inputs": [],
     "outputs": [
-      {
-        "name": "",
-        "type": "address",
-        "internalType": "contract AggregatorV3Interface"
-      }
+      { "name": "", "type": "address", "internalType": "contract IOracle" }
     ],
     "stateMutability": "view"
   },
@@ -1067,26 +886,14 @@
     "type": "function",
     "name": "owner",
     "inputs": [],
-    "outputs": [
-      {
-        "name": "",
-        "type": "address",
-        "internalType": "address"
-      }
-    ],
+    "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
     "stateMutability": "view"
   },
   {
     "type": "function",
     "name": "poolId",
     "inputs": [],
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
-    ],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
     "stateMutability": "view"
   },
   {
@@ -1094,11 +901,7 @@
     "name": "poolsNFT",
     "inputs": [],
     "outputs": [
-      {
-        "name": "",
-        "type": "address",
-        "internalType": "contract IPoolsNFT"
-      }
+      { "name": "", "type": "address", "internalType": "contract IPoolsNFT" }
     ],
     "stateMutability": "view"
   },
@@ -1107,11 +910,7 @@
     "name": "quoteToken",
     "inputs": [],
     "outputs": [
-      {
-        "name": "",
-        "type": "address",
-        "internalType": "contract IToken"
-      }
+      { "name": "", "type": "address", "internalType": "contract IToken" }
     ],
     "stateMutability": "view"
   },
@@ -1119,13 +918,7 @@
     "type": "function",
     "name": "reinvest",
     "inputs": [],
-    "outputs": [
-      {
-        "name": "",
-        "type": "bool",
-        "internalType": "bool"
-      }
-    ],
+    "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
     "stateMutability": "view"
   },
   {
@@ -1180,13 +973,16 @@
   },
   {
     "type": "function",
+    "name": "setDexParams",
+    "inputs": [{ "name": "args", "type": "bytes", "internalType": "bytes" }],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "setExtraCoef",
     "inputs": [
-      {
-        "name": "extraCoef",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
+      { "name": "extraCoef", "type": "uint256", "internalType": "uint256" }
     ],
     "outputs": [],
     "stateMutability": "nonpayable"
@@ -1195,12 +991,15 @@
     "type": "function",
     "name": "setHedgeNumberMax",
     "inputs": [
-      {
-        "name": "hedgeNumberMax",
-        "type": "uint8",
-        "internalType": "uint8"
-      }
+      { "name": "hedgeNumberMax", "type": "uint8", "internalType": "uint8" }
     ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "setLendingParams",
+    "inputs": [{ "name": "args", "type": "bytes", "internalType": "bytes" }],
     "outputs": [],
     "stateMutability": "nonpayable"
   },
@@ -1208,11 +1007,7 @@
     "type": "function",
     "name": "setLongNumberMax",
     "inputs": [
-      {
-        "name": "longNumberMax",
-        "type": "uint8",
-        "internalType": "uint8"
-      }
+      { "name": "longNumberMax", "type": "uint8", "internalType": "uint8" }
     ],
     "outputs": [],
     "stateMutability": "nonpayable"
@@ -1221,13 +1016,19 @@
     "type": "function",
     "name": "setOpFeeCoef",
     "inputs": [
+      { "name": "op", "type": "uint8", "internalType": "uint8" },
+      { "name": "feeCoef", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "setOpReturnPercent",
+    "inputs": [
+      { "name": "op", "type": "uint8", "internalType": "uint8" },
       {
-        "name": "op",
-        "type": "uint8",
-        "internalType": "uint8"
-      },
-      {
-        "name": "_feeCoef",
+        "name": "returnPercent",
         "type": "uint256",
         "internalType": "uint256"
       }
@@ -1237,17 +1038,17 @@
   },
   {
     "type": "function",
-    "name": "setOpReturnPercent",
+    "name": "setOracles",
     "inputs": [
       {
-        "name": "op",
-        "type": "uint8",
-        "internalType": "uint8"
+        "name": "oracleQuoteTokenPerFeeToken",
+        "type": "address",
+        "internalType": "address"
       },
       {
-        "name": "returnPercent",
-        "type": "uint256",
-        "internalType": "uint256"
+        "name": "oracleQuoteTokenPerBaseToken",
+        "type": "address",
+        "internalType": "address"
       }
     ],
     "outputs": [],
@@ -1270,26 +1071,14 @@
     "type": "function",
     "name": "startTimestamp",
     "inputs": [],
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
-    ],
+    "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
     "stateMutability": "view"
   },
   {
     "type": "function",
     "name": "strategyId",
     "inputs": [],
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint16",
-        "internalType": "uint16"
-      }
-    ],
+    "outputs": [{ "name": "", "type": "uint16", "internalType": "uint16" }],
     "stateMutability": "view"
   },
   {
@@ -1303,11 +1092,7 @@
     "type": "function",
     "name": "withdraw",
     "inputs": [
-      {
-        "name": "to",
-        "type": "address",
-        "internalType": "address"
-      },
+      { "name": "to", "type": "address", "internalType": "address" },
       {
         "name": "quoteTokenAmount",
         "type": "uint256",
@@ -1327,11 +1112,7 @@
     "type": "function",
     "name": "withdraw2",
     "inputs": [
-      {
-        "name": "to",
-        "type": "address",
-        "internalType": "address"
-      },
+      { "name": "to", "type": "address", "internalType": "address" },
       {
         "name": "baseTokenAmount",
         "type": "uint256",
@@ -1384,79 +1165,20 @@
     ],
     "anonymous": false
   },
-  {
-    "type": "error",
-    "name": "BuyUpperPriceMin",
-    "inputs": []
-  },
-  {
-    "type": "error",
-    "name": "DipUpperThreshold",
-    "inputs": []
-  },
-  {
-    "type": "error",
-    "name": "HedgeSellOutOfBound",
-    "inputs": []
-  },
-  {
-    "type": "error",
-    "name": "Hedged",
-    "inputs": []
-  },
-  {
-    "type": "error",
-    "name": "InvalidOp",
-    "inputs": []
-  },
-  {
-    "type": "error",
-    "name": "Longed",
-    "inputs": []
-  },
-  {
-    "type": "error",
-    "name": "NotAgent",
-    "inputs": []
-  },
-  {
-    "type": "error",
-    "name": "NotGateway",
-    "inputs": []
-  },
-  {
-    "type": "error",
-    "name": "NotHedged",
-    "inputs": []
-  },
-  {
-    "type": "error",
-    "name": "NotLongNumberMax",
-    "inputs": []
-  },
-  {
-    "type": "error",
-    "name": "NotLonged",
-    "inputs": []
-  },
-  {
-    "type": "error",
-    "name": "NotOwner",
-    "inputs": []
-  },
-  {
-    "type": "error",
-    "name": "NotProfitableHedgeSell",
-    "inputs": []
-  },
-  {
-    "type": "error",
-    "name": "NotProfitableLongSell",
-    "inputs": []
-  },
-  {
-    "type": "error",
-    "name": "NotProfitableRebuy",
-    "inputs": []
-  }
+  { "type": "error", "name": "BuyUpperPriceMin", "inputs": [] },
+  { "type": "error", "name": "DexInitialized", "inputs": [] },
+  { "type": "error", "name": "HedgeSellOutOfBound", "inputs": [] },
+  { "type": "error", "name": "Hedged", "inputs": [] },
+  { "type": "error", "name": "InvalidOp", "inputs": [] },
+  { "type": "error", "name": "LendingInitialized", "inputs": [] },
+  { "type": "error", "name": "Longed", "inputs": [] },
+  { "type": "error", "name": "NotAgent", "inputs": [] },
+  { "type": "error", "name": "NotGateway", "inputs": [] },
+  { "type": "error", "name": "NotHedged", "inputs": [] },
+  { "type": "error", "name": "NotLongNumberMax", "inputs": [] },
+  { "type": "error", "name": "NotLonged", "inputs": [] },
+  { "type": "error", "name": "NotOwner", "inputs": [] },
+  { "type": "error", "name": "NotProfitableHedgeSell", "inputs": [] },
+  { "type": "error", "name": "NotProfitableLongSell", "inputs": [] },
+  { "type": "error", "name": "NotProfitableRebuy", "inputs": [] }
 ]
