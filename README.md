@@ -38,6 +38,10 @@ GrindURUS is a decentralized protocol with multiple components. This frontend pr
 - Interface for the bridge `grAI` token.
 - Functionality under development.
 
+### 🔁 Grind (Completed.Continue Development)
+
+- Allows to grind pool choosen by GrinderAI.
+
 ### 📦 Pool (Completed)
 
 - **Panel Section**:
