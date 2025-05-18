@@ -2,13 +2,14 @@ import { useAppKitAccount } from '@reown/appkit/react'
 import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 
-import { FormGroup, Option, Select } from '@/components/ui'
+import { FormGroup, Option, Select, Checkbox } from '@/components/ui'
 import { Token } from '@/config'
 import { useProtocolContext } from '@/context/ProtocolContext'
 import { useIsMobile } from '@/hooks'
 import { ERC20, ERC20__factory } from '@/typechain-types'
 
 import styles from './CreatePool.module.scss'
+import Config from '../config/Config'
 
 function CreatePool() {
   const { provider, networkConfig, poolsNFT } = useProtocolContext()
@@ -27,7 +28,7 @@ function CreatePool() {
   const [quoteTokenAmount, setQuoteTokenAmount] = useState<string>('')
   const [quoteTokenInfo, setQuoteTokenInfo] = useState<Token | null>(null)
 
-  const [mode, setMode] = useState<'manual' | 'grinder'>('manual')
+  const [config, setConfig] = useState({});
 
   const [waitApproving, setWaitApproving] = useState<boolean>(false)
   const [waitMint, setWaitMint] = useState<boolean>(false)
@@ -153,7 +154,7 @@ function CreatePool() {
         <h2 className={`${styles['title']} form-title`}>Create Pool</h2>
       </div>
       <div className={styles['subtitle']}>
-        <h2>Manual creation of pool</h2>
+        <h2>Creation of single and isolated pool</h2>
       </div>
       <FormGroup label="Strategy">
         <Select onChange={value => setSelectedStrategyId(value as number)}>
@@ -198,6 +199,7 @@ function CreatePool() {
           </button>
         </div>
       </FormGroup>
+      <Config setConfig={setConfig} setSubnodesMax={null}/>
       <div className={styles['buttons']}>
         {!isApproved ? (
           <button
@@ -213,7 +215,7 @@ function CreatePool() {
             onClick={handleMint}
             disabled={waitMint}
           >
-            Mint
+            Create Pool
           </button>
         )}
       </div>

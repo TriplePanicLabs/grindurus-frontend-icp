@@ -2,13 +2,14 @@ import { useAppKitAccount } from '@reown/appkit/react'
 import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 
-import { FormGroup, Option, Select } from '@/components/ui'
+import { FormGroup, Option, Select, Checkbox } from '@/components/ui'
 import { Token } from '@/config'
 import { useProtocolContext } from '@/context/ProtocolContext'
 import { useIsMobile } from '@/hooks'
 import { ERC20, ERC20__factory } from '@/typechain-types'
 
 import styles from './CreateAgent.module.scss'
+import Config from '../config/Config'
 
 function CreateAgent() {
   const { provider, networkConfig, poolsNFT } = useProtocolContext()
@@ -27,7 +28,12 @@ function CreateAgent() {
   const [quoteTokenAmount, setQuoteTokenAmount] = useState<string>('')
   const [quoteTokenInfo, setQuoteTokenInfo] = useState<Token | null>(null)
 
-  const [mode, setMode] = useState<'manual' | 'grinder'>('manual')
+  const [config, setConfig] = useState({});
+  
+
+  const [liquidityFragment, setLiqudityFragment] = useState<string>('')
+  const [positionsMax, setPositionsMax] = useState<string>('3')
+  const [subnodesMax, setSubnodesMax] = useState<string>('1')
 
   const [waitApproving, setWaitApproving] = useState<boolean>(false)
   const [waitMint, setWaitMint] = useState<boolean>(false)
@@ -77,21 +83,48 @@ function CreateAgent() {
     }
   }
 
-  const handleMaxDepositQuoteToken = async () => {
+  const recalcMaxLiquidity = async () => {
     try {
       checkRequired()
       setWaitApproving(true)
 
       const balanceRaw = await quoteTokenContract!.balanceOf(userAddress!)
-      const balance = ethers.formatUnits(balanceRaw, quoteTokenInfo!.decimals)
+      const decimals = quoteTokenInfo!.decimals
+      const balance = ethers.formatUnits(balanceRaw, decimals)
 
       setQuoteTokenAmount(balance)
+      if (positionsMax == 'Infinity') {
+        setPositionsMax('3')
+      }
+      const fragment = Number(balance) / Number(positionsMax)
+      setLiqudityFragment(fragment.toFixed(decimals))
     } catch (err) {
       alert('Failed to fetch balance!')
       console.error('Error fetching balance: ', err)
     } finally {
       setWaitApproving(false)
     }
+  }
+
+  const recalcByLiqudity = async (liquidity: string) => {
+    const fragment = Number(liquidity) / Number(positionsMax)
+    setLiqudityFragment(fragment.toFixed(2))
+  }
+
+  const recalcByPositionsMax = async (positons: string) => {
+    const fragment = Number(quoteTokenAmount) / Number(positons)
+    setLiqudityFragment(fragment.toFixed(2))
+  }
+
+  const recalcByLiquidityFragment = async (fragment: string) => {
+    const positionsMax = Math.floor(Number(quoteTokenAmount) / Number(fragment))
+    setPositionsMax(positionsMax.toString())
+  }
+
+  const optimizePositionsMax = async () => {
+    const optimizedPositionsMax = '3'
+    setPositionsMax(optimizedPositionsMax)
+    recalcByPositionsMax(optimizedPositionsMax)
   }
 
   const handleApprove = async () => {
@@ -151,13 +184,16 @@ function CreateAgent() {
     <div className={`${styles['form']} form`}>
       <div className={styles['header']}>
         <h2 className={`${styles['title']} form-title`}>Create Agent</h2>
-        <button
+        {/* <button
           className={`${styles['autofill-button']} ${
-            mode === 'grinder' ? styles['active'] : ''
+            configMode === 'default' ? styles['active'] : ''
           } button`}
         >
           {isMobile ? 'Autofill' : 'Autofill Fields'}
-        </button>
+        </button> */}
+      </div>
+      <div className={styles['subtitle']}>
+        <h2>Creation of agent with automated pools management</h2>
       </div>
       <FormGroup label="Strategy">
         <Select onChange={value => setSelectedStrategyId(value as number)}>
@@ -190,18 +226,62 @@ function CreateAgent() {
             ))}
         </Select>
       </FormGroup>
-      <FormGroup label="Quote Token Amount">
+      <FormGroup label="Liquidity (Quote Token Amount)">
         <div className="form-input">
           <input
             value={quoteTokenAmount}
             placeholder="0"
-            onChange={e => setQuoteTokenAmount(e.target.value)}
+            onChange={e => {
+              setQuoteTokenAmount(e.target.value)
+              recalcByLiqudity(e.target.value)
+            }}
           />
-          <button className="max-button button" type="button" onClick={handleMaxDepositQuoteToken}>
+          <button className="max-button button" type="button" onClick={recalcMaxLiquidity}>
             MAX
           </button>
         </div>
       </FormGroup>
+
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+        <div style={{ width: '49%' }}>
+          <FormGroup 
+            label='Liquidity Fragment'
+            className={styles['form-group-left']}>
+            <div className="form-input">
+              <input
+                value={liquidityFragment}
+                placeholder="0"
+                onChange={e => {
+                  setLiqudityFragment(e.target.value)
+                  recalcByLiquidityFragment(e.target.value)
+                }}
+              />
+            </div>
+          </FormGroup>
+        </div>
+        <div style={{ width: '49%' }}>
+          <FormGroup 
+            label='Liquidity Positions Max' 
+            className={styles['form-group-right']}>
+            <div className="form-input">
+              <input
+                value={positionsMax}
+                placeholder="0"
+                onChange={e => {
+                  setPositionsMax(e.target.value)
+                  recalcByPositionsMax(e.target.value)
+                }}
+              />
+              <button className="max-button button" type="button" onClick={optimizePositionsMax}>
+                OPTIMIZE
+              </button>
+            </div>
+          </FormGroup>
+        </div>
+      </div>
+
+      <Config setConfig={setConfig} setSubnodesMax={setSubnodesMax}/>
+
       <div className={styles['buttons']}>
         {!isApproved ? (
           <button
@@ -217,7 +297,7 @@ function CreateAgent() {
             onClick={handleMint}
             disabled={waitMint}
           >
-            Mint
+            Create Agent
           </button>
         )}
       </div>
