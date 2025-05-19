@@ -1,30 +1,58 @@
-import React, { useState } from 'react';
-import { Checkbox, FormGroup } from '@/components/ui'; // Replace with actual imports
+import React, { useEffect, useState } from 'react';
+import { Checkbox, FormGroup } from '@/components/ui';
+import { ethers } from 'ethers';
+import { IURUS } from '@/typechain-types/AgentsNFT';
 
 function Config({ setConfig, setSubnodesMax }: { setConfig: (config: any) => void; setSubnodesMax: ((value: string) => void) | null }) {
 
     const [configMode, setConfigMode] = useState<'manual' | 'default'>('default')
-    const [localSubnodesMax, setLocalSubnodesMax] = useState('1')
-    const [longNumberMax, setLongNumberMax] = useState('3')
-    const [hedgeNumberMax, setHedgeNumberMax] = useState('3')
-    const [extraCoefficient, setExtraCoefficient] = useState('2.0')
-    const [priceVolatility, setPriceVolatility] = useState('1.0')
-    const [longSellReturnPercent, setLongSellReturnPercent] = useState('100.5')
-    const [hedgeSellReturnPercent, setHedgeSellReturnPercent] = useState('100.5')
-    const [hedgeRebuyReturnPercent, setHedgeRebuyReturnPercent] = useState('100.5')
+    const [localSubnodesMax, setLocalSubnodesMax] = useState<string>('1')
+    const [longNumberMax, setLongNumberMax] = useState<string>('3')
+    const [hedgeNumberMax, setHedgeNumberMax] = useState<string>('3')
+    const [extraCoefficient, setExtraCoefficient] = useState<string>('2.0')
+    const [priceVolatilityPercent, setPriceVolatilityPercent] = useState<string>('1.0')
+    const [returnPercentLongSell, setReturnPercentLongSell] = useState<string>('100.5')
+    const [returnPercentHedgeSell, setReturnPercentHedgeSell] = useState<string>('100.5')
+    const [returnPercentHedgeRebuy, setReturnPercentHedgeRebuy] = useState<string>('100.5')
+
+    useEffect(() => {
+      updateSubnodesMax()
+    }, [localSubnodesMax])
+
+    useEffect(() => {
+      updateConfig()
+    }, [longNumberMax, hedgeNumberMax, extraCoefficient, priceVolatilityPercent, returnPercentLongSell, returnPercentHedgeSell, returnPercentHedgeRebuy])
 
     const updateConfig = () => {
+      try {
+        const longNumberMaxFormatted = ethers.parseUnits(longNumberMax, 0)
+        const hedgeNumberMaxFormatted = ethers.parseUnits(hedgeNumberMax, 0)
+        const extraCoeficientFormatted = ethers.parseUnits(extraCoefficient, 2)
+        const priceVolatilityFormatted = ethers.parseUnits(priceVolatilityPercent, 2)
+        const longSellReturnPercentFormatted = ethers.parseUnits(returnPercentLongSell, 2) 
+        const hedgeSellReturnPercentFormatted = ethers.parseUnits(returnPercentHedgeSell, 2)
+        const hedgeRebuyReturnPercentFormatted = ethers.parseUnits(returnPercentHedgeRebuy, 2)
+
         setConfig({
-            configMode,
-            longNumberMax,
-            hedgeNumberMax,
-            extraCoefficient,
-            priceVolatility,
-            longSellReturnPercent,
-            hedgeSellReturnPercent,
-            hedgeRebuyReturnPercent,
+            longNumberMax: longNumberMaxFormatted,
+            hedgeNumberMax: hedgeNumberMaxFormatted,
+            extraCoef: extraCoeficientFormatted,
+            priceVolatilityPercent: priceVolatilityFormatted,
+            returnPercentLongSell: longSellReturnPercentFormatted,
+            returnPercentHedgeSell: hedgeSellReturnPercentFormatted,
+            returnPercentHedgeRebuy: hedgeRebuyReturnPercentFormatted
         });
+      } catch {
+
+      }
+
     };
+
+    const updateSubnodesMax = () => {
+      if (setSubnodesMax) {
+        setSubnodesMax(localSubnodesMax)
+      }
+    }
 
     return (
       <div className="config">
@@ -54,11 +82,10 @@ function Config({ setConfig, setSubnodesMax }: { setConfig: (config: any) => voi
                       setLongNumberMax('3')
                       setHedgeNumberMax('3')
                       setExtraCoefficient('2.0')
-                      setPriceVolatility('1.0')
-                      setLongSellReturnPercent('100.5')
-                      setHedgeSellReturnPercent('100.5')
-                      setHedgeRebuyReturnPercent('100.5')
-                      updateConfig()
+                      setPriceVolatilityPercent('1.0')
+                      setReturnPercentLongSell('100.5')
+                      setReturnPercentHedgeSell('100.5')
+                      setReturnPercentHedgeRebuy('100.5')
                     }}
                   >
                     Set Default Config
@@ -73,7 +100,6 @@ function Config({ setConfig, setSubnodesMax }: { setConfig: (config: any) => voi
                   placeholder="1"
                   onChange={(e) => {
                     setLocalSubnodesMax(e.target.value)
-                    updateConfig()
                   }}
                   />
                   <button
@@ -82,7 +108,6 @@ function Config({ setConfig, setSubnodesMax }: { setConfig: (config: any) => voi
                   style={{ whiteSpace: 'nowrap' }}
                   onClick={() => {
                       setLocalSubnodesMax('1')
-                      updateConfig();
                   }}
                   >
                   Default
@@ -96,8 +121,9 @@ function Config({ setConfig, setSubnodesMax }: { setConfig: (config: any) => voi
                   value={longNumberMax}
                   placeholder="3"
                   onChange={(e) => {
+                    console.log("tv")
+                    console.log(e.target.value)
                       setLongNumberMax(e.target.value)
-                      updateConfig();
                   }}
                 />
                 <button
@@ -105,8 +131,7 @@ function Config({ setConfig, setSubnodesMax }: { setConfig: (config: any) => voi
                   type="button"
                   style={{ whiteSpace: 'nowrap' }}
                   onClick={() => {
-                      setLongNumberMax('3');
-                      updateConfig();
+                      setLongNumberMax('3')
                   }}
                 >
                   Default
@@ -120,7 +145,6 @@ function Config({ setConfig, setSubnodesMax }: { setConfig: (config: any) => voi
                   placeholder="3"
                   onChange={(e) => {
                       setHedgeNumberMax(e.target.value)
-                      updateConfig();
                   }}
                 />
                 <button
@@ -129,7 +153,6 @@ function Config({ setConfig, setSubnodesMax }: { setConfig: (config: any) => voi
                   style={{ whiteSpace: 'nowrap' }}
                   onClick={() => {
                       setHedgeNumberMax('3');
-                      updateConfig();
                   }}
                 >
                   Default
@@ -143,7 +166,6 @@ function Config({ setConfig, setSubnodesMax }: { setConfig: (config: any) => voi
                   placeholder="2.0"
                   onChange={(e) => {
                       setExtraCoefficient(e.target.value)
-                      updateConfig();
                   }}
                 />
                 <button
@@ -152,7 +174,6 @@ function Config({ setConfig, setSubnodesMax }: { setConfig: (config: any) => voi
                   style={{ whiteSpace: 'nowrap' }}
                   onClick={() => {
                       setExtraCoefficient('2.0')
-                      updateConfig();
                   }}
                 >
                   Default
@@ -162,11 +183,10 @@ function Config({ setConfig, setSubnodesMax }: { setConfig: (config: any) => voi
             <FormGroup label="Price Volatility (%)">
               <div className="form-input">
                 <input
-                  value={priceVolatility}
+                  value={priceVolatilityPercent}
                   placeholder="1"
                   onChange={(e) => {
-                      setPriceVolatility(e.target.value)
-                      updateConfig();
+                    setPriceVolatilityPercent(e.target.value)
                   }}
                 />
                 <button
@@ -174,8 +194,7 @@ function Config({ setConfig, setSubnodesMax }: { setConfig: (config: any) => voi
                   type="button"
                   style={{ whiteSpace: 'nowrap' }}
                   onClick={() => {
-                      setPriceVolatility('1.0')
-                      updateConfig();
+                    setPriceVolatilityPercent('1.0')
                   }}
                 >
                   Default
@@ -185,11 +204,10 @@ function Config({ setConfig, setSubnodesMax }: { setConfig: (config: any) => voi
             <FormGroup label="Long Sell Return Percent (%)">
               <div className="form-input">
                 <input
-                  value={longSellReturnPercent}
+                  value={returnPercentLongSell}
                   placeholder="3"
                   onChange={(e) => {
-                      setLongSellReturnPercent(e.target.value)
-                      updateConfig();
+                    setReturnPercentLongSell(e.target.value)
                   }}
                 />
                 <button
@@ -197,8 +215,7 @@ function Config({ setConfig, setSubnodesMax }: { setConfig: (config: any) => voi
                   type="button"
                   style={{ whiteSpace: 'nowrap' }}
                   onClick={() => {
-                      setLongSellReturnPercent('100.5')
-                      updateConfig();
+                    setReturnPercentLongSell('100.5')
                   }}
                 >
                   Default
@@ -208,11 +225,10 @@ function Config({ setConfig, setSubnodesMax }: { setConfig: (config: any) => voi
             <FormGroup label="Hedge Sell Return Percent (%)">
               <div className="form-input">
                 <input
-                  value={hedgeSellReturnPercent}
+                  value={returnPercentHedgeSell}
                   placeholder="100.5"
                   onChange={(e) => {
-                      setHedgeSellReturnPercent(e.target.value)
-                      updateConfig();
+                      setReturnPercentHedgeSell(e.target.value)
                   }}
                 />
                 <button
@@ -220,8 +236,7 @@ function Config({ setConfig, setSubnodesMax }: { setConfig: (config: any) => voi
                   type="button"
                   style={{ whiteSpace: 'nowrap' }}
                   onClick={() => {
-                      setHedgeSellReturnPercent('100.5')
-                      updateConfig();
+                      setReturnPercentHedgeSell('100.5')
                   }}
                 >
                   Default
@@ -231,11 +246,10 @@ function Config({ setConfig, setSubnodesMax }: { setConfig: (config: any) => voi
             <FormGroup label="Hedge Rebuy Return Percent (%)">
               <div className="form-input">
               <input
-                value={hedgeRebuyReturnPercent}
+                value={returnPercentHedgeRebuy}
                 placeholder="100.5"
                 onChange={(e) => {
-                    setHedgeRebuyReturnPercent(e.target.value)
-                    updateConfig();
+                  setReturnPercentHedgeRebuy(e.target.value)
                 }}
               />
               <button
@@ -243,8 +257,7 @@ function Config({ setConfig, setSubnodesMax }: { setConfig: (config: any) => voi
                 type="button"
                 style={{ whiteSpace: 'nowrap' }}
                 onClick={() => {
-                    setHedgeRebuyReturnPercent('100.5')
-                    updateConfig();
+                  setReturnPercentHedgeRebuy('100.5')
                 }}
               >
                 Default

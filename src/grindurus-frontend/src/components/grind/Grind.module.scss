@@ -8,8 +8,32 @@
   height: 100%;
 }
 
-.grind-section, .container {
-  height: 100%;
+.grind-section {
+  display: flex;
+  flex-direction: column; // Убедитесь, что содержимое располагается вертикально
+  justify-content: flex-start; // Начало содержимого сверху
+  align-items: center; // Центрирование по горизонтали
+  min-height: 100vh; // Минимальная высота секции — высота экрана
+  padding: 20px; // Отступы
+  box-sizing: border-box; // Учитываем отступы в размерах
+}
+
+.container {
+  flex-grow: 1; // Контейнер будет расширяться, чтобы заполнить доступное пространство
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; // Начало содержимого сверху
+  align-items: center; // Центрирование по горизонтали
+  width: 100%; // Контейнер занимает всю ширину
+}
+
+.grind-form {
+  display: flex;
+  flex-direction: column; // Содержимое располагается вертикально
+  justify-content: center; // Центрирование содержимого по вертикали
+  align-items: center; // Центрирование содержимого по горизонтали
+  gap: 30px;
+  width: 100%; // Растягиваем форму на всю ширину
 }
 
 .grind {
@@ -92,6 +116,16 @@
 .button {
   width: 100%;
 }
+
+.grinder-share {
+  margin-bottom: 10px;
+}
+
+.pool-owner-share {
+  margin-top: 10px;
+}
+
+
 
 @media screen and (max-width: 730px) {
   .grind-form {

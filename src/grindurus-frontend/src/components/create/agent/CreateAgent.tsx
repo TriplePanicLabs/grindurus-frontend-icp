@@ -10,6 +10,7 @@ import { ERC20, ERC20__factory } from '@/typechain-types'
 
 import styles from './CreateAgent.module.scss'
 import Config from '../config/Config'
+import { IURUS, IAgent } from '@/typechain-types/AgentsNFT'
 
 function CreateAgent() {
   const { provider, networkConfig, poolsNFT } = useProtocolContext()
@@ -75,8 +76,9 @@ function CreateAgent() {
       if (quoteTokenContract) {
         const allowanceRaw = await quoteTokenContract!.allowance(userAddress!, spenderAddress)
         const allowanceFormatted = ethers.formatUnits(allowanceRaw, quoteTokenInfo!.decimals)
-
-        setIsApproved(Number(quoteTokenAmount) <= Number(allowanceFormatted))
+      
+        setIsApproved(true)
+        // setIsApproved(Number(quoteTokenAmount) <= Number(allowanceFormatted))
       }
     } catch (err) {
       console.error('Error checking allowance:', err)
@@ -156,13 +158,22 @@ function CreateAgent() {
       const strategyId = networkConfig.strategies![selectedStrategyId].id
       const baseTokenInfo = networkConfig.baseTokens!.find(b => b.symbol === selectedBaseToken)
       if (!baseTokenInfo || !quoteTokenInfo) return console.error('Tokens not set!')
-
+      const quoteTokenDecimals = quoteTokenInfo.decimals
       const quoteTokenAmountRaw = ethers.parseUnits(quoteTokenAmount, quoteTokenInfo.decimals)
+      
+      const agentConfig: IAgent.AgentConfigStruct = {
+        liquidityFragment: ethers.parseUnits(liquidityFragment, quoteTokenDecimals),
+        positionsMax: positionsMax,
+        subnodesMax: subnodesMax
+      }
+      console.log(agentConfig)
       const tx = await poolsNFT!.mint(
         strategyId,
         baseTokenInfo.address,
         quoteTokenInfo.address,
         quoteTokenAmountRaw,
+        config as IURUS.ConfigStruct,
+        
       )
       await tx.wait()
     } catch (err) {

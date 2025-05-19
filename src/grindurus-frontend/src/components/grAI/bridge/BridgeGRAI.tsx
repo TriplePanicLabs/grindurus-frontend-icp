@@ -100,7 +100,7 @@ function BridgeGRAI() {
   const isFormValid = bridgeAmount > 0
 
   return (
-    <section className={styles['bridge-grai']}>
+    <>
       <div className={`${styles['container']} container`}>
         <div className={`${styles['bridge-grai-form']} form`}>
           <h2 className={`${styles['title']} form-title`}>Bridge grAI</h2>
@@ -179,7 +179,7 @@ function BridgeGRAI() {
               )}
             </Checkbox>
           </FormGroup>
-          <p className="form-label">Fee: {fee}</p>
+          <p className="form-label">Fee: {fee} ETH</p>
           <button
             className={`${styles['bridge-button']} button`}
             disabled={!isFormValid}
@@ -189,7 +189,7 @@ function BridgeGRAI() {
           </button>
         </div>
       </div>
-    </section>
+    </>
   )
 }
 

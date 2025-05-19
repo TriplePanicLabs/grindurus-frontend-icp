@@ -1,12 +1,13 @@
 import { useAppKitAccount } from '@reown/appkit/react'
-import { ethers } from 'ethers'
+import { ethers, BigNumberish } from 'ethers'
 import { useEffect, useState } from 'react'
 
 import { FormGroup, Option, Select, Checkbox } from '@/components/ui'
 import { Token } from '@/config'
 import { useProtocolContext } from '@/context/ProtocolContext'
 import { useIsMobile } from '@/hooks'
-import { ERC20, ERC20__factory } from '@/typechain-types'
+import { ERC20, ERC20__factory, PoolsNFT } from '@/typechain-types'
+import { IURUS } from '@/typechain-types/PoolsNFT'
 
 import styles from './CreatePool.module.scss'
 import Config from '../config/Config'
@@ -28,7 +29,15 @@ function CreatePool() {
   const [quoteTokenAmount, setQuoteTokenAmount] = useState<string>('')
   const [quoteTokenInfo, setQuoteTokenInfo] = useState<Token | null>(null)
 
-  const [config, setConfig] = useState({});
+  const [config, setConfig] = useState<IURUS.ConfigStruct | null>({
+    longNumberMax: 3 as BigNumberish,
+    hedgeNumberMax: 3 as BigNumberish,
+    extraCoef: 2_00 as BigNumberish,
+    priceVolatilityPercent: 1_00 as BigNumberish, 
+    returnPercentLongSell: 100_50 as BigNumberish,
+    returnPercentHedgeSell: 100_50 as BigNumberish,
+    returnPercentHedgeRebuy: 100_50 as BigNumberish
+  });
 
   const [waitApproving, setWaitApproving] = useState<boolean>(false)
   const [waitMint, setWaitMint] = useState<boolean>(false)
@@ -70,7 +79,8 @@ function CreatePool() {
       if (quoteTokenContract) {
         const allowanceRaw = await quoteTokenContract!.allowance(userAddress!, spenderAddress)
         const allowanceFormatted = ethers.formatUnits(allowanceRaw, quoteTokenInfo!.decimals)
-
+        
+        // setIsApproved(true)
         setIsApproved(Number(quoteTokenAmount) <= Number(allowanceFormatted))
       }
     } catch (err) {
@@ -125,12 +135,18 @@ function CreatePool() {
       const baseTokenInfo = networkConfig.baseTokens!.find(b => b.symbol === selectedBaseToken)
       if (!baseTokenInfo || !quoteTokenInfo) return console.error('Tokens not set!')
 
+      const baseTokenAddress = baseTokenInfo.address
+      const quoteTokenAddress = quoteTokenInfo.address
       const quoteTokenAmountRaw = ethers.parseUnits(quoteTokenAmount, quoteTokenInfo.decimals)
+      
+      console.log("aaa")
+      console.log(config)
       const tx = await poolsNFT!.mint(
         strategyId,
-        baseTokenInfo.address,
-        quoteTokenInfo.address,
+        baseTokenAddress,
+        quoteTokenAddress,
         quoteTokenAmountRaw,
+        config as IURUS.ConfigStruct
       )
       await tx.wait()
     } catch (err) {

@@ -1,13 +1,24 @@
-
 .container {
-  height: 100%;
+  width: 100%;
+  max-width: 800px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.form {
+  width: 100%;
+  height: auto; // Убедитесь, что высота адаптируется к содержимому
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; // Добавьте расстояние между элементами
 }
 
 .mint-grai-form {
-  height: fit-content;
-  width: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .grai-description {
@@ -66,6 +77,12 @@
 
 .checked {
   padding: 0;
+}
+
+@media screen and (max-width: 700px) {
+  .bridge-grai-form {
+    width: 100%; // На мобильных устройствах форма занимает всю ширину
+  }
 }
 
 @media screen and (max-width: 416px) {

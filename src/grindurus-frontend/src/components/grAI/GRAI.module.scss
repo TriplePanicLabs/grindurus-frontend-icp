@@ -1,0 +1,16 @@
+.grai-container {
+  display: flex;
+  flex-direction: column; // Расположите компоненты вертикально
+  align-items: center;
+  width: 100%;
+  max-width: 1200px; // Убедитесь, что ширина совпадает с BridgeGRAI
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+  
+  @media screen and (max-width: 700px) {
+    .grai-container {
+      gap: 0; // Уменьшите расстояние между компонентами на мобильных устройствах
+    }
+  }
