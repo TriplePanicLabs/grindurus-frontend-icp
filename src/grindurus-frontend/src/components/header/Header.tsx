@@ -29,8 +29,8 @@ function Header() {
               </Link>
             </li>
             <li onClick={() => setIsMenuOpen(!isMenuOpen)} className={styles['menu-item']}>
-              <Link to="/" className={styles['menu-link']}>
-                Dashboard
+              <Link to="/explore" className={styles['menu-link']}>
+                Explore
               </Link>
             </li>
             <li onClick={() => setIsMenuOpen(!isMenuOpen)} className={styles['menu-item']}>

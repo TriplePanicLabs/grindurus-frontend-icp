@@ -66,7 +66,10 @@ function BridgeGRAI() {
       const dstChain = endpointIds[bridgeTo]
       const toAddress = await grAI!.addressToBytes32(receiver)
       const amount = BigInt(bridgeAmount)
-      const [, , totalNativeFee] = await grAI!.getTotalFeesForBridgeTo(dstChain, toAddress, amount)
+      console.log(dstChain)
+      console.log(toAddress)
+      console.log(amount)
+      const [, , totalNativeFee] = await grAI!.getTotalFees(dstChain, toAddress, amount)
       setFee(ethers.formatUnits(totalNativeFee, 18))
     } catch (error) {
       console.error('Error calculating fee:', error)
@@ -82,7 +85,7 @@ function BridgeGRAI() {
       const dstChain = endpointIds[bridgeTo]
       const toAddress = await grAI!.addressToBytes32(receiver)
       const amount = BigInt(bridgeAmount)
-      const [, , totalNativeFee] = await grAI!.getTotalFeesForBridgeTo(dstChain, toAddress, amount)
+      const [, , totalNativeFee] = await grAI!.getTotalFees(dstChain, toAddress, amount)
       const tx = await grAI!.bridgeTo(dstChain, toAddress, amount, { value: totalNativeFee })
       await tx.wait()
     } catch (error) {

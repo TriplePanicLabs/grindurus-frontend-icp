@@ -1,5 +1,5 @@
 import { useAppKitAccount } from '@reown/appkit/react'
-import { ethers } from 'ethers'
+import { ethers, formatUnits } from 'ethers'
 import { useEffect, useState } from 'react'
 
 import { Checkbox, FormGroup } from '@/components/ui'
@@ -56,7 +56,8 @@ function MintGRAI() {
     }
 
     try {
-      const paymentAmount = await grinderAI!.calcPayment(ETH, graiAmount)
+      const graiAmountFormatted = ethers.parseUnits(graiAmount.toString(), 18)
+      const paymentAmount = await grinderAI!.calcPayment(ETH, graiAmountFormatted)
       return paymentAmount
     } catch (error) {
       console.error('Error calculating payment: ', error)
@@ -72,7 +73,8 @@ function MintGRAI() {
     try {
       const paymentAmount = await calcPayment()
       const receiver = receiverAddress ? receiverAddress : userAddress
-      const tx = await grinderAI!.mintTo(ETH, receiver!, graiAmount, { value: paymentAmount })
+      const amount = ethers.parseUnits(graiAmount.toString(), 18)
+      const tx = await grinderAI!.mintTo(ETH, receiver!, amount, { value: paymentAmount })
       await tx.wait()
     } catch (error) {
       console.error('Error minting intent: ', error)
@@ -92,9 +94,8 @@ function MintGRAI() {
             <FormGroup label={`grAI Amount`}>
               <div className={`${styles['grai-amount-input']} form-input`}>
                 <input
-                  type="number"
-                  value={graiAmount}
                   placeholder="0"
+                  value={graiAmount}
                   onChange={e => setGraiAmount(Number(e.target.value))}
                 />
               </div>

@@ -42,9 +42,9 @@ const Configuration = ({ poolId }: ConfigurationProps) => {
   const initPool = async () => {
     const poolAddress = await poolsNFT!.pools(poolId)
     const contract = Strategy__factory.connect(poolAddress, signer)
-    const poolsNFTInfos: IPoolsNFTLens.PoolNFTInfoStructOutput[] =
-      await poolsNFT!.getPoolNFTInfosBy([poolId])
-    const config = poolsNFTInfos[0].config
+    const poolInfos: IPoolsNFTLens.PoolInfoStructOutput[] =
+      await poolsNFT!.getPoolInfosBy([poolId])
+    const config = poolInfos[0].config
     setLongNumberMax(Number(config.longNumberMax))
     setHedgeNumberMax(Number(config.hedgeNumberMax))
     setExtraCoef((Number(config.extraCoef) / 100).toFixed(2))
@@ -52,7 +52,7 @@ const Configuration = ({ poolId }: ConfigurationProps) => {
     setLongSellReturnPercent((Number(config.returnPercentLongSell) / 100).toFixed(2))
     setHedgeSellReturnPercent((Number(config.returnPercentHedgeSell) / 100).toFixed(2))
     setHedgeRebuyReturnPercent((Number(config.returnPercentHedgeRebuy) / 100).toFixed(2))
-    const feeConfig = poolsNFTInfos[0].feeConfig
+    const feeConfig = poolInfos[0].feeConfig
     setLongSellFeeCoef((Number(feeConfig.longSellFeeCoef) / 100).toFixed(2))
     setHedgeSellFeeCoef((Number(feeConfig.hedgeSellFeeCoef) / 100).toFixed(2))
     setHedgeRebuyFeeCoef((Number(feeConfig.hedgeRebuyFeeCoef) / 100).toFixed(2))

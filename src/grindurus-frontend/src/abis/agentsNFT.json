@@ -2,18 +2,14 @@
     {
       "type": "function",
       "name": "agentIds",
-      "inputs": [
-        { "name": "agent", "type": "address", "internalType": "address" }
-      ],
+      "inputs": [{ "name": "agent", "type": "address", "internalType": "address" }],
       "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
       "stateMutability": "view"
     },
     {
       "type": "function",
       "name": "agents",
-      "inputs": [
-        { "name": "agentId", "type": "uint256", "internalType": "uint256" }
-      ],
+      "inputs": [{ "name": "agentId", "type": "uint256", "internalType": "uint256" }],
       "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
       "stateMutability": "view"
     },
@@ -30,12 +26,8 @@
     {
       "type": "function",
       "name": "balanceOf",
-      "inputs": [
-        { "name": "owner", "type": "address", "internalType": "address" }
-      ],
-      "outputs": [
-        { "name": "balance", "type": "uint256", "internalType": "uint256" }
-      ],
+      "inputs": [{ "name": "owner", "type": "address", "internalType": "address" }],
+      "outputs": [{ "name": "balance", "type": "uint256", "internalType": "uint256" }],
       "stateMutability": "view"
     },
     {
@@ -43,11 +35,7 @@
       "name": "deposit",
       "inputs": [
         { "name": "agentId", "type": "uint256", "internalType": "uint256" },
-        {
-          "name": "quoteTokenAmount",
-          "type": "uint256",
-          "internalType": "uint256"
-        }
+        { "name": "quoteTokenAmount", "type": "uint256", "internalType": "uint256" }
       ],
       "outputs": [],
       "stateMutability": "nonpayable"
@@ -79,37 +67,21 @@
     {
       "type": "function",
       "name": "exit",
-      "inputs": [
-        { "name": "agentId", "type": "uint256", "internalType": "uint256" }
-      ],
+      "inputs": [{ "name": "agentId", "type": "uint256", "internalType": "uint256" }],
       "outputs": [],
       "stateMutability": "nonpayable"
     },
     {
       "type": "function",
       "name": "getAgentIdsOf",
-      "inputs": [
-        { "name": "agentOwner", "type": "address", "internalType": "address" }
-      ],
-      "outputs": [
-        {
-          "name": "_agentIds",
-          "type": "uint256[]",
-          "internalType": "uint256[]"
-        }
-      ],
+      "inputs": [{ "name": "agentOwner", "type": "address", "internalType": "address" }],
+      "outputs": [{ "name": "_agentIds", "type": "uint256[]", "internalType": "uint256[]" }],
       "stateMutability": "view"
     },
     {
       "type": "function",
       "name": "getAgentInfosBy",
-      "inputs": [
-        {
-          "name": "_agentIds",
-          "type": "uint256[]",
-          "internalType": "uint256[]"
-        }
-      ],
+      "inputs": [{ "name": "_agentIds", "type": "uint256[]", "internalType": "uint256[]" }],
       "outputs": [
         {
           "name": "agentInfos",
@@ -119,61 +91,21 @@
             { "name": "agentId", "type": "uint256", "internalType": "uint256" },
             { "name": "agent", "type": "address", "internalType": "address" },
             { "name": "owner", "type": "address", "internalType": "address" },
-            {
-              "name": "strategyId",
-              "type": "uint16",
-              "internalType": "uint16"
-            },
-            {
-              "name": "baseToken",
-              "type": "address",
-              "internalType": "address"
-            },
-            {
-              "name": "quoteToken",
-              "type": "address",
-              "internalType": "address"
-            },
-            {
-              "name": "baseTokenSymbol",
-              "type": "string",
-              "internalType": "string"
-            },
-            {
-              "name": "quoteTokenSymbol",
-              "type": "string",
-              "internalType": "string"
-            },
-            {
-              "name": "baseTokenDecimals",
-              "type": "uint8",
-              "internalType": "uint8"
-            },
-            {
-              "name": "quoteTokenDecimals",
-              "type": "uint8",
-              "internalType": "uint8"
-            },
+            { "name": "strategyId", "type": "uint16", "internalType": "uint16" },
+            { "name": "baseToken", "type": "address", "internalType": "address" },
+            { "name": "quoteToken", "type": "address", "internalType": "address" },
+            { "name": "baseTokenSymbol", "type": "string", "internalType": "string" },
+            { "name": "quoteTokenSymbol", "type": "string", "internalType": "string" },
+            { "name": "baseTokenDecimals", "type": "uint8", "internalType": "uint8" },
+            { "name": "quoteTokenDecimals", "type": "uint8", "internalType": "uint8" },
             {
               "name": "agentConfig",
               "type": "tuple",
               "internalType": "struct IAgent.AgentConfig",
               "components": [
-                {
-                  "name": "liquidityFragment",
-                  "type": "uint256",
-                  "internalType": "uint256"
-                },
-                {
-                  "name": "positionsMax",
-                  "type": "uint16",
-                  "internalType": "uint16"
-                },
-                {
-                  "name": "subnodesMax",
-                  "type": "uint16",
-                  "internalType": "uint16"
-                }
+                { "name": "liquidityFragment", "type": "uint256", "internalType": "uint256" },
+                { "name": "positionsMax", "type": "uint16", "internalType": "uint16" },
+                { "name": "subnodesMax", "type": "uint16", "internalType": "uint16" }
               ]
             },
             {
@@ -181,16 +113,8 @@
               "type": "tuple",
               "internalType": "struct IAgent.Balance",
               "components": [
-                {
-                  "name": "reserve",
-                  "type": "uint256",
-                  "internalType": "uint256"
-                },
-                {
-                  "name": "active",
-                  "type": "uint256",
-                  "internalType": "uint256"
-                }
+                { "name": "reserve", "type": "uint256", "internalType": "uint256" },
+                { "name": "active", "type": "uint256", "internalType": "uint256" }
               ]
             },
             {
@@ -198,26 +122,10 @@
               "type": "tuple",
               "internalType": "struct IURUS.Profits",
               "components": [
-                {
-                  "name": "quoteTokenYieldProfit",
-                  "type": "uint256",
-                  "internalType": "uint256"
-                },
-                {
-                  "name": "baseTokenYieldProfit",
-                  "type": "uint256",
-                  "internalType": "uint256"
-                },
-                {
-                  "name": "quoteTokenTradeProfit",
-                  "type": "uint256",
-                  "internalType": "uint256"
-                },
-                {
-                  "name": "baseTokenTradeProfit",
-                  "type": "uint256",
-                  "internalType": "uint256"
-                }
+                { "name": "quoteTokenYieldProfit", "type": "uint256", "internalType": "uint256" },
+                { "name": "baseTokenYieldProfit", "type": "uint256", "internalType": "uint256" },
+                { "name": "quoteTokenTradeProfit", "type": "uint256", "internalType": "uint256" },
+                { "name": "baseTokenTradeProfit", "type": "uint256", "internalType": "uint256" }
               ]
             },
             {
@@ -225,26 +133,10 @@
               "type": "tuple",
               "internalType": "struct IURUS.Profits",
               "components": [
-                {
-                  "name": "quoteTokenYieldProfit",
-                  "type": "uint256",
-                  "internalType": "uint256"
-                },
-                {
-                  "name": "baseTokenYieldProfit",
-                  "type": "uint256",
-                  "internalType": "uint256"
-                },
-                {
-                  "name": "quoteTokenTradeProfit",
-                  "type": "uint256",
-                  "internalType": "uint256"
-                },
-                {
-                  "name": "baseTokenTradeProfit",
-                  "type": "uint256",
-                  "internalType": "uint256"
-                }
+                { "name": "quoteTokenYieldProfit", "type": "uint256", "internalType": "uint256" },
+                { "name": "baseTokenYieldProfit", "type": "uint256", "internalType": "uint256" },
+                { "name": "quoteTokenTradeProfit", "type": "uint256", "internalType": "uint256" },
+                { "name": "baseTokenTradeProfit", "type": "uint256", "internalType": "uint256" }
               ]
             },
             {
@@ -252,27 +144,11 @@
               "type": "tuple[]",
               "internalType": "struct IPoolsNFTLens.PoolInfo[]",
               "components": [
-                {
-                  "name": "poolId",
-                  "type": "uint256",
-                  "internalType": "uint256"
-                },
-                {
-                  "name": "strategyId",
-                  "type": "uint256",
-                  "internalType": "uint256"
-                },
-                {
-                  "name": "pool",
-                  "type": "address",
-                  "internalType": "address"
-                },
+                { "name": "poolId", "type": "uint256", "internalType": "uint256" },
+                { "name": "strategyId", "type": "uint256", "internalType": "uint256" },
+                { "name": "pool", "type": "address", "internalType": "address" },
                 { "name": "reinvest", "type": "bool", "internalType": "bool" },
-                {
-                  "name": "isDrawdown",
-                  "type": "bool",
-                  "internalType": "bool"
-                },
+                { "name": "isDrawdown", "type": "bool", "internalType": "bool" },
                 {
                   "name": "positions",
                   "type": "tuple",
@@ -283,46 +159,14 @@
                       "type": "tuple",
                       "internalType": "struct IURUS.Position",
                       "components": [
-                        {
-                          "name": "number",
-                          "type": "uint8",
-                          "internalType": "uint8"
-                        },
-                        {
-                          "name": "numberMax",
-                          "type": "uint8",
-                          "internalType": "uint8"
-                        },
-                        {
-                          "name": "priceMin",
-                          "type": "uint256",
-                          "internalType": "uint256"
-                        },
-                        {
-                          "name": "liquidity",
-                          "type": "uint256",
-                          "internalType": "uint256"
-                        },
-                        {
-                          "name": "qty",
-                          "type": "uint256",
-                          "internalType": "uint256"
-                        },
-                        {
-                          "name": "price",
-                          "type": "uint256",
-                          "internalType": "uint256"
-                        },
-                        {
-                          "name": "feeQty",
-                          "type": "uint256",
-                          "internalType": "uint256"
-                        },
-                        {
-                          "name": "feePrice",
-                          "type": "uint256",
-                          "internalType": "uint256"
-                        }
+                        { "name": "number", "type": "uint8", "internalType": "uint8" },
+                        { "name": "numberMax", "type": "uint8", "internalType": "uint8" },
+                        { "name": "priceMin", "type": "uint256", "internalType": "uint256" },
+                        { "name": "liquidity", "type": "uint256", "internalType": "uint256" },
+                        { "name": "qty", "type": "uint256", "internalType": "uint256" },
+                        { "name": "price", "type": "uint256", "internalType": "uint256" },
+                        { "name": "feeQty", "type": "uint256", "internalType": "uint256" },
+                        { "name": "feePrice", "type": "uint256", "internalType": "uint256" }
                       ]
                     },
                     {
@@ -330,46 +174,14 @@
                       "type": "tuple",
                       "internalType": "struct IURUS.Position",
                       "components": [
-                        {
-                          "name": "number",
-                          "type": "uint8",
-                          "internalType": "uint8"
-                        },
-                        {
-                          "name": "numberMax",
-                          "type": "uint8",
-                          "internalType": "uint8"
-                        },
-                        {
-                          "name": "priceMin",
-                          "type": "uint256",
-                          "internalType": "uint256"
-                        },
-                        {
-                          "name": "liquidity",
-                          "type": "uint256",
-                          "internalType": "uint256"
-                        },
-                        {
-                          "name": "qty",
-                          "type": "uint256",
-                          "internalType": "uint256"
-                        },
-                        {
-                          "name": "price",
-                          "type": "uint256",
-                          "internalType": "uint256"
-                        },
-                        {
-                          "name": "feeQty",
-                          "type": "uint256",
-                          "internalType": "uint256"
-                        },
-                        {
-                          "name": "feePrice",
-                          "type": "uint256",
-                          "internalType": "uint256"
-                        }
+                        { "name": "number", "type": "uint8", "internalType": "uint8" },
+                        { "name": "numberMax", "type": "uint8", "internalType": "uint8" },
+                        { "name": "priceMin", "type": "uint256", "internalType": "uint256" },
+                        { "name": "liquidity", "type": "uint256", "internalType": "uint256" },
+                        { "name": "qty", "type": "uint256", "internalType": "uint256" },
+                        { "name": "price", "type": "uint256", "internalType": "uint256" },
+                        { "name": "feeQty", "type": "uint256", "internalType": "uint256" },
+                        { "name": "feePrice", "type": "uint256", "internalType": "uint256" }
                       ]
                     }
                   ]
@@ -379,21 +191,9 @@
                   "type": "tuple",
                   "internalType": "struct IURUS.Config",
                   "components": [
-                    {
-                      "name": "longNumberMax",
-                      "type": "uint8",
-                      "internalType": "uint8"
-                    },
-                    {
-                      "name": "hedgeNumberMax",
-                      "type": "uint8",
-                      "internalType": "uint8"
-                    },
-                    {
-                      "name": "extraCoef",
-                      "type": "uint256",
-                      "internalType": "uint256"
-                    },
+                    { "name": "longNumberMax", "type": "uint8", "internalType": "uint8" },
+                    { "name": "hedgeNumberMax", "type": "uint8", "internalType": "uint8" },
+                    { "name": "extraCoef", "type": "uint256", "internalType": "uint256" },
                     {
                       "name": "priceVolatilityPercent",
                       "type": "uint256",
@@ -421,21 +221,9 @@
                   "type": "tuple",
                   "internalType": "struct IURUS.FeeConfig",
                   "components": [
-                    {
-                      "name": "longSellFeeCoef",
-                      "type": "uint256",
-                      "internalType": "uint256"
-                    },
-                    {
-                      "name": "hedgeSellFeeCoef",
-                      "type": "uint256",
-                      "internalType": "uint256"
-                    },
-                    {
-                      "name": "hedgeRebuyFeeCoef",
-                      "type": "uint256",
-                      "internalType": "uint256"
-                    }
+                    { "name": "longSellFeeCoef", "type": "uint256", "internalType": "uint256" },
+                    { "name": "hedgeSellFeeCoef", "type": "uint256", "internalType": "uint256" },
+                    { "name": "hedgeRebuyFeeCoef", "type": "uint256", "internalType": "uint256" }
                   ]
                 },
                 {
@@ -448,36 +236,12 @@
                   "type": "address",
                   "internalType": "address"
                 },
-                {
-                  "name": "feeToken",
-                  "type": "address",
-                  "internalType": "address"
-                },
-                {
-                  "name": "quoteToken",
-                  "type": "address",
-                  "internalType": "address"
-                },
-                {
-                  "name": "baseToken",
-                  "type": "address",
-                  "internalType": "address"
-                },
-                {
-                  "name": "feeTokenSymbol",
-                  "type": "string",
-                  "internalType": "string"
-                },
-                {
-                  "name": "quoteTokenSymbol",
-                  "type": "string",
-                  "internalType": "string"
-                },
-                {
-                  "name": "baseTokenSymbol",
-                  "type": "string",
-                  "internalType": "string"
-                },
+                { "name": "feeToken", "type": "address", "internalType": "address" },
+                { "name": "quoteToken", "type": "address", "internalType": "address" },
+                { "name": "baseToken", "type": "address", "internalType": "address" },
+                { "name": "feeTokenSymbol", "type": "string", "internalType": "string" },
+                { "name": "quoteTokenSymbol", "type": "string", "internalType": "string" },
+                { "name": "baseTokenSymbol", "type": "string", "internalType": "string" },
                 {
                   "name": "oracleQuoteTokenPerBaseTokenDecimals",
                   "type": "uint8",
@@ -488,36 +252,12 @@
                   "type": "uint8",
                   "internalType": "uint8"
                 },
-                {
-                  "name": "quoteTokenDecimals",
-                  "type": "uint8",
-                  "internalType": "uint8"
-                },
-                {
-                  "name": "baseTokenDecimals",
-                  "type": "uint8",
-                  "internalType": "uint8"
-                },
-                {
-                  "name": "quoteTokenAmount",
-                  "type": "uint256",
-                  "internalType": "uint256"
-                },
-                {
-                  "name": "baseTokenAmount",
-                  "type": "uint256",
-                  "internalType": "uint256"
-                },
-                {
-                  "name": "activeCapital",
-                  "type": "uint256",
-                  "internalType": "uint256"
-                },
-                {
-                  "name": "startTimestamp",
-                  "type": "uint256",
-                  "internalType": "uint256"
-                },
+                { "name": "quoteTokenDecimals", "type": "uint8", "internalType": "uint8" },
+                { "name": "baseTokenDecimals", "type": "uint8", "internalType": "uint8" },
+                { "name": "quoteTokenAmount", "type": "uint256", "internalType": "uint256" },
+                { "name": "baseTokenAmount", "type": "uint256", "internalType": "uint256" },
+                { "name": "activeCapital", "type": "uint256", "internalType": "uint256" },
+                { "name": "startTimestamp", "type": "uint256", "internalType": "uint256" },
                 {
                   "name": "profits",
                   "type": "tuple",
@@ -538,11 +278,7 @@
                       "type": "uint256",
                       "internalType": "uint256"
                     },
-                    {
-                      "name": "baseTokenTradeProfit",
-                      "type": "uint256",
-                      "internalType": "uint256"
-                    }
+                    { "name": "baseTokenTradeProfit", "type": "uint256", "internalType": "uint256" }
                   ]
                 },
                 {
@@ -565,11 +301,7 @@
                       "type": "uint256",
                       "internalType": "uint256"
                     },
-                    {
-                      "name": "baseTokenTradeProfit",
-                      "type": "uint256",
-                      "internalType": "uint256"
-                    }
+                    { "name": "baseTokenTradeProfit", "type": "uint256", "internalType": "uint256" }
                   ]
                 },
                 {
@@ -577,21 +309,9 @@
                   "type": "tuple",
                   "internalType": "struct IPoolsNFTLens.ROI",
                   "components": [
-                    {
-                      "name": "ROINumerator",
-                      "type": "uint256",
-                      "internalType": "uint256"
-                    },
-                    {
-                      "name": "ROIDeniminator",
-                      "type": "uint256",
-                      "internalType": "uint256"
-                    },
-                    {
-                      "name": "ROIPeriod",
-                      "type": "uint256",
-                      "internalType": "uint256"
-                    }
+                    { "name": "ROINumerator", "type": "uint256", "internalType": "uint256" },
+                    { "name": "ROIDeniminator", "type": "uint256", "internalType": "uint256" },
+                    { "name": "ROIPeriod", "type": "uint256", "internalType": "uint256" }
                   ]
                 },
                 {
@@ -599,16 +319,8 @@
                   "type": "tuple",
                   "internalType": "struct IPoolsNFTLens.Thresholds",
                   "components": [
-                    {
-                      "name": "spotPrice",
-                      "type": "uint256",
-                      "internalType": "uint256"
-                    },
-                    {
-                      "name": "longBuyPriceMin",
-                      "type": "uint256",
-                      "internalType": "uint256"
-                    },
+                    { "name": "spotPrice", "type": "uint256", "internalType": "uint256" },
+                    { "name": "longBuyPriceMin", "type": "uint256", "internalType": "uint256" },
                     {
                       "name": "longSellQuoteTokenAmountThreshold",
                       "type": "uint256",
@@ -629,11 +341,7 @@
                       "type": "uint256",
                       "internalType": "uint256"
                     },
-                    {
-                      "name": "hedgeSellLiquidity",
-                      "type": "uint256",
-                      "internalType": "uint256"
-                    },
+                    { "name": "hedgeSellLiquidity", "type": "uint256", "internalType": "uint256" },
                     {
                       "name": "hedgeSellQuoteTokenAmountThreshold",
                       "type": "uint256",
@@ -666,36 +374,12 @@
                   "type": "tuple",
                   "internalType": "struct IPoolsNFTLens.RoyaltyParams",
                   "components": [
-                    {
-                      "name": "compensationShare",
-                      "type": "uint256",
-                      "internalType": "uint256"
-                    },
-                    {
-                      "name": "poolOwnerShare",
-                      "type": "uint256",
-                      "internalType": "uint256"
-                    },
-                    {
-                      "name": "reserveShare",
-                      "type": "uint256",
-                      "internalType": "uint256"
-                    },
-                    {
-                      "name": "ownerShare",
-                      "type": "uint256",
-                      "internalType": "uint256"
-                    },
-                    {
-                      "name": "oldRoyaltyPrice",
-                      "type": "uint256",
-                      "internalType": "uint256"
-                    },
-                    {
-                      "name": "newRoyaltyPrice",
-                      "type": "uint256",
-                      "internalType": "uint256"
-                    }
+                    { "name": "compensationShare", "type": "uint256", "internalType": "uint256" },
+                    { "name": "poolOwnerShare", "type": "uint256", "internalType": "uint256" },
+                    { "name": "reserveShare", "type": "uint256", "internalType": "uint256" },
+                    { "name": "ownerShare", "type": "uint256", "internalType": "uint256" },
+                    { "name": "oldRoyaltyPrice", "type": "uint256", "internalType": "uint256" },
+                    { "name": "newRoyaltyPrice", "type": "uint256", "internalType": "uint256" }
                   ]
                 }
               ]
@@ -708,24 +392,14 @@
     {
       "type": "function",
       "name": "getApproved",
-      "inputs": [
-        { "name": "tokenId", "type": "uint256", "internalType": "uint256" }
-      ],
-      "outputs": [
-        { "name": "operator", "type": "address", "internalType": "address" }
-      ],
+      "inputs": [{ "name": "tokenId", "type": "uint256", "internalType": "uint256" }],
+      "outputs": [{ "name": "operator", "type": "address", "internalType": "address" }],
       "stateMutability": "view"
     },
     {
       "type": "function",
       "name": "getIntents",
-      "inputs": [
-        {
-          "name": "_agentIds",
-          "type": "uint256[]",
-          "internalType": "uint256[]"
-        }
-      ],
+      "inputs": [{ "name": "_agentIds", "type": "uint256[]", "internalType": "uint256[]" }],
       "outputs": [
         {
           "name": "",
@@ -734,11 +408,7 @@
           "components": [
             { "name": "account", "type": "address", "internalType": "address" },
             { "name": "grinds", "type": "uint256", "internalType": "uint256" },
-            {
-              "name": "poolIds",
-              "type": "uint256[]",
-              "internalType": "uint256[]"
-            }
+            { "name": "poolIds", "type": "uint256[]", "internalType": "uint256[]" }
           ]
         }
       ],
@@ -747,12 +417,8 @@
     {
       "type": "function",
       "name": "getPoolIds",
-      "inputs": [
-        { "name": "agentId", "type": "uint256", "internalType": "uint256" }
-      ],
-      "outputs": [
-        { "name": "", "type": "uint256[]", "internalType": "uint256[]" }
-      ],
+      "inputs": [{ "name": "agentId", "type": "uint256", "internalType": "uint256" }],
+      "outputs": [{ "name": "", "type": "uint256[]", "internalType": "uint256[]" }],
       "stateMutability": "view"
     },
     {
@@ -772,22 +438,33 @@
         { "name": "strategyId", "type": "uint16", "internalType": "uint16" },
         { "name": "baseToken", "type": "address", "internalType": "address" },
         { "name": "quoteToken", "type": "address", "internalType": "address" },
+        { "name": "quoteTokenAmount", "type": "uint256", "internalType": "uint256" },
         {
-          "name": "quoteTokenAmount",
-          "type": "uint256",
-          "internalType": "uint256"
+          "name": "config",
+          "type": "tuple",
+          "internalType": "struct IURUS.Config",
+          "components": [
+            { "name": "longNumberMax", "type": "uint8", "internalType": "uint8" },
+            { "name": "hedgeNumberMax", "type": "uint8", "internalType": "uint8" },
+            { "name": "extraCoef", "type": "uint256", "internalType": "uint256" },
+            { "name": "priceVolatilityPercent", "type": "uint256", "internalType": "uint256" },
+            { "name": "returnPercentLongSell", "type": "uint256", "internalType": "uint256" },
+            { "name": "returnPercentHedgeSell", "type": "uint256", "internalType": "uint256" },
+            { "name": "returnPercentHedgeRebuy", "type": "uint256", "internalType": "uint256" }
+          ]
         },
         {
-          "name": "liquidityFragment",
-          "type": "uint256",
-          "internalType": "uint256"
-        },
-        { "name": "positionsMax", "type": "uint16", "internalType": "uint16" },
-        { "name": "subnodesMax", "type": "uint16", "internalType": "uint16" }
+          "name": "agentConfig",
+          "type": "tuple",
+          "internalType": "struct IAgent.AgentConfig",
+          "components": [
+            { "name": "liquidityFragment", "type": "uint256", "internalType": "uint256" },
+            { "name": "positionsMax", "type": "uint16", "internalType": "uint16" },
+            { "name": "subnodesMax", "type": "uint16", "internalType": "uint16" }
+          ]
+        }
       ],
-      "outputs": [
-        { "name": "agentId", "type": "uint256", "internalType": "uint256" }
-      ],
+      "outputs": [{ "name": "agentId", "type": "uint256", "internalType": "uint256" }],
       "stateMutability": "nonpayable"
     },
     {
@@ -798,51 +475,54 @@
         { "name": "strategyId", "type": "uint16", "internalType": "uint16" },
         { "name": "baseToken", "type": "address", "internalType": "address" },
         { "name": "quoteToken", "type": "address", "internalType": "address" },
+        { "name": "quoteTokenAmount", "type": "uint256", "internalType": "uint256" },
         {
-          "name": "quoteTokenAmount",
-          "type": "uint256",
-          "internalType": "uint256"
+          "name": "config",
+          "type": "tuple",
+          "internalType": "struct IURUS.Config",
+          "components": [
+            { "name": "longNumberMax", "type": "uint8", "internalType": "uint8" },
+            { "name": "hedgeNumberMax", "type": "uint8", "internalType": "uint8" },
+            { "name": "extraCoef", "type": "uint256", "internalType": "uint256" },
+            { "name": "priceVolatilityPercent", "type": "uint256", "internalType": "uint256" },
+            { "name": "returnPercentLongSell", "type": "uint256", "internalType": "uint256" },
+            { "name": "returnPercentHedgeSell", "type": "uint256", "internalType": "uint256" },
+            { "name": "returnPercentHedgeRebuy", "type": "uint256", "internalType": "uint256" }
+          ]
         },
         {
-          "name": "liquidityFragment",
-          "type": "uint256",
-          "internalType": "uint256"
-        },
-        { "name": "positionsMax", "type": "uint16", "internalType": "uint16" },
-        { "name": "subnodesMax", "type": "uint16", "internalType": "uint16" }
+          "name": "agentConfig",
+          "type": "tuple",
+          "internalType": "struct IAgent.AgentConfig",
+          "components": [
+            { "name": "liquidityFragment", "type": "uint256", "internalType": "uint256" },
+            { "name": "positionsMax", "type": "uint16", "internalType": "uint16" },
+            { "name": "subnodesMax", "type": "uint16", "internalType": "uint16" }
+          ]
+        }
       ],
-      "outputs": [
-        { "name": "agentId", "type": "uint256", "internalType": "uint256" }
-      ],
+      "outputs": [{ "name": "agentId", "type": "uint256", "internalType": "uint256" }],
       "stateMutability": "nonpayable"
     },
     {
       "type": "function",
       "name": "owner",
       "inputs": [],
-      "outputs": [
-        { "name": "", "type": "address", "internalType": "address payable" }
-      ],
+      "outputs": [{ "name": "", "type": "address", "internalType": "address payable" }],
       "stateMutability": "view"
     },
     {
       "type": "function",
       "name": "ownerOf",
-      "inputs": [
-        { "name": "tokenId", "type": "uint256", "internalType": "uint256" }
-      ],
-      "outputs": [
-        { "name": "owner", "type": "address", "internalType": "address" }
-      ],
+      "inputs": [{ "name": "tokenId", "type": "uint256", "internalType": "uint256" }],
+      "outputs": [{ "name": "owner", "type": "address", "internalType": "address" }],
       "stateMutability": "view"
     },
     {
       "type": "function",
       "name": "poolsNFT",
       "inputs": [],
-      "outputs": [
-        { "name": "", "type": "address", "internalType": "contract IPoolsNFT" }
-      ],
+      "outputs": [{ "name": "", "type": "address", "internalType": "contract IPoolsNFT" }],
       "stateMutability": "view"
     },
     {
@@ -852,11 +532,7 @@
         { "name": "agentId", "type": "uint256", "internalType": "uint256" },
         { "name": "poolId", "type": "uint256", "internalType": "uint256" },
         { "name": "to", "type": "address", "internalType": "address" },
-        {
-          "name": "quoteTokenAmount",
-          "type": "uint256",
-          "internalType": "uint256"
-        }
+        { "name": "quoteTokenAmount", "type": "uint256", "internalType": "uint256" }
       ],
       "outputs": [],
       "stateMutability": "nonpayable"
@@ -887,13 +563,7 @@
     {
       "type": "function",
       "name": "setAgentImplementation",
-      "inputs": [
-        {
-          "name": "_agentImplementation",
-          "type": "address",
-          "internalType": "address"
-        }
-      ],
+      "inputs": [{ "name": "_agentImplementation", "type": "address", "internalType": "address" }],
       "outputs": [],
       "stateMutability": "nonpayable"
     },
@@ -910,18 +580,14 @@
     {
       "type": "function",
       "name": "setBaseURI",
-      "inputs": [
-        { "name": "newBaseURI", "type": "string", "internalType": "string" }
-      ],
+      "inputs": [{ "name": "newBaseURI", "type": "string", "internalType": "string" }],
       "outputs": [],
       "stateMutability": "nonpayable"
     },
     {
       "type": "function",
       "name": "supportsInterface",
-      "inputs": [
-        { "name": "interfaceId", "type": "bytes4", "internalType": "bytes4" }
-      ],
+      "inputs": [{ "name": "interfaceId", "type": "bytes4", "internalType": "bytes4" }],
       "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
       "stateMutability": "view"
     },
@@ -948,11 +614,7 @@
       "name": "withdraw",
       "inputs": [
         { "name": "agentId", "type": "uint256", "internalType": "uint256" },
-        {
-          "name": "quoteTokenAmount",
-          "type": "uint256",
-          "internalType": "uint256"
-        }
+        { "name": "quoteTokenAmount", "type": "uint256", "internalType": "uint256" }
       ],
       "outputs": [],
       "stateMutability": "nonpayable"
@@ -964,11 +626,7 @@
         { "name": "agentId", "type": "uint256", "internalType": "uint256" },
         { "name": "poolId", "type": "uint256", "internalType": "uint256" },
         { "name": "to", "type": "address", "internalType": "address" },
-        {
-          "name": "quoteTokenAmount",
-          "type": "uint256",
-          "internalType": "uint256"
-        }
+        { "name": "quoteTokenAmount", "type": "uint256", "internalType": "uint256" }
       ],
       "outputs": [],
       "stateMutability": "nonpayable"
@@ -977,24 +635,9 @@
       "type": "event",
       "name": "Approval",
       "inputs": [
-        {
-          "name": "owner",
-          "type": "address",
-          "indexed": true,
-          "internalType": "address"
-        },
-        {
-          "name": "approved",
-          "type": "address",
-          "indexed": true,
-          "internalType": "address"
-        },
-        {
-          "name": "tokenId",
-          "type": "uint256",
-          "indexed": true,
-          "internalType": "uint256"
-        }
+        { "name": "owner", "type": "address", "indexed": true, "internalType": "address" },
+        { "name": "approved", "type": "address", "indexed": true, "internalType": "address" },
+        { "name": "tokenId", "type": "uint256", "indexed": true, "internalType": "uint256" }
       ],
       "anonymous": false
     },
@@ -1002,24 +645,9 @@
       "type": "event",
       "name": "ApprovalForAll",
       "inputs": [
-        {
-          "name": "owner",
-          "type": "address",
-          "indexed": true,
-          "internalType": "address"
-        },
-        {
-          "name": "operator",
-          "type": "address",
-          "indexed": true,
-          "internalType": "address"
-        },
-        {
-          "name": "approved",
-          "type": "bool",
-          "indexed": false,
-          "internalType": "bool"
-        }
+        { "name": "owner", "type": "address", "indexed": true, "internalType": "address" },
+        { "name": "operator", "type": "address", "indexed": true, "internalType": "address" },
+        { "name": "approved", "type": "bool", "indexed": false, "internalType": "bool" }
       ],
       "anonymous": false
     },
@@ -1027,36 +655,11 @@
       "type": "event",
       "name": "Mint",
       "inputs": [
-        {
-          "name": "agentId",
-          "type": "uint256",
-          "indexed": false,
-          "internalType": "uint256"
-        },
-        {
-          "name": "agent",
-          "type": "address",
-          "indexed": false,
-          "internalType": "address"
-        },
-        {
-          "name": "strategyId",
-          "type": "uint16",
-          "indexed": false,
-          "internalType": "uint16"
-        },
-        {
-          "name": "baseToken",
-          "type": "address",
-          "indexed": false,
-          "internalType": "address"
-        },
-        {
-          "name": "quoteToken",
-          "type": "address",
-          "indexed": false,
-          "internalType": "address"
-        }
+        { "name": "agentId", "type": "uint256", "indexed": false, "internalType": "uint256" },
+        { "name": "agent", "type": "address", "indexed": false, "internalType": "address" },
+        { "name": "strategyId", "type": "uint16", "indexed": false, "internalType": "uint16" },
+        { "name": "baseToken", "type": "address", "indexed": false, "internalType": "address" },
+        { "name": "quoteToken", "type": "address", "indexed": false, "internalType": "address" }
       ],
       "anonymous": false
     },
@@ -1064,24 +667,9 @@
       "type": "event",
       "name": "Transfer",
       "inputs": [
-        {
-          "name": "from",
-          "type": "address",
-          "indexed": true,
-          "internalType": "address"
-        },
-        {
-          "name": "to",
-          "type": "address",
-          "indexed": true,
-          "internalType": "address"
-        },
-        {
-          "name": "tokenId",
-          "type": "uint256",
-          "indexed": true,
-          "internalType": "uint256"
-        }
+        { "name": "from", "type": "address", "indexed": true, "internalType": "address" },
+        { "name": "to", "type": "address", "indexed": true, "internalType": "address" },
+        { "name": "tokenId", "type": "uint256", "indexed": true, "internalType": "uint256" }
       ],
       "anonymous": false
     },
@@ -1089,4 +677,4 @@
     { "type": "error", "name": "NotAgentsNFT", "inputs": [] },
     { "type": "error", "name": "NotOwner", "inputs": [] },
     { "type": "error", "name": "NotOwnerOf", "inputs": [] }
-  ]
+]

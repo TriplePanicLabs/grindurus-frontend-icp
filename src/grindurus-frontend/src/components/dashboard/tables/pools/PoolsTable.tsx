@@ -9,6 +9,7 @@ import { useProtocolContext } from '@/context/ProtocolContext'
 import { IPoolsNFTLens } from '@/typechain-types/PoolsNFT'
 
 import styles from './PoolsTable.module.scss'
+import { ERC20__factory } from '@/typechain-types'
 
 interface PoolData {
   id: string
@@ -28,7 +29,7 @@ interface PoolData {
 function PoolsTable() {
   const [tableData, setTableData] = useState<PoolData[] | null>(null)
   const [isLoading, setIsLoading] = useState(true)
-  const { poolsNFT, isConnected } = useProtocolContext()
+  const { poolsNFT, isConnected, grinderAI,  } = useProtocolContext()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -62,8 +63,8 @@ function PoolsTable() {
     if (!checkRequired()) return
     setIsLoading(true)
     try {
-      const poolNFTInfos = await poolsNFT!.getPoolInfosBy(poolIds)
-      const formatted = formatTableData(poolNFTInfos)
+      const poolInfos = await poolsNFT!.getPoolInfosBy(poolIds)
+      const formatted = formatTableData(poolInfos)
       setTableData(formatted)
     } catch (err) {
       console.error('Failed to fetch pool info', err)
@@ -77,9 +78,9 @@ function PoolsTable() {
 
   const handleGrind = async (poolId: string) => {
     try {
-      const estimatedGasLimit = await poolsNFT!.grind.estimateGas(poolId)
+      const estimatedGasLimit = await grinderAI!.grind.estimateGas(poolId)
       const adjustedGasLimit = (estimatedGasLimit * 15n) / 10n
-      const tx = await poolsNFT!.grind(poolId, { gasLimit: adjustedGasLimit })
+      const tx = await grinderAI!.grind(poolId, { gasLimit: adjustedGasLimit })
       await tx.wait()
     } catch (error) {
       console.log('Failed to grind', error)
@@ -89,6 +90,8 @@ function PoolsTable() {
   const handleBuyRoyalty = async (poolId: string, royaltyPrice: string) => {
     try {
       const royaltyShares = await poolsNFT!.calcRoyaltyPriceShares(poolId)
+      console.log(royaltyShares)
+
       // const tx = await poolsNFT!.buyRoyalty(poolId, { value: royaltyShares.newRoyaltyPrice })
       // await tx.wait()
     } catch (error) {
@@ -96,8 +99,8 @@ function PoolsTable() {
     }
   }
 
-  const formatTableData = (poolNFTInfos: IPoolsNFTLens.PoolNFTInfoStructOutput[]): PoolData[] => {
-    return poolNFTInfos.map(info => {
+  const formatTableData = (poolInfos: IPoolsNFTLens.PoolInfoStructOutput[]): PoolData[] => {
+    return poolInfos.map(info => {
       const quoteAmount = formatUnits(info.quoteTokenAmount, info.quoteTokenDecimals)
       const baseAmount = formatUnits(info.baseTokenAmount, info.baseTokenDecimals)
 
@@ -237,7 +240,7 @@ function PoolsTable() {
               </div>
             </button>
             <button onClick={() => handleGrind(data.id)} className={`${styles['button']} button`}>
-              Grind
+              GRIND
             </button>
           </div>
         </div>

@@ -20,7 +20,7 @@ const Interaction = ({ poolId }: InteractionProps) => {
   const [inputDeposit, setInputDeposit] = useState<string>('')
   const [inputWithdraw, setInputWithdraw] = useState<number>(0)
   const [royaltyPrice, setRoyaltyPrice] = useState<string>('')
-  const [poolsNFTInfo, setPoolsNFTInfo] = useState<IPoolsNFTLens.PoolNFTInfoStructOutput | null>(
+  const [poolsNFTInfo, setPoolsNFTInfo] = useState<IPoolsNFTLens.PoolInfoStructOutput | null>(
     null,
   )
   const [isProcessingBuyRoyalty, setIsProcessingBuyRoyalty] = useState<Boolean>(false)
@@ -43,8 +43,8 @@ const Interaction = ({ poolId }: InteractionProps) => {
   }, [poolsNFT])
 
   const fetchPoolsNFTInfo = async () => {
-    const poolsNFTInfos: IPoolsNFTLens.PoolNFTInfoStructOutput[] =
-      await poolsNFT!.getPoolNFTInfosBy([poolId])
+    const poolsNFTInfos: IPoolsNFTLens.PoolInfoStructOutput[] =
+      await poolsNFT!.getPoolInfosBy([poolId])
     setPoolsNFTInfo(poolsNFTInfos[0])
 
     const newRoyaltyPrice = poolsNFTInfos[0].royaltyParams.newRoyaltyPrice
@@ -194,16 +194,15 @@ const Interaction = ({ poolId }: InteractionProps) => {
               </button>
             </div>
           </FormGroup>
-        </div>
-        <div>
           <Switcher
             label="Reinvest"
             value={reinvest}
             onChange={value => handleSwitchReinvest(value)}
           />
+        </div>
+        <div>
           <div className={styles['exit-description']}>
-            Exit: emergency withdraw distribution of funds and ownership of strategy pool will be
-            moved to royalty receiver.
+            Exit: emergency withdraw distribution of funds from pool
           </div>
           <button className={`${styles['button']} button`} onClick={() => handleExit()}>
             Exit

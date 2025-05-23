@@ -3,15 +3,14 @@ import { Route, Routes } from 'react-router-dom'
 
 import ConnectWallet from '@/components/connect/ConnectWallet'
 import Dashboard from '@/components/dashboard/Dashboard'
-import BridgeGRAI from '@/components/grAI/bridge/BridgeGRAI'
 import Create from '@/components/create/Create'
 import GrETH from '@/components/grETH/GrETH'
 import Grind from '@/components/grind/Grind'
 import GrinderAI from '@/components/grinderAI/GrinderAI'
 import Header from '@/components/header/Header'
 import Pool from '@/components/pool/Pool'
+import GRAI from '@/components/grAI/GrAI'
 import { useProtocolContext } from '@/context/ProtocolContext'
-import MintGRAI from './components/grAI/mint/MintGRAI'
 
 type RouterGuardProps = {
   networkConfig: Record<string, any>
@@ -40,6 +39,14 @@ function App() {
       <main className="page">
         <Routes>
           <Route
+            path="/"
+            element={
+              <RouterGuard networkConfig={networkConfig} isConnected={isConnected}>
+                <Dashboard />
+              </RouterGuard>
+            }
+          />
+          <Route
             path="/grind"
             element={
               <RouterGuard networkConfig={networkConfig} isConnected={isConnected}>
@@ -48,7 +55,7 @@ function App() {
             }
           />
           <Route
-            path="/"
+            path="/explore"
             element={
               <RouterGuard networkConfig={networkConfig} isConnected={isConnected}>
                 <Dashboard />
@@ -84,8 +91,7 @@ function App() {
             path="/grai"
             element={
               <RouterGuard networkConfig={networkConfig} isConnected={isConnected}>
-                <MintGRAI />
-                <BridgeGRAI />
+                <GRAI/>
               </RouterGuard>
             }
           />

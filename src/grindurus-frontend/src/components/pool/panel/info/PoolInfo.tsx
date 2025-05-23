@@ -48,8 +48,7 @@ const PoolInfo = ({ poolId }: PoolInfoProps) => {
       const _royaltyReceiver = await poolsNFT!.royaltyReceiver(poolId)
       setRoyaltyReceiver(_royaltyReceiver)
 
-      const poolNFTInfos: IPoolsNFTLens.PoolNFTInfoStructOutput[] =
-        await poolsNFT!.getPoolNFTInfosBy([poolId])
+      const poolNFTInfos: IPoolsNFTLens.PoolInfoStructOutput[] = await poolsNFT!.getPoolInfosBy([poolId])
       let poolNFTInfo = poolNFTInfos[0]
       setQuoteTokenSymbol(poolNFTInfo.quoteTokenSymbol)
       setBaseTokenSymbol(poolNFTInfo.baseTokenSymbol)

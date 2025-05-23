@@ -10,30 +10,30 @@
 
 .grind-section {
   display: flex;
-  flex-direction: column; // Убедитесь, что содержимое располагается вертикально
-  justify-content: flex-start; // Начало содержимого сверху
-  align-items: center; // Центрирование по горизонтали
-  min-height: 100vh; // Минимальная высота секции — высота экрана
-  padding: 20px; // Отступы
-  box-sizing: border-box; // Учитываем отступы в размерах
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .container {
-  flex-grow: 1; // Контейнер будет расширяться, чтобы заполнить доступное пространство
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; // Начало содержимого сверху
-  align-items: center; // Центрирование по горизонтали
-  width: 100%; // Контейнер занимает всю ширину
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
 }
 
 .grind-form {
   display: flex;
-  flex-direction: column; // Содержимое располагается вертикально
-  justify-content: center; // Центрирование содержимого по вертикали
-  align-items: center; // Центрирование содержимого по горизонтали
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 30px;
-  width: 100%; // Растягиваем форму на всю ширину
+  width: 100%;
 }
 
 .grind {
@@ -104,6 +104,19 @@
   &:not(:last-child) {
     margin-bottom: 10px;
   }
+}
+
+.divider {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: right;
+}
+
+.grind-pnl {
+  margin-bottom: '12px'; 
+  display: 'flex';
+  justify-content: 'space-between';
 }
 
 .grinder-ai {
@@ -192,7 +205,7 @@
 @media screen and (max-width: 550px) {
   .container {
     display: flex;
-    justify-content: center;
+    // justify-content: center;
     align-items: center;
   }
 }

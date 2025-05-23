@@ -13,7 +13,7 @@ import Config from '../config/Config'
 import { IURUS, IAgent } from '@/typechain-types/AgentsNFT'
 
 function CreateAgent() {
-  const { provider, networkConfig, poolsNFT } = useProtocolContext()
+  const { provider, networkConfig, poolsNFT, agentsNFT } = useProtocolContext()
   const { address: userAddress } = useAppKitAccount()
 
   const [isApproved, setIsApproved] = useState<boolean>(false)
@@ -37,7 +37,7 @@ function CreateAgent() {
   const [subnodesMax, setSubnodesMax] = useState<string>('1')
 
   const [waitApproving, setWaitApproving] = useState<boolean>(false)
-  const [waitMint, setWaitMint] = useState<boolean>(false)
+  const [waitCreate, setWaitCreate] = useState<boolean>(false)
 
   const isMobile = useIsMobile(1000)
 
@@ -60,29 +60,6 @@ function CreateAgent() {
     const signer = await provider.getSigner()
     const contract = ERC20__factory.connect(quoteTokenAddress, signer)
     setQuoteTokenContract(contract)
-  }
-
-  const checkRequired = () => {
-    if (!provider) return console.error('provider not set!')
-    if (!quoteTokenContract) return console.error('quoteTokenContract is null!')
-    if (!quoteTokenInfo) return console.error('quoteTokenInfo is null!')
-  }
-
-  const checkAllowance = async () => {
-    try {
-      checkRequired()
-
-      const spenderAddress = networkConfig.poolsNFT!
-      if (quoteTokenContract) {
-        const allowanceRaw = await quoteTokenContract!.allowance(userAddress!, spenderAddress)
-        const allowanceFormatted = ethers.formatUnits(allowanceRaw, quoteTokenInfo!.decimals)
-      
-        setIsApproved(true)
-        // setIsApproved(Number(quoteTokenAmount) <= Number(allowanceFormatted))
-      }
-    } catch (err) {
-      console.error('Error checking allowance:', err)
-    }
   }
 
   const recalcMaxLiquidity = async () => {
@@ -129,12 +106,37 @@ function CreateAgent() {
     recalcByPositionsMax(optimizedPositionsMax)
   }
 
+
+  const checkRequired = () => {
+    if (!provider) return console.error('provider not set!')
+    if (!quoteTokenContract) return console.error('quoteTokenContract is null!')
+    if (!quoteTokenInfo) return console.error('quoteTokenInfo is null!')
+  }
+
+  const checkAllowance = async () => {
+    try {
+      checkRequired()
+
+      const spenderAddress = networkConfig.agentsNFT!
+      //console.log(spenderAddress)
+      if (quoteTokenContract) {
+        const allowanceRaw = await quoteTokenContract!.allowance(userAddress!, spenderAddress)
+        const allowanceFormatted = ethers.formatUnits(allowanceRaw, quoteTokenInfo!.decimals)
+        // console.log("allowanceFormatted: ", allowanceFormatted)
+        // setIsApproved(true)
+        setIsApproved(Number(quoteTokenAmount) <= Number(allowanceFormatted))
+      }
+    } catch (err) {
+      console.error('Error checking allowance:', err)
+    }
+  }
+
   const handleApprove = async () => {
     try {
       checkRequired()
       setWaitApproving(true)
 
-      const spenderAddress = networkConfig.poolsNFT
+      const spenderAddress = networkConfig.agentsNFT
       const amount = ethers.parseUnits(quoteTokenAmount, quoteTokenInfo!.decimals)
       const tx = await quoteTokenContract!.approve(spenderAddress!, amount)
       await tx.wait()
@@ -148,39 +150,46 @@ function CreateAgent() {
     }
   }
 
-  const handleMint = async () => {
+  const handleCreate = async () => {
     try {
       checkRequired()
-      if (!poolsNFT) return console.error('poolsNFT is null!')
+      if (!agentsNFT) return console.error('agentsNFT is null!')
 
-      setWaitMint(true)
+      setWaitCreate(true)
 
       const strategyId = networkConfig.strategies![selectedStrategyId].id
       const baseTokenInfo = networkConfig.baseTokens!.find(b => b.symbol === selectedBaseToken)
       if (!baseTokenInfo || !quoteTokenInfo) return console.error('Tokens not set!')
+      const baseTokenAddress = baseTokenInfo.address
+      const quoteTokenAddress = quoteTokenInfo.address
       const quoteTokenDecimals = quoteTokenInfo.decimals
-      const quoteTokenAmountRaw = ethers.parseUnits(quoteTokenAmount, quoteTokenInfo.decimals)
+      const quoteTokenAmountRaw = ethers.parseUnits(quoteTokenAmount, quoteTokenDecimals)
       
       const agentConfig: IAgent.AgentConfigStruct = {
         liquidityFragment: ethers.parseUnits(liquidityFragment, quoteTokenDecimals),
         positionsMax: positionsMax,
         subnodesMax: subnodesMax
       }
+      console.log(strategyId)
+      console.log(baseTokenAddress)
+      console.log(quoteTokenAddress)
+      console.log(quoteTokenAmountRaw)
+      console.log(config)
       console.log(agentConfig)
-      const tx = await poolsNFT!.mint(
+      const tx = await agentsNFT!.mint(
         strategyId,
-        baseTokenInfo.address,
-        quoteTokenInfo.address,
+        baseTokenAddress,
+        quoteTokenAddress,
         quoteTokenAmountRaw,
         config as IURUS.ConfigStruct,
-        
+        agentConfig
       )
       await tx.wait()
     } catch (err) {
       alert('Error minting pool')
       console.error('Error minting pool', err)
     } finally {
-      setWaitMint(false)
+      setWaitCreate(false)
     }
   }
 
@@ -305,8 +314,8 @@ function CreateAgent() {
         ) : (
           <button
             className={`${styles['mint-button']} button`}
-            onClick={handleMint}
-            disabled={waitMint}
+            onClick={handleCreate}
+            disabled={waitCreate}
           >
             Create Agent
           </button>

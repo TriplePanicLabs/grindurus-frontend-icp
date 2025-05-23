@@ -39,8 +39,8 @@ const PositionsTable = ({ poolId }: PositionsTableProps) => {
     if (!(await checkRequired())) return
     setIsLoading(true)
     try {
-      const poolsNFTInfos: IPoolsNFTLens.PoolNFTInfoStructOutput[] =
-        await poolsNFT!.getPoolNFTInfosBy([poolId])
+      const poolsNFTInfos: IPoolsNFTLens.PoolInfoStructOutput[] =
+        await poolsNFT!.getPoolInfosBy([poolId])
       const positions = poolsNFTInfos[0].positions
       const feeTokenDecimals = 18
       const baseTokenDecimals = poolsNFTInfos[0].baseTokenDecimals

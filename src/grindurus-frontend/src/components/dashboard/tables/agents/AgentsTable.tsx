@@ -5,6 +5,9 @@ import visible from '@/assets/icons/eye.svg'
 import logoArbitrum from '@/assets/tokens/logoArbitrum.png'
 
 import styles from './AgentsTable.module.scss'
+import { useProtocolContext } from '@/context/ProtocolContext'
+import { IAgentsNFT } from '@/typechain-types/AgentsNFT'
+
 
 interface Pool {
   id: string
@@ -28,6 +31,7 @@ interface AgentData {
 function AgentsTable() {
   const [tableData, setTableData] = useState<AgentData[] | null>(null)
   const navigate = useNavigate()
+  const { agentsNFT } = useProtocolContext()
 
   useEffect(() => {
     const data: AgentData[] = [
@@ -53,6 +57,53 @@ function AgentsTable() {
     ]
     setTableData(data)
   }, [])
+
+  const checkRequired = () => {
+    if (!agentsNFT) {
+      console.error('agentsNFT not set!')
+      return false
+    }
+    return true
+  }
+
+  const fetchInitialAgents = async () => {
+    if (!checkRequired()) return
+    
+  }
+
+  const fetchAgents = async (agentIds: number[]) => {
+    if (!checkRequired()) return
+    try {
+      const agentInfos: IAgentsNFT.AgentInfoStructOutput[] = await agentsNFT!.getAgentInfosBy(agentIds)
+      const formatted = formatTableData(agentInfos)
+    } catch (err) {
+
+    }
+  }
+
+  const formatTableData = (agentInfos: IAgentsNFT.AgentInfoStructOutput[]) => {
+    return agentInfos.map( info => {
+      return {
+        id: info.agentId,
+        strategyId: info.strategyId,
+        quoteTokenSymbol: info.quoteTokenSymbol,
+        baseTokenSymbol: info.quoteTokenSymbol,
+        reserve: info.balance.reserve,
+        active: info.balance.active,
+        quoteYield: info.totalProfits.quoteTokenYieldProfit,
+        baseYield: info.totalProfits.baseTokenYieldProfit,
+        quoteTrade: info.totalProfits.quoteTokenTradeProfit,
+        baseTrade: info.totalProfits.baseTokenTradeProfit,
+        pools: [
+          { id: '0', balance: '100' },
+          { id: '1', balance: '100' },
+          { id: '2', balance: '100' },
+          { id: '3', balance: '100' },
+          { id: '3', balance: '100' },
+        ],
+      }
+    })
+  } 
 
   const handleViewagent = (agentId: string) => {
     navigate(`/agent/${agentId}`)
@@ -93,7 +144,7 @@ function AgentsTable() {
                     </div>
                   </div>
                   <div className={styles['block']}>
-                    <div className={styles['block-title']}>Yield Profit:</div>
+                    <div className={styles['block-title']}>Total Yield Profit:</div>
                     <div className={styles['block-text']}>
                       <div>{`${data.quoteYield} ${data.quoteTokenSymbol}`}</div>
                       <div>{`${data.baseYield} ${data.baseTokenSymbol}`}</div>
@@ -108,7 +159,7 @@ function AgentsTable() {
                     </div>
                   </div>
                   <div className={styles['block']}>
-                    <div className={styles['block-title']}>Trade Profit:</div>
+                    <div className={styles['block-title']}>Total Trade Profit:</div>
                     <div className={styles['block-text']}>
                       <div>{`${data.quoteTrade} ${data.quoteTokenSymbol}`}</div>
                       <div>{`${data.baseTrade} ${data.baseTokenSymbol}`}</div>
@@ -133,14 +184,14 @@ function AgentsTable() {
                 </div>
                 <div className={styles['column']}>
                   <div className={styles['block']}>
-                    <div className={styles['block-title']}>Yield Profit:</div>
+                    <div className={styles['block-title']}>Total Yield Profit:</div>
                     <div className={styles['block-text']}>
                       <div>{`${data.quoteYield} ${data.quoteTokenSymbol}`}</div>
                       <div>{`${data.baseYield} ${data.baseTokenSymbol}`}</div>
                     </div>
                   </div>
                   <div className={styles['block']}>
-                    <div className={styles['block-title']}>Trade Profit:</div>
+                    <div className={styles['block-title']}>Total Trade Profit:</div>
                     <div className={styles['block-text']}>
                       <div>{`${data.quoteTrade} ${data.quoteTokenSymbol}`}</div>
                       <div>{`${data.baseTrade} ${data.baseTokenSymbol}`}</div>
@@ -166,7 +217,15 @@ function AgentsTable() {
                 View Agent
               </button>
               <button onClick={() => console.log(data.id)} className={`${styles['button']} button`}>
-                Grind
+                <div>
+                  Random Buy Royalty
+                </div>
+                <div>
+                  x QuoteToken
+                </div>
+              </button>
+              <button onClick={() => console.log(data.id)} className={`${styles['button']} button`}>
+                GRIND
               </button>
             </div>
           </div>

@@ -40,22 +40,25 @@ const ThresholdsTable = ({ poolId }: ThresholdsTableProps) => {
 
     setIsLoading(true)
     try {
-      const poolsNFTInfos: IPoolsNFTLens.PoolNFTInfoStructOutput[] =
-        await poolsNFT!.getPoolNFTInfosBy([poolId])
-      const _thresholds = poolsNFTInfos[0].thresholds
-
+      const poolInfos: IPoolsNFTLens.PoolInfoStructOutput[] = await poolsNFT!.getPoolInfosBy([poolId])
+      const _thresholds = poolInfos[0].thresholds
+      const oracleQuoteTokenPerBaseTokenDecimals = poolInfos[0].oracleQuoteTokenPerBaseTokenDecimals
+      const quoteTokenDecimals = poolInfos[0].quoteTokenDecimals
+      const baseTokenDecimals = poolInfos[0].baseTokenDecimals
+      const priceDecimals = oracleQuoteTokenPerBaseTokenDecimals !== BigInt(0) ? oracleQuoteTokenPerBaseTokenDecimals : 8n
       const thresholds = {
-        longBuyPriceMin: formatUnits(_thresholds[0], 8),
-        longSellQuoteTokenAmountThreshold: formatUnits(_thresholds[1], 6),
-        longSellSwapPriceThreshold: formatUnits(_thresholds[2], 8),
-        hedgeSellInitPriceThresholdHigh: formatUnits(_thresholds[3], 8),
-        hedgeSellInitPriceThresholdLow: formatUnits(_thresholds[4], 8),
-        hedgeSellLiquidity: formatUnits(_thresholds[5], 6),
-        hedgeSellQuoteTokenAmountThreshold: formatUnits(_thresholds[6], 6),
-        hedgeSellTargetPrice: formatUnits(_thresholds[7], 8),
-        hedgeSellSwapPriceThreshold: formatUnits(_thresholds[8], 8),
-        hedgeRebuyBaseTokenAmountThreshold: formatUnits(_thresholds[9], 18),
-        hedgeRebuySwapPriceThreshold: formatUnits(_thresholds[10], 8),
+        spotPrice: formatUnits(_thresholds.spotPrice, priceDecimals),
+        longBuyPriceMin: formatUnits(_thresholds.longBuyPriceMin, priceDecimals),
+        longSellQuoteTokenAmountThreshold: formatUnits(_thresholds.longSellQuoteTokenAmountThreshold, quoteTokenDecimals),
+        longSellSwapPriceThreshold: formatUnits(_thresholds.longSellSwapPriceThreshold, priceDecimals),
+        hedgeSellInitPriceThresholdHigh: formatUnits(_thresholds.hedgeSellInitPriceThresholdHigh, priceDecimals),
+        hedgeSellInitPriceThresholdLow: formatUnits(_thresholds.hedgeSellInitPriceThresholdLow, priceDecimals),
+        hedgeSellLiquidity: formatUnits(_thresholds.hedgeSellLiquidity, quoteTokenDecimals),
+        hedgeSellQuoteTokenAmountThreshold: formatUnits(_thresholds.hedgeSellQuoteTokenAmountThreshold, priceDecimals),
+        hedgeSellTargetPrice: formatUnits(_thresholds.hedgeSellTargetPrice, priceDecimals),
+        hedgeSellSwapPriceThreshold: formatUnits(_thresholds.hedgeSellSwapPriceThreshold, priceDecimals),
+        hedgeRebuyBaseTokenAmountThreshold: formatUnits(_thresholds.hedgeRebuyBaseTokenAmountThreshold, baseTokenDecimals),
+        hedgeRebuySwapPriceThreshold: formatUnits(_thresholds.hedgeRebuySwapPriceThreshold, priceDecimals),
       }
 
       const formatted: ThresholdEntry[] = Object.entries(thresholds).map(([param, value]) => ({
