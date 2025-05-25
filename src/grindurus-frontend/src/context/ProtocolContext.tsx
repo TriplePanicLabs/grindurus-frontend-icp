@@ -4,8 +4,6 @@ import React, { createContext, ReactNode, useContext, useEffect, useMemo, useSta
 
 import config from '@/config'
 import {
-  GrAI,
-  GrAI__factory,
   GrETH,
   GrETH__factory,
   PoolsNFT,
@@ -26,7 +24,6 @@ interface ProtocolContextType {
   signer: JsonRpcSigner | null
   poolsNFT: PoolsNFT | null
   grETH: GrETH | null
-  grAI: GrAI | null
   grinderAI: GrinderAI | null
   agentsNFT: AgentsNFT | null
   registry: Registry | null
@@ -45,7 +42,6 @@ export const ProtocolContextProvider = ({ children }: { children: ReactNode }) =
   const [networkConfig, setNetworkConfig] = useState<Partial<NetworkConfig>>({})
   const [poolsNFT, setPoolsNFT] = useState<PoolsNFT | null>(null)
   const [grETH, setGrETH] = useState<GrETH | null>(null)
-  const [grAI, setGrAI] = useState<GrAI | null>(null)
   const [grinderAI, setGrinderAI] = useState<GrinderAI| null>(null)
   const [agentsNFT, setAgentsNFT] = useState<AgentsNFT | null>(null)
   const [registry, setRegistry] = useState<Registry | null>(null)
@@ -86,7 +82,6 @@ export const ProtocolContextProvider = ({ children }: { children: ReactNode }) =
     if (!signer) {
       setPoolsNFT(null)
       setGrETH(null)
-      setGrAI(null)
       setGrinderAI(null)
       setAgentsNFT(null)
       setRegistry(null)
@@ -104,7 +99,6 @@ export const ProtocolContextProvider = ({ children }: { children: ReactNode }) =
 
     setPoolsNFT(poolsAddress ? PoolsNFT__factory.connect(poolsAddress, signer) : null)
     setGrETH(grETHAddress ? GrETH__factory.connect(grETHAddress, signer) : null)
-    setGrAI(grAIAddress ? GrAI__factory.connect(grAIAddress, signer) : null)
     setGrinderAI(grinderAIAddress ? GrinderAI__factory.connect(grinderAIAddress, signer): null)
     setAgentsNFT(agentsNFTAddress ? AgentsNFT__factory.connect(agentsNFTAddress, signer): null)
     setRegistry(registryAddress ? Registry__factory.connect(registryAddress, signer) : null)
@@ -123,7 +117,6 @@ export const ProtocolContextProvider = ({ children }: { children: ReactNode }) =
         provider,
         poolsNFT,
         grETH,
-        grAI,
         grinderAI,
         agentsNFT,
         registry,
