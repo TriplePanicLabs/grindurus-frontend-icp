@@ -14,6 +14,8 @@ import {
   AgentsNFT__factory,
   Registry,
   Registry__factory,
+  AggregatorV3Interface,
+  AggregatorV3Interface__factory
 } from '@/typechain-types'
 import { convertDecimalToHex } from '@/utils/numbers'
 
@@ -27,6 +29,7 @@ interface ProtocolContextType {
   grinderAI: GrinderAI | null
   agentsNFT: AgentsNFT | null
   registry: Registry | null
+  oracleETHUSD: AggregatorV3Interface | null
   networkConfig: Partial<NetworkConfig>
   setNetworkConfig: React.Dispatch<React.SetStateAction<Partial<NetworkConfig>>>
   isConnected: boolean
@@ -45,6 +48,7 @@ export const ProtocolContextProvider = ({ children }: { children: ReactNode }) =
   const [grinderAI, setGrinderAI] = useState<GrinderAI| null>(null)
   const [agentsNFT, setAgentsNFT] = useState<AgentsNFT | null>(null)
   const [registry, setRegistry] = useState<Registry | null>(null)
+  const [oracleETHUSD, setOracleETHUSD] = useState<AggregatorV3Interface | null>(null)
   const [visiblePoolIds, setVisiblePoolIds] = useState<number[]>([])
 
   const { walletProvider } = useAppKitProvider('eip155')
@@ -85,6 +89,7 @@ export const ProtocolContextProvider = ({ children }: { children: ReactNode }) =
       setGrinderAI(null)
       setAgentsNFT(null)
       setRegistry(null)
+      setOracleETHUSD(null)
       return
     }
 
@@ -95,6 +100,7 @@ export const ProtocolContextProvider = ({ children }: { children: ReactNode }) =
       grinderAI: grinderAIAddress,
       agentsNFT: agentsNFTAddress,
       registry: registryAddress,
+      oracleETHUSD: oracleETHUSDAddress
     } = networkConfig ?? {}
 
     setPoolsNFT(poolsAddress ? PoolsNFT__factory.connect(poolsAddress, signer) : null)
@@ -102,6 +108,8 @@ export const ProtocolContextProvider = ({ children }: { children: ReactNode }) =
     setGrinderAI(grinderAIAddress ? GrinderAI__factory.connect(grinderAIAddress, signer): null)
     setAgentsNFT(agentsNFTAddress ? AgentsNFT__factory.connect(agentsNFTAddress, signer): null)
     setRegistry(registryAddress ? Registry__factory.connect(registryAddress, signer) : null)
+    setOracleETHUSD(oracleETHUSDAddress ? AggregatorV3Interface__factory.connect(oracleETHUSDAddress, signer): null)
+
   }, [signer, networkConfig])
 
   const getDefaultVisiblePool = async () => {
@@ -120,6 +128,7 @@ export const ProtocolContextProvider = ({ children }: { children: ReactNode }) =
         grinderAI,
         agentsNFT,
         registry,
+        oracleETHUSD,
         networkConfig,
         setNetworkConfig,
         isConnected,

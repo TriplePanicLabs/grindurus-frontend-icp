@@ -28,6 +28,7 @@ export interface ChainConfig {
   grAI?: string
   grinderAI?: string
   agentsNFT?: string
+  oracleETHUSD?: string
   strategies: Strategy[]
   quoteTokens: Token[]
   baseTokens: Token[]
@@ -46,6 +47,7 @@ const config: Record<SupportedChains, ChainConfig> = {
     grAI: '0x137A57C494422008F49F2b7fCEB856118A5febd9',
     grinderAI: '0x137A57C494422008F49F2b7fCEB856118A5febd9',
     agentsNFT: '0xB24929439bb77b9C52b31dE00EA2e8002D5b058a',
+    oracleETHUSD: '0x639Fe6ab55C921f74e7fac1ee960C0B6293ba612',
     strategies: [
       {
         id: 1,

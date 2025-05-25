@@ -13,7 +13,7 @@ import { IGrinderAI } from '@/typechain-types/GrinderAI'
 const ETH = '0x0000000000000000000000000000000000000000'
 
 function Grind() {
-  const { poolsNFT, grinderAI, agentsNFT, provider } = useProtocolContext()
+  const { oracleETHUSD, poolsNFT, grinderAI, agentsNFT, provider } = useProtocolContext()
 
   const [poolId, setPoolId] = useState<bigint | null>(0n)
   const [calculating, setCalculating] = useState<boolean>(false)
@@ -174,9 +174,9 @@ function Grind() {
       const gasPrice = feeData?.gasPrice as bigint
       const estimateGas = await grinderAI!.grind.estimateGas(poolId)
       const grindEstimatedFee = ethers.formatEther(gasPrice * estimateGas)
-      const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd')
-      const data = await response.json()
-      const ethPrice = parseFloat(data.ethereum.usd)
+      const latestRoundData = await oracleETHUSD?.latestRoundData();
+      const answer = latestRoundData?.answer as bigint;
+      const ethPrice = Number(ethers.formatUnits(answer, 8))
       const _grindCostUSD = parseFloat(grindEstimatedFee) * ethPrice
       setGrindCostETH(grindEstimatedFee)
       setGrindCostUSD(_grindCostUSD.toFixed(2))
@@ -260,20 +260,19 @@ function Grind() {
 
   const handleGrind = async () => {
     setButtonActive(true)
-    if(!poolId) {
+    if (!poolId) {
       console.log("da")
       return
     }
     try {
       if (optimizeGrind) {
-  
+        
       } else {
-        let grindTx= await grinderAI?.grind(poolId);
-        grindTx?.wait()
+        let grindTx = await grinderAI?.grind(poolId);
+        await grindTx?.wait()
       }
-
-    } catch {
-      console.log("ad")
+    } catch (err) {
+      console.log("error grind: ", err)
     }
   }
 
