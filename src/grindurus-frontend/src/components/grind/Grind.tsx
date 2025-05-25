@@ -15,7 +15,7 @@ const ETH = '0x0000000000000000000000000000000000000000'
 function Grind() {
   const { poolsNFT, grinderAI, agentsNFT, provider } = useProtocolContext()
 
-  const [poolId, setPoolId] = useState<bigint | null>(null)
+  const [poolId, setPoolId] = useState<bigint | null>(0n)
   const [calculating, setCalculating] = useState<boolean>(false)
   const [baseTokenSymbol, setBaseTokenSymbol] = useState<string>('')
   const [quoteTokenSymbol, setQuoteTokenSymbol] = useState<string>('')
@@ -27,10 +27,6 @@ function Grind() {
   const [poolBuyerShare, setPoolBuyerShare] = useState<IGrinderAI.PnLSharesStruct | null>(null)
   const [reserveShare, setReserveShare] = useState<IGrinderAI.PnLSharesStruct | null>(null)
   const [grinderShare, setGrinderShare] = useState<IGrinderAI.PnLSharesStruct | null>(null)
-  // const [grethPrice, setGRETHPrice] = useState<string>('0.0')
-  // const [graiPrice, setGRAIPrice] = useState<string>('0.0')
-  // const [baseTokenPrice, setBaseTokenPrice] = useState<string>('0.0')
-  // const [quoteTokenPrice, setQuoteTokenPrice] = useState<string>('0.0')
 
   const [grinderGRETHShare, setGrinderGRETHShare] = useState<string>('...') 
   const [grinderGRAIShare, setGrinderGRAIShare] = useState<string>('...')
@@ -45,16 +41,28 @@ function Grind() {
   const [poolOwnerGRAIShare, setPoolOwnerGRAIShare] = useState<string>('...')
   const [poolOwnerBaseTokenShare, setPoolOwnerBaseTokenShare] = useState<string>('...')
   const [poolOwnerQuoteTokenShare, setPoolOwnerQuoteTokenShare] = useState<string>('...')
+  const [poolOwnerGRETHShareUSD, setPoolOwnerGRETHShareUSD] = useState<number>(0.0) 
+  const [poolOwnerGRAIShareUSD, setPoolOwnerGRAIShareUSD] = useState<number>(0.0)
+  const [poolOwnerBaseTokenShareUSD, setPoolOwnerBaseTokenShareUSD] = useState<number>(0.0)
+  const [poolOwnerQuoteTokenShareUSD, setPoolOwnerQuoteTokenShareUSD] = useState<number>(0.0)
 
   const [poolBuyerGRETHShare, setPoolBuyerGRETHShare] = useState<string>('...') 
   const [poolBuyerGRAIShare, setPoolBuyerGRAIShare] = useState<string>('...')
   const [poolBuyerBaseTokenShare, setPoolBuyerBaseTokenShare] = useState<string>('...')
   const [poolBuyerQuoteTokenShare, setPoolBuyerQuoteTokenShare] = useState<string>('...')
+  const [poolBuyerGRETHShareUSD, setPoolBuyerGRETHShareUSD] = useState<number>(0.0) 
+  const [poolBuyerGRAIShareUSD, setPoolBuyerGRAIShareUSD] = useState<number>(0.0)
+  const [poolBuyerBaseTokenShareUSD, setPoolBuyerBaseTokenShareUSD] = useState<number>(0.0)
+  const [poolBuyerQuoteTokenShareUSD, setPoolBuyerQuoteTokenShareUSD] = useState<number>(0.0)
 
   const [reserveGRETHShare, setReserveGRETHShare] = useState<string>('...') 
   const [reserveGRAIShare, setReserveGRAIShare] = useState<string>('...')
   const [reserveBaseTokenShare, setReserveBaseTokenShare] = useState<string>('...')
   const [reserveQuoteTokenShare, setReserveQuoteTokenShare] = useState<string>('...')
+  const [reserveGRETHShareUSD, setReserveGRETHShareUSD] = useState<number>(0.0) 
+  const [reserveGRAIShareUSD, setReserveGRAIShareUSD] = useState<number>(0.0)
+  const [reserveBaseTokenShareUSD, setReserveBaseTokenShareUSD] = useState<number>(0.0)
+  const [reserveQuoteTokenShareUSD, setReserveQuoteTokenShareUSD] = useState<number>(0.0)
 
   const [grindCostETH, setGrindCostETH] = useState<string>('0.0')
   const [grindCostUSD, setGrindCostUSD] = useState<string>('0.0')
@@ -65,14 +73,11 @@ function Grind() {
   }, [])
 
   useEffect(() => {
-    generatePoolId()
-  }, [refresh])
-
-  useEffect(() => {
-    if (poolId) {
-      fetchPoolInfoWithPnLShares()
+    if (!poolId) {
+      generatePoolId()
     }
-  }, [poolId])
+    fetchPoolInfoWithPnLShares()
+  }, [refresh])
 
   const handleRefresh = () => {
     setRefresh((prev) => prev + 1)
@@ -82,7 +87,7 @@ function Grind() {
 
   const generatePoolId = async () => {
     try {
-      if (!agentsNFT) return
+      if (!agentsNFT || !poolsNFT) return
       const totalAgents = Number(await agentsNFT?.totalAgents())
       const pivotAgentId = getRandomInt(totalAgents)
       console.log("pivotAgentId: ", pivotAgentId)
@@ -105,7 +110,7 @@ function Grind() {
       console.log("randomPoolIdIndex: ", randomPoolIdIndex)
       const _poolId = poolIds[randomPoolIdIndex]
       console.log("poolId: ", _poolId)
-      setPoolId(() => _poolId);
+      setPoolId(_poolId);
     } catch (error) {
       console.error('Error generating pool ID:', error)
       setPoolId(null)
@@ -114,45 +119,56 @@ function Grind() {
 
   const fetchPoolInfoWithPnLShares = async () => {
     try {
-      if (!poolId) return
       setCalculating(true)
       const shares: IGrinderAI.PnLSharesStruct[] = await grinderAI?.getPnLShares(poolId as BigNumberish) as IGrinderAI.PnLSharesStruct[]
-      const poolInfos: IPoolsNFTLens.PoolInfoStruct[] = await poolsNFT?.getPoolInfosBy([poolId as BigNumberish]) as IPoolsNFTLens.PoolInfoStruct[]
+      const poolInfos: IPoolsNFTLens.PoolInfoStruct[] = await poolsNFT?.getPoolInfosBy([poolId as BigNumberish]) as IPoolsNFTLens.PoolInfoStruct[];
+      // console.log(poolInfos);
       const poolInfo = poolInfos[0]
+      const baseTokenDecimals = poolInfo?.baseTokenDecimals as number
+      const quoteTokenDecimals = poolInfo?.quoteTokenDecimals as number
       setBaseTokenSymbol(poolInfo.baseTokenSymbol)
       setQuoteTokenSymbol(poolInfo.quoteTokenSymbol)
 
       setPoolOwnerShare(shares[0])
       setPoolBuyerShare(shares[1])
       setReserveShare(shares[2])
-
       setGrinderShare(shares[3])
-      const grinderGRETHAmount = Number(ethers.formatUnits(shares[3].grethAmount, 18).toString())
-      const grinderGRAIAmount = Number(ethers.formatUnits(shares[3].graiAmount, 18).toString())
-      const grinderBaseTokenAmount = Number(ethers.formatUnits(shares[3].baseTokenAmount, poolInfo?.baseTokenDecimals).toString())
-      const grinderQuoteTokenAmount = Number(ethers.formatUnits(shares[3].quoteTokenAmount, poolInfo?.quoteTokenDecimals).toString())
-      setGrinderGRETHShare(grinderGRETHAmount.toString())
-      setGrinderGRAIShare(grinderGRAIAmount.toString())
-      setGrinderBaseTokenShare(grinderBaseTokenAmount.toString())
-      setGrinderQuoteTokenShare(grinderQuoteTokenAmount.toString())
 
-      setPoolOwnerShare(shares[0])
-      setPoolOwnerGRETHShare(ethers.formatUnits(shares[0].grethAmount, 18).toString())
-      setPoolOwnerGRAIShare(ethers.formatUnits(shares[0].graiAmount, 18).toString())
-      setPoolOwnerBaseTokenShare(ethers.formatUnits(shares[0].baseTokenAmount, poolInfo?.baseTokenDecimals).toString())
-      setPoolOwnerQuoteTokenShare(ethers.formatUnits(shares[0].quoteTokenAmount, poolInfo?.quoteTokenDecimals).toString())
+      const grinderGRETHAmount = ethers.formatUnits(shares[3].grethAmount, 18)
+      const grinderGRAIAmount = ethers.formatUnits(shares[3].graiAmount, 18)
+      const grinderBaseTokenAmount = ethers.formatUnits(shares[3].baseTokenAmount, baseTokenDecimals)
+      const grinderQuoteTokenAmount = ethers.formatUnits(shares[3].quoteTokenAmount, quoteTokenDecimals)
+      setGrinderGRETHShare(grinderGRETHAmount)
+      setGrinderGRAIShare(grinderGRAIAmount)
+      setGrinderBaseTokenShare(grinderBaseTokenAmount)
+      setGrinderQuoteTokenShare(grinderQuoteTokenAmount)
 
-      setPoolBuyerShare(shares[1])
-      setPoolBuyerGRETHShare(ethers.formatUnits(shares[1].grethAmount, 18).toString())
-      setPoolBuyerGRAIShare(ethers.formatUnits(shares[1].graiAmount, 18).toString())
-      setPoolBuyerBaseTokenShare(ethers.formatUnits(shares[1].baseTokenAmount, poolInfo?.baseTokenDecimals).toString())
-      setPoolBuyerQuoteTokenShare(ethers.formatUnits(shares[1].quoteTokenAmount, poolInfo?.quoteTokenDecimals).toString())
+      const poolOwnerGRETHAmount = ethers.formatUnits(shares[0].grethAmount, 18)
+      const poolOwnerGRAIAmount = ethers.formatUnits(shares[0].graiAmount, 18)
+      const poolOwnerBaseTokenAmount = ethers.formatUnits(shares[0].baseTokenAmount, baseTokenDecimals)
+      const poolOwnerQuoteTokenAmount = ethers.formatUnits(shares[0].quoteTokenAmount, quoteTokenDecimals)
+      setPoolOwnerGRETHShare(poolOwnerGRETHAmount)
+      setPoolOwnerGRAIShare(poolOwnerGRAIAmount)
+      setPoolOwnerBaseTokenShare(poolOwnerBaseTokenAmount)
+      setPoolOwnerQuoteTokenShare(poolOwnerQuoteTokenAmount)
 
-      setReserveShare(shares[2])
-      setReserveGRETHShare(ethers.formatUnits(shares[2].grethAmount, 18).toString())
-      setReserveGRAIShare(ethers.formatUnits(shares[2].graiAmount, 18).toString())
-      setReserveBaseTokenShare(ethers.formatUnits(shares[2].baseTokenAmount, poolInfo?.baseTokenDecimals).toString())
-      setReserveQuoteTokenShare(ethers.formatUnits(shares[2].quoteTokenAmount, poolInfo?.quoteTokenDecimals).toString())
+      const poolBuyerGRETHAmount = ethers.formatUnits(shares[1].grethAmount, 18)
+      const poolBuyerGRAIAmount = ethers.formatUnits(shares[1].graiAmount, 18)
+      const poolBuyerBaseTokenAmount = ethers.formatUnits(shares[1].baseTokenAmount, baseTokenDecimals)
+      const poolBuyerQuoteTokenAmount = ethers.formatUnits(shares[1].quoteTokenAmount, quoteTokenDecimals)
+      setPoolBuyerGRETHShare(poolBuyerGRETHAmount)
+      setPoolBuyerGRAIShare(poolBuyerGRAIAmount)
+      setPoolBuyerBaseTokenShare(poolBuyerBaseTokenAmount)
+      setPoolBuyerQuoteTokenShare(poolBuyerQuoteTokenAmount)
+
+      const reserveGRETHAmount = ethers.formatUnits(shares[2].grethAmount, 18)
+      const reserveGRAIAmount = ethers.formatUnits(shares[2].graiAmount, 18)
+      const reserveBaseTokenAmount = ethers.formatUnits(shares[2].baseTokenAmount, baseTokenDecimals)
+      const reserveQuoteTokenAmount = ethers.formatUnits(shares[2].quoteTokenAmount, quoteTokenDecimals)
+      setReserveGRETHShare(reserveGRETHAmount)
+      setReserveGRAIShare(reserveGRAIAmount)
+      setReserveBaseTokenShare(reserveBaseTokenAmount)
+      setReserveQuoteTokenShare(reserveQuoteTokenAmount)
 
       const feeData = await provider?.getFeeData()
       const gasPrice = feeData?.gasPrice as bigint
@@ -167,19 +183,15 @@ function Grind() {
       const rateRaw = await grinderAI?.ratePerGRAI(ETH) as bigint
       const rate = Number(ethers.formatUnits(rateRaw, 18))
       const grethPrice = rate * ethPrice
-      console.log(grethPrice)
+      // console.log(grethPrice)
       const graiPrice = rate * ethPrice
       const baseTokenPrice = Number(ethers.formatUnits(poolInfo.positions.long.price.toString(), poolInfo.oracleQuoteTokenPerBaseTokenDecimals)) // [baseTokenPrice]=quoteToken/baseToken
       const quoteTokenPrice = Number(1.0) // [quoteTokenPrice] = USD/quoteToken
-      // setGRETHPrice(grethPrice.toString())
-      // setGRAIPrice(graiPrice.toString())
-      // setBaseTokenPrice(baseTokenPrice.toString())
-      // setQuoteTokenPrice(quoteTokenPrice.toString())
-      // setGrinderBaseTokenShareUSD()
-      const _grinderGRETHAmountUSD = grinderGRETHAmount * grethPrice
-      const _grinderGRAIAmountUSD = grinderGRAIAmount * graiPrice
-      const _grinderBaseTokenAmountUSD = grinderBaseTokenAmount * baseTokenPrice
-      const _grinderQuoteTokenAmountUSD = grinderQuoteTokenAmount * quoteTokenPrice
+
+      const _grinderGRETHAmountUSD = Number(grinderGRETHAmount) * grethPrice
+      const _grinderGRAIAmountUSD = Number(grinderGRAIAmount) * graiPrice
+      const _grinderBaseTokenAmountUSD = Number(grinderBaseTokenAmount) * baseTokenPrice
+      const _grinderQuoteTokenAmountUSD = Number(grinderQuoteTokenAmount) * quoteTokenPrice
       setGrinderGRETHShareUSD(_grinderGRETHAmountUSD)
       setGrinderGRAIShareUSD(_grinderGRAIAmountUSD)
       setGrinderBaseTokenShareUSD(_grinderBaseTokenAmountUSD)
@@ -191,6 +203,34 @@ function Grind() {
         _grinderQuoteTokenAmountUSD - 
         _grindCostUSD
       setGrindProfitUSD(totalGrinderProfitsUSD.toFixed(2))
+      
+      const _poolOwnerGRETHAmountUSD = Number(poolOwnerGRETHAmount) * grethPrice
+      const _poolOwnerGRAIAmountUSD = Number(poolOwnerGRAIAmount) * graiPrice
+      const _poolOwnerBaseTokenAmountUSD = Number(poolOwnerBaseTokenAmount) * baseTokenPrice
+      const _poolOwnerQuoteTokenAmountUSD = Number(poolOwnerQuoteTokenAmount) * quoteTokenPrice
+      setPoolOwnerGRETHShareUSD(_poolOwnerGRETHAmountUSD)
+      setPoolOwnerGRAIShareUSD(_poolOwnerGRAIAmountUSD)
+      setPoolOwnerBaseTokenShareUSD(_poolOwnerBaseTokenAmountUSD)
+      setPoolOwnerQuoteTokenShareUSD(_poolOwnerQuoteTokenAmountUSD)
+
+      const _poolBuyerGRETHAmountUSD = Number(poolBuyerGRETHAmount) * grethPrice
+      const _poolBuyerGRAIAmountUSD = Number(poolBuyerGRAIAmount) * graiPrice
+      const _poolBuyerBaseTokenAmountUSD = Number(poolBuyerBaseTokenAmount) * baseTokenPrice
+      const _poolBuyerQuoteTokenAmountUSD = Number(poolBuyerQuoteTokenAmount) * quoteTokenPrice
+      setPoolBuyerGRETHShareUSD(_poolBuyerGRETHAmountUSD)
+      setPoolBuyerGRAIShareUSD(_poolBuyerGRAIAmountUSD)
+      setPoolBuyerBaseTokenShareUSD(_poolBuyerBaseTokenAmountUSD)
+      setPoolBuyerQuoteTokenShareUSD(_poolBuyerQuoteTokenAmountUSD)
+
+      const _reserveGRETHAmountUSD = Number(reserveGRETHAmount) * grethPrice
+      const _reserveGRAIAmountUSD = Number(reserveGRAIAmount) * graiPrice
+      const _reserveBaseTokenAmountUSD = Number(reserveBaseTokenAmount) * baseTokenPrice
+      const _reserveQuoteTokenAmountUSD = Number(reserveQuoteTokenAmount) * quoteTokenPrice
+      setReserveGRETHShareUSD(_reserveGRETHAmountUSD)
+      setReserveGRAIShareUSD(_reserveGRAIAmountUSD)
+      setReserveBaseTokenShareUSD(_reserveBaseTokenAmountUSD)
+      setReserveQuoteTokenShareUSD(_reserveQuoteTokenAmountUSD)
+
       setCalculating(false)
     } catch (error) {
       setCalculating(false)
@@ -278,7 +318,7 @@ function Grind() {
           </div>
           <div style={{ marginBottom: '12px', display: 'flex', justifyContent: 'space-between' }}>
             <div>Grind cost ~ </div>
-            <div>{grindCostETH} ETH (${grindCostUSD})</div>
+            <div> {grindCostETH} ETH (${grindCostUSD})</div>
           </div>
           <div style={{ marginBottom: '12px', display: 'flex', justifyContent: 'space-between' }}>
             <div>Grinder net PnL:</div>
@@ -299,27 +339,27 @@ function Grind() {
             <div className={styles['divider']}>------------------------------</div>
             <div className={styles['pool-owner-share']}>Pool Owner share:</div>
             <div className={styles['tokens-infos']}>
-              <div className={styles['token-info']}>+ {poolOwnerGRETHShare} grETH ($0.01)</div>
-              <div className={styles['token-info']}>+ {poolOwnerGRAIShare} grAI ($0.01)</div>
-              <div className={styles['token-info']}>+ {poolOwnerBaseTokenShare} {baseTokenSymbol} ($0.01)</div>
-              <div className={styles['token-info']}>+ {poolOwnerQuoteTokenShare} {quoteTokenSymbol} ($0.01)</div>
+              <div className={styles['token-info']}>+ {poolOwnerGRETHShare} grETH ({showUSD(poolOwnerGRETHShareUSD)})</div>
+              <div className={styles['token-info']}>+ {poolOwnerGRAIShare} grAI ({showUSD(poolOwnerGRAIShareUSD)})</div>
+              <div className={styles['token-info']}>+ {poolOwnerBaseTokenShare} {baseTokenSymbol} ({showUSD(poolOwnerBaseTokenShareUSD)})</div>
+              <div className={styles['token-info']}>+ {poolOwnerQuoteTokenShare} {quoteTokenSymbol} ({showUSD(poolOwnerQuoteTokenShareUSD)})</div>
             </div>
             <div>Pool Owner net PnL</div>
             <div className={styles['divider']}>------------------------------</div>
             <div className={styles['pool-owner-share']}>Pool Buyer share:</div>
             <div className={styles['tokens-infos']}>
-              <div className={styles['token-info']}>+ {poolBuyerGRETHShare} grETH ($0.01)</div>
-              <div className={styles['token-info']}>+ {poolBuyerGRAIShare} grAI ($0.01)</div>
-              <div className={styles['token-info']}>+ {poolBuyerBaseTokenShare} {baseTokenSymbol} ($0.01)</div>
-              <div className={styles['token-info']}>+ {poolBuyerQuoteTokenShare} {quoteTokenSymbol} ($0.01)</div>
+              <div className={styles['token-info']}>+ {poolBuyerGRETHShare} grETH ({showUSD(poolBuyerGRETHShareUSD)})</div>
+              <div className={styles['token-info']}>+ {poolBuyerGRAIShare} grAI ({showUSD(poolBuyerGRAIShareUSD)})</div>
+              <div className={styles['token-info']}>+ {poolBuyerBaseTokenShare} {baseTokenSymbol} ({showUSD(poolBuyerBaseTokenShareUSD)})</div>
+              <div className={styles['token-info']}>+ {poolBuyerQuoteTokenShare} {quoteTokenSymbol} ({showUSD(poolBuyerQuoteTokenShareUSD)})</div>
             </div>
             <div className={styles['divider']}>------------------------------</div>
             <div className={styles['pool-owner-share']}>Reserve share:</div>
             <div className={styles['tokens-infos']}>
-              <div className={styles['token-info']}>+ {reserveGRETHShare} grETH ($0.01)</div>
-              <div className={styles['token-info']}>+ {reserveGRAIShare} grAI ($0.01)</div>
-              <div className={styles['token-info']}>+ {reserveBaseTokenShare} {baseTokenSymbol} ($0.01)</div>
-              <div className={styles['token-info']}>+ {reserveQuoteTokenShare} {quoteTokenSymbol} ($0.01)</div>
+              <div className={styles['token-info']}>+ {reserveGRETHShare} grETH ({showUSD(reserveGRETHShareUSD)})</div>
+              <div className={styles['token-info']}>+ {reserveGRAIShare} grAI ({showUSD(reserveGRAIShareUSD)})</div>
+              <div className={styles['token-info']}>+ {reserveBaseTokenShare} {baseTokenSymbol} ({showUSD(reserveBaseTokenShareUSD)})</div>
+              <div className={styles['token-info']}>+ {reserveQuoteTokenShare} {quoteTokenSymbol} ({showUSD(reserveQuoteTokenShareUSD)})</div>
             </div>
             <div className={styles['divider']}>------------------------------</div>
             </>
