@@ -8,6 +8,13 @@
     },
     {
       "type": "function",
+      "name": "agentImplementation",
+      "inputs": [],
+      "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
       "name": "agents",
       "inputs": [{ "name": "agentId", "type": "uint256", "internalType": "uint256" }],
       "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
@@ -28,6 +35,13 @@
       "name": "balanceOf",
       "inputs": [{ "name": "owner", "type": "address", "internalType": "address" }],
       "outputs": [{ "name": "balance", "type": "uint256", "internalType": "uint256" }],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "baseURI",
+      "inputs": [],
+      "outputs": [{ "name": "", "type": "string", "internalType": "string" }],
       "stateMutability": "view"
     },
     {
@@ -408,7 +422,252 @@
           "components": [
             { "name": "account", "type": "address", "internalType": "address" },
             { "name": "grinds", "type": "uint256", "internalType": "uint256" },
-            { "name": "poolIds", "type": "uint256[]", "internalType": "uint256[]" }
+            { "name": "poolIds", "type": "uint256[]", "internalType": "uint256[]" },
+            {
+              "name": "poolInfos",
+              "type": "tuple[]",
+              "internalType": "struct IPoolsNFTLens.PoolInfo[]",
+              "components": [
+                { "name": "poolId", "type": "uint256", "internalType": "uint256" },
+                { "name": "strategyId", "type": "uint256", "internalType": "uint256" },
+                { "name": "pool", "type": "address", "internalType": "address" },
+                { "name": "reinvest", "type": "bool", "internalType": "bool" },
+                { "name": "isDrawdown", "type": "bool", "internalType": "bool" },
+                {
+                  "name": "positions",
+                  "type": "tuple",
+                  "internalType": "struct IPoolsNFTLens.Positions",
+                  "components": [
+                    {
+                      "name": "long",
+                      "type": "tuple",
+                      "internalType": "struct IURUS.Position",
+                      "components": [
+                        { "name": "number", "type": "uint8", "internalType": "uint8" },
+                        { "name": "numberMax", "type": "uint8", "internalType": "uint8" },
+                        { "name": "priceMin", "type": "uint256", "internalType": "uint256" },
+                        { "name": "liquidity", "type": "uint256", "internalType": "uint256" },
+                        { "name": "qty", "type": "uint256", "internalType": "uint256" },
+                        { "name": "price", "type": "uint256", "internalType": "uint256" },
+                        { "name": "feeQty", "type": "uint256", "internalType": "uint256" },
+                        { "name": "feePrice", "type": "uint256", "internalType": "uint256" }
+                      ]
+                    },
+                    {
+                      "name": "hedge",
+                      "type": "tuple",
+                      "internalType": "struct IURUS.Position",
+                      "components": [
+                        { "name": "number", "type": "uint8", "internalType": "uint8" },
+                        { "name": "numberMax", "type": "uint8", "internalType": "uint8" },
+                        { "name": "priceMin", "type": "uint256", "internalType": "uint256" },
+                        { "name": "liquidity", "type": "uint256", "internalType": "uint256" },
+                        { "name": "qty", "type": "uint256", "internalType": "uint256" },
+                        { "name": "price", "type": "uint256", "internalType": "uint256" },
+                        { "name": "feeQty", "type": "uint256", "internalType": "uint256" },
+                        { "name": "feePrice", "type": "uint256", "internalType": "uint256" }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "config",
+                  "type": "tuple",
+                  "internalType": "struct IURUS.Config",
+                  "components": [
+                    { "name": "longNumberMax", "type": "uint8", "internalType": "uint8" },
+                    { "name": "hedgeNumberMax", "type": "uint8", "internalType": "uint8" },
+                    { "name": "extraCoef", "type": "uint256", "internalType": "uint256" },
+                    {
+                      "name": "priceVolatilityPercent",
+                      "type": "uint256",
+                      "internalType": "uint256"
+                    },
+                    {
+                      "name": "returnPercentLongSell",
+                      "type": "uint256",
+                      "internalType": "uint256"
+                    },
+                    {
+                      "name": "returnPercentHedgeSell",
+                      "type": "uint256",
+                      "internalType": "uint256"
+                    },
+                    {
+                      "name": "returnPercentHedgeRebuy",
+                      "type": "uint256",
+                      "internalType": "uint256"
+                    }
+                  ]
+                },
+                {
+                  "name": "feeConfig",
+                  "type": "tuple",
+                  "internalType": "struct IURUS.FeeConfig",
+                  "components": [
+                    { "name": "longSellFeeCoef", "type": "uint256", "internalType": "uint256" },
+                    { "name": "hedgeSellFeeCoef", "type": "uint256", "internalType": "uint256" },
+                    { "name": "hedgeRebuyFeeCoef", "type": "uint256", "internalType": "uint256" }
+                  ]
+                },
+                {
+                  "name": "oracleQuoteTokenPerBaseToken",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "oracleQuoteTokenPerFeeToken",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                { "name": "feeToken", "type": "address", "internalType": "address" },
+                { "name": "quoteToken", "type": "address", "internalType": "address" },
+                { "name": "baseToken", "type": "address", "internalType": "address" },
+                { "name": "feeTokenSymbol", "type": "string", "internalType": "string" },
+                { "name": "quoteTokenSymbol", "type": "string", "internalType": "string" },
+                { "name": "baseTokenSymbol", "type": "string", "internalType": "string" },
+                {
+                  "name": "oracleQuoteTokenPerBaseTokenDecimals",
+                  "type": "uint8",
+                  "internalType": "uint8"
+                },
+                {
+                  "name": "oracleQuoteTokenPerFeeTokenDecimals",
+                  "type": "uint8",
+                  "internalType": "uint8"
+                },
+                { "name": "quoteTokenDecimals", "type": "uint8", "internalType": "uint8" },
+                { "name": "baseTokenDecimals", "type": "uint8", "internalType": "uint8" },
+                { "name": "quoteTokenAmount", "type": "uint256", "internalType": "uint256" },
+                { "name": "baseTokenAmount", "type": "uint256", "internalType": "uint256" },
+                { "name": "activeCapital", "type": "uint256", "internalType": "uint256" },
+                { "name": "startTimestamp", "type": "uint256", "internalType": "uint256" },
+                {
+                  "name": "profits",
+                  "type": "tuple",
+                  "internalType": "struct IURUS.Profits",
+                  "components": [
+                    {
+                      "name": "quoteTokenYieldProfit",
+                      "type": "uint256",
+                      "internalType": "uint256"
+                    },
+                    {
+                      "name": "baseTokenYieldProfit",
+                      "type": "uint256",
+                      "internalType": "uint256"
+                    },
+                    {
+                      "name": "quoteTokenTradeProfit",
+                      "type": "uint256",
+                      "internalType": "uint256"
+                    },
+                    { "name": "baseTokenTradeProfit", "type": "uint256", "internalType": "uint256" }
+                  ]
+                },
+                {
+                  "name": "totalProfits",
+                  "type": "tuple",
+                  "internalType": "struct IURUS.Profits",
+                  "components": [
+                    {
+                      "name": "quoteTokenYieldProfit",
+                      "type": "uint256",
+                      "internalType": "uint256"
+                    },
+                    {
+                      "name": "baseTokenYieldProfit",
+                      "type": "uint256",
+                      "internalType": "uint256"
+                    },
+                    {
+                      "name": "quoteTokenTradeProfit",
+                      "type": "uint256",
+                      "internalType": "uint256"
+                    },
+                    { "name": "baseTokenTradeProfit", "type": "uint256", "internalType": "uint256" }
+                  ]
+                },
+                {
+                  "name": "roi",
+                  "type": "tuple",
+                  "internalType": "struct IPoolsNFTLens.ROI",
+                  "components": [
+                    { "name": "ROINumerator", "type": "uint256", "internalType": "uint256" },
+                    { "name": "ROIDeniminator", "type": "uint256", "internalType": "uint256" },
+                    { "name": "ROIPeriod", "type": "uint256", "internalType": "uint256" }
+                  ]
+                },
+                {
+                  "name": "thresholds",
+                  "type": "tuple",
+                  "internalType": "struct IPoolsNFTLens.Thresholds",
+                  "components": [
+                    { "name": "spotPrice", "type": "uint256", "internalType": "uint256" },
+                    { "name": "longBuyPriceMin", "type": "uint256", "internalType": "uint256" },
+                    {
+                      "name": "longSellQuoteTokenAmountThreshold",
+                      "type": "uint256",
+                      "internalType": "uint256"
+                    },
+                    {
+                      "name": "longSellSwapPriceThreshold",
+                      "type": "uint256",
+                      "internalType": "uint256"
+                    },
+                    {
+                      "name": "hedgeSellInitPriceThresholdHigh",
+                      "type": "uint256",
+                      "internalType": "uint256"
+                    },
+                    {
+                      "name": "hedgeSellInitPriceThresholdLow",
+                      "type": "uint256",
+                      "internalType": "uint256"
+                    },
+                    { "name": "hedgeSellLiquidity", "type": "uint256", "internalType": "uint256" },
+                    {
+                      "name": "hedgeSellQuoteTokenAmountThreshold",
+                      "type": "uint256",
+                      "internalType": "uint256"
+                    },
+                    {
+                      "name": "hedgeSellTargetPrice",
+                      "type": "uint256",
+                      "internalType": "uint256"
+                    },
+                    {
+                      "name": "hedgeSellSwapPriceThreshold",
+                      "type": "uint256",
+                      "internalType": "uint256"
+                    },
+                    {
+                      "name": "hedgeRebuyBaseTokenAmountThreshold",
+                      "type": "uint256",
+                      "internalType": "uint256"
+                    },
+                    {
+                      "name": "hedgeRebuySwapPriceThreshold",
+                      "type": "uint256",
+                      "internalType": "uint256"
+                    }
+                  ]
+                },
+                {
+                  "name": "royaltyParams",
+                  "type": "tuple",
+                  "internalType": "struct IPoolsNFTLens.RoyaltyParams",
+                  "components": [
+                    { "name": "compensationShare", "type": "uint256", "internalType": "uint256" },
+                    { "name": "poolOwnerShare", "type": "uint256", "internalType": "uint256" },
+                    { "name": "reserveShare", "type": "uint256", "internalType": "uint256" },
+                    { "name": "ownerShare", "type": "uint256", "internalType": "uint256" },
+                    { "name": "oldRoyaltyPrice", "type": "uint256", "internalType": "uint256" },
+                    { "name": "newRoyaltyPrice", "type": "uint256", "internalType": "uint256" }
+                  ]
+                }
+              ]
+            }
           ]
         }
       ],
