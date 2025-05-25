@@ -57,7 +57,7 @@ function MintGRAI() {
 
     try {
       const graiAmountFormatted = ethers.parseUnits(graiAmount.toString(), 18)
-      const paymentAmount = await grinderAI!.calcPayment(ETH, graiAmountFormatted)
+      const paymentAmount = await grinderAI!.calcMintPayment(ETH, graiAmountFormatted)
       return paymentAmount
     } catch (error) {
       console.error('Error calculating payment: ', error)

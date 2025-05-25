@@ -8,7 +8,7 @@ function GRAI() {
   return (
     <div className={styles['grai-container']}>
       <MintGRAI/>
-      <BridgeGRAI/>
+      {/* <BridgeGRAI/> */}
     </div>
   );
 };
