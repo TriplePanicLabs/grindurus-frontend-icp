@@ -123,13 +123,17 @@ function InstancesTable() {
                 <img className={styles['network-img']} alt="Network Icon" src={logoArbitrum} />
                 <h3 className={styles['instance-title']}>Instance {data.id}</h3>
               </div>
-              <div className={styles['instance-header-right']}>
-                <div className={styles['pair-info']}>{data.pair}</div>
-                <div className={styles['terminal-info']}>{data.terminal}</div>
-              </div>
+              <button
+                onClick={() => handleViewInstance(data.id)}
+                className={`${styles['view-button']} ${styles['button']} button`}
+              >
+                <img className={styles['view-img']} src={visible} alt="Eye Icon" />
+                View Instance
+              </button>
             </div>
             <div className={styles['body']}>
-              <div className={styles['metrics']}>
+              <div className={styles['body-info']}>
+                <div className={styles['metrics']}>
                 <div className={styles['block']}>
                   <div className={styles['block-title']}>Strategy:</div>
                   <div className={styles['block-text']}>{data.strategy}</div>
@@ -142,33 +146,29 @@ function InstancesTable() {
                   <div className={styles['block-title']}>Active Qty:</div>
                   <div className={styles['block-text']}>{data.activeQty}</div>
                 </div>
-              </div>
-              <div className={styles['performance']}>
-                <div className={styles['block']}>
-                  <div className={styles['block-title']}>Avg Buy Price:</div>
-                  <div className={styles['block-text']}>${data.avgBuyPrice}</div>
                 </div>
-                <div className={styles['block']}>
-                  <div className={styles['block-title']}>Net PnL:</div>
-                  <div className={`${styles['block-text']} ${styles['pnl']}`}>
-                    {data.netPnL}
+                <div className={styles['performance']}>
+                  <div className={styles['block']}>
+                    <div className={styles['block-title']}>Avg Buy Price:</div>
+                    <div className={styles['block-text']}>${data.avgBuyPrice}</div>
+                  </div>
+                  <div className={styles['block']}>
+                    <div className={styles['block-title']}>Net PnL:</div>
+                    <div className={`${styles['block-text']} ${styles['pnl']}`}>
+                      {data.netPnL}
+                    </div>
+                  </div>
+                  <div className={styles['block']}>
+                    <div className={styles['block-title']}>Started:</div>
+                    <div className={styles['block-text']}>{data.startDate}</div>
                   </div>
                 </div>
-                <div className={styles['block']}>
-                  <div className={styles['block-title']}>Started:</div>
-                  <div className={styles['block-text']}>{data.startDate}</div>
-                </div>
+              </div>
+              <div className={styles['instance-header-right']}>
+                <div className={styles['pair-info']}>{data.pair}</div>
+                <div className={styles['terminal-info']}>{data.terminal}</div>
               </div>
             </div>
-          </div>
-          <div className={styles['buttons']}>
-            <button
-              onClick={() => handleViewInstance(data.id)}
-              className={`${styles['view-button']} ${styles['button']} button`}
-            >
-              <img className={styles['view-img']} src={visible} alt="Eye Icon" />
-              View Instance
-            </button>
           </div>
         </div>
       ))}

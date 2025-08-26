@@ -1,9 +1,33 @@
 import { useState, useEffect, useRef } from 'react'
 import { useParams } from 'react-router-dom'
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+} from 'chart.js'
+import { Line } from 'react-chartjs-2'
 
 import { NumberView } from '@/components/ui'
 
 import styles from './InstanceDetail.module.scss'
+
+// Register Chart.js components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+)
 
 interface InstanceData {
   id: string
@@ -23,8 +47,6 @@ function InstanceDetail() {
   const [instanceData, setInstanceData] = useState<InstanceData | null>(null)
   const [activeTab, setActiveTab] = useState<'info' | 'configs'>('info')
   const [isLoading, setIsLoading] = useState(true)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [containerWidth, setContainerWidth] = useState<number>(0)
 
   useEffect(() => {
     fetchInstanceData()
@@ -45,12 +67,22 @@ function InstanceDetail() {
         netPnL: '+450.25',
         startDate: '2024-01-15',
         chartData: [
-          { time: '2024-01-15', value: 10000 },
-          { time: '2024-01-16', value: 10200 },
-          { time: '2024-01-17', value: 10150 },
-          { time: '2024-01-18', value: 10300 },
-          { time: '2024-01-19', value: 10450 },
-          { time: '2024-01-20', value: 10450 },
+          { time: 'Aug 11', value: 10000 },
+          { time: 'Aug 12', value: 10200 },
+          { time: 'Aug 13', value: 10150 },
+          { time: 'Aug 14', value: 10300 },
+          { time: 'Aug 15', value: 10450 },
+          { time: 'Aug 16', value: 10600 },
+          { time: 'Aug 17', value: 10550 },
+          { time: 'Aug 18', value: 10700 },
+          { time: 'Aug 19', value: 10850 },
+          { time: 'Aug 20', value: 10900 },
+          { time: 'Aug 21', value: 11100 },
+          { time: 'Aug 22', value: 11250 },
+          { time: 'Aug 23', value: 11300 },
+          { time: 'Aug 24', value: 11450 },
+          { time: 'Aug 25', value: 11600 },
+          { time: 'Aug 26', value: 11750 },
         ]
       }
       setInstanceData(mockData)
@@ -60,76 +92,119 @@ function InstanceDetail() {
     setIsLoading(false)
   }
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (containerRef.current) {
-        setContainerWidth(containerRef.current.clientWidth)
-      }
-    }
-
-    handleResize()
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
   const renderChart = () => {
     if (!instanceData) return null
 
     const chartData = instanceData.chartData
-    const maxValue = Math.max(...chartData.map(d => d.value))
-    const minValue = Math.min(...chartData.map(d => d.value))
-    const range = maxValue - minValue
 
-    const width = Math.max(300, containerWidth || 0)
-    const height = Math.max(240, Math.round(width * 0.5))
-    const padding = 40
+    const data = {
+      labels: chartData.map(d => d.time),
+      datasets: [
+        {
+          label: 'Portfolio Value',
+          data: chartData.map(d => d.value),
+          borderColor: '#933DC9',
+          backgroundColor: 'rgba(147, 61, 201, 0.1)',
+          borderWidth: 3,
+          pointBackgroundColor: '#933DC9',
+          pointBorderColor: '#ffffff',
+          pointBorderWidth: 2,
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          fill: true,
+          tension: 0.4,
+          pointHoverBackgroundColor: '#ffffff',
+          pointHoverBorderColor: '#933DC9',
+        }
+      ]
+    }
 
-    const points = chartData.map((point, index) => {
-      const x = padding + (index / (chartData.length - 1)) * (width - 2 * padding)
-      const y = height - padding - ((point.value - minValue) / range) * (height - 2 * padding)
-      return `${x},${y}`
-    }).join(' ')
+    const options = {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false,
+        },
+        tooltip: {
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          titleColor: '#ffffff',
+          bodyColor: '#ffffff',
+          borderColor: '#933DC9',
+          borderWidth: 1,
+          cornerRadius: 8,
+          displayColors: false,
+          callbacks: {
+            label: function(context: any) {
+              return `$${context.parsed.y.toLocaleString()}`
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: {
+            color: 'rgba(255, 255, 255, 0.1)',
+            drawBorder: false,
+          },
+          ticks: {
+            color: '#6b7280',
+            font: {
+              size: 12,
+            },
+          },
+          border: {
+            display: false,
+          }
+        },
+        y: {
+          grid: {
+            color: 'rgba(255, 255, 255, 0.1)',
+            drawBorder: false,
+          },
+          ticks: {
+            color: '#6b7280',
+            font: {
+              size: 12,
+            },
+            callback: function(value: any) {
+              return `$${(value / 1000).toFixed(0)}k`
+            }
+          },
+          border: {
+            display: false,
+          }
+        }
+      },
+      interaction: {
+        intersect: false,
+        mode: 'index' as const,
+      },
+      elements: {
+        point: {
+          hoverBorderWidth: 3,
+        }
+      }
+    }
 
     return (
-      <div className={styles['chart-container']} ref={containerRef}>
-        <svg className={styles['chart']} viewBox={`0 0 ${width} ${height}`}>
-          {/* Grid lines */}
-          <line x1={padding} y1={padding} x2={padding} y2={height - padding} stroke="#333333" strokeWidth="1" />
-          <line x1={padding} y1={height - padding} x2={width - padding} y2={height - padding} stroke="#333333" strokeWidth="1" />
-          
-          {/* Chart line */}
-          <polyline
-            points={points}
-            fill="none"
-            stroke="#933DC9"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          
-          {/* Data points */}
-          {chartData.map((point, index) => {
-            const x = padding + (index / (chartData.length - 1)) * (width - 2 * padding)
-            const y = height - padding - ((point.value - minValue) / range) * (height - 2 * padding)
-            return (
-              <circle
-                key={index}
-                cx={x}
-                cy={y}
-                r="3"
-                fill="#933DC9"
-              />
-            )
-          })}
-          
-          {/* Y-axis labels */}
-          <text x={10} y={padding} fill="#ffffff" fontSize="12">${maxValue.toLocaleString()}</text>
-          <text x={10} y={height - padding} fill="#ffffff" fontSize="12">${minValue.toLocaleString()}</text>
-          
-          {/* X-axis labels */}
-          <text x={padding} y={height - 10} fill="#ffffff" fontSize="10">{chartData[0].time}</text>
-          <text x={width - padding - 30} y={height - 10} fill="#ffffff" fontSize="10">{chartData[chartData.length - 1].time}</text>
-        </svg>
+      <div className={styles['chart-container']}>
+        <div className={styles['chart-header']}>
+          <h3 className={styles['chart-title']}>Portfolio Performance</h3>
+          <div className={styles['chart-stats']}>
+            <div className={styles['stat']}>
+              <span className={styles['stat-label']}>Current Value:</span>
+              <span className={styles['stat-value']}>${chartData[chartData.length - 1].value.toLocaleString()}</span>
+            </div>
+            <div className={styles['stat']}>
+              <span className={styles['stat-label']}>Change:</span>
+              <span className={styles['stat-change']}>+{((chartData[chartData.length - 1].value - chartData[0].value) / chartData[0].value * 100).toFixed(1)}%</span>
+            </div>
+          </div>
+        </div>
+        <div className={styles['chart-wrapper']}>
+          <Line data={data} options={options} className={styles['chart']} />
+        </div>
       </div>
     )
   }
@@ -174,44 +249,44 @@ function InstanceDetail() {
               <div className={styles['tab-content']}>
                 {activeTab === 'info' && (
                   <div className={styles['info-content']}>
-                    <div className={styles['metric']}>
-                      <span className={styles['metric-label']}>Total Liquidity:</span>
-                      <span className={styles['metric-value']}>${instanceData.totalLiquidity}</span>
+                    <div className={styles['info-block']}>
+                      <div className={styles['element']}>Total Liquidity</div>
+                      <div className={styles['element']}>${instanceData.totalLiquidity}</div>
                     </div>
-                    <div className={styles['metric']}>
-                      <span className={styles['metric-label']}>Active Qty:</span>
-                      <span className={styles['metric-value']}>{instanceData.activeQty}</span>
+                    <div className={styles['info-block']}>
+                      <div className={styles['element']}>Active Qty</div>
+                      <div className={styles['element']}>{instanceData.activeQty}</div>
                     </div>
-                    <div className={styles['metric']}>
-                      <span className={styles['metric-label']}>Average Buy Price:</span>
-                      <span className={styles['metric-value']}>${instanceData.avgBuyPrice}</span>
+                    <div className={styles['info-block']}>
+                      <div className={styles['element']}>Average Buy Price</div>
+                      <div className={styles['element']}>${instanceData.avgBuyPrice}</div>
                     </div>
-                    <div className={styles['metric']}>
-                      <span className={styles['metric-label']}>Net PnL:</span>
-                      <span className={`${styles['metric-value']} ${styles['pnl']}`}>
+                    <div className={styles['info-block']}>
+                      <div className={styles['element']}>Net PnL</div>
+                      <div className={`${styles['element']} ${styles['pnl']}`}>
                         {instanceData.netPnL}
-                      </span>
+                      </div>
                     </div>
                   </div>
                 )}
                 
                 {activeTab === 'configs' && (
                   <div className={styles['configs-content']}>
-                    <div className={styles['config']}>
-                      <span className={styles['config-label']}>Terminal:</span>
-                      <span className={styles['config-value']}>{instanceData.terminal}</span>
+                    <div className={styles['info-block']}>
+                      <div className={styles['element']}>Terminal</div>
+                      <div className={styles['element']}>{instanceData.terminal}</div>
                     </div>
-                    <div className={styles['config']}>
-                      <span className={styles['config-label']}>Pair:</span>
-                      <span className={styles['config-value']}>{instanceData.pair}</span>
+                    <div className={styles['info-block']}>
+                      <div className={styles['element']}>Pair</div>
+                      <div className={styles['element']}>{instanceData.pair}</div>
                     </div>
-                    <div className={styles['config']}>
-                      <span className={styles['config-label']}>Strategy:</span>
-                      <span className={styles['config-value']}>{instanceData.strategy}</span>
+                    <div className={styles['info-block']}>
+                      <div className={styles['element']}>Strategy</div>
+                      <div className={styles['element']}>{instanceData.strategy}</div>
                     </div>
-                    <div className={styles['config']}>
-                      <span className={styles['config-label']}>Started:</span>
-                      <span className={styles['config-value']}>{instanceData.startDate}</span>
+                    <div className={styles['info-block']}>
+                      <div className={styles['element']}>Started</div>
+                      <div className={styles['element']}>{instanceData.startDate}</div>
                     </div>
                   </div>
                 )}
