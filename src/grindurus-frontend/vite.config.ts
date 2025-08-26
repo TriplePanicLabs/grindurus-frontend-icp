@@ -7,7 +7,12 @@ import environment from 'vite-plugin-environment'
 
 dotenv.config({ path: '../../.env' })
 
+// Resolve ESM-friendly __dirname
+const __dirnameResolved = path.dirname(fileURLToPath(new URL(import.meta.url)))
+
 export default defineConfig({
+  // Ensure Vite treats this package directory as the root
+  root: __dirnameResolved,
   build: {
     emptyOutDir: true,
   },
@@ -39,7 +44,8 @@ export default defineConfig({
       },
       {
         find: '@',
-        replacement: path.resolve(__dirname, 'src'),
+        // Use resolved dir to avoid relying on CommonJS __dirname
+        replacement: path.resolve(__dirnameResolved, 'src'),
       },
     ],
     dedupe: ['@dfinity/agent'],

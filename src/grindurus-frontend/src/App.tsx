@@ -9,7 +9,7 @@ import Grind from '@/components/grind/Grind'
 import GrinderAI from '@/components/grinderAI/GrinderAI'
 import Header from '@/components/header/Header'
 import Pool from '@/components/pool/Pool'
-import GRAI from '@/components/grAI/GrAI'
+import GRAI from '@/components/grAI/GRAI'
 import { useProtocolContext } from '@/context/ProtocolContext'
 
 type RouterGuardProps = {
