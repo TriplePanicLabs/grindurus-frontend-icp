@@ -2,13 +2,15 @@ import { useState } from 'react'
 
 import AgentsTable from './agents/AgentsTable'
 import PoolsTable from './pools/PoolsTable'
+import InstancesTable from '@/components/instances/InstancesTable'
 import styles from './Tables.module.scss'
 
-type TablesToShow = 'pools' | 'agents'
+type TablesToShow = 'pools' | 'agents' | 'instances'
 
 const tables: Record<TablesToShow, JSX.Element> = {
   pools: <PoolsTable />,
   agents: <AgentsTable />,
+  instances: <InstancesTable />,
 }
 
 function Tables() {
@@ -34,6 +36,14 @@ function Tables() {
               } button`}
             >
               Agents
+            </button>
+            <button
+              onClick={() => setShowTable('instances')}
+              className={`${styles['select-button']} ${
+                showTable === 'instances' ? styles['active'] : ''
+              } button`}
+            >
+              Instances
             </button>
           </div>
           {tables[showTable]}

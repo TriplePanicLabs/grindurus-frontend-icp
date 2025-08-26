@@ -10,6 +10,9 @@ import GrinderAI from '@/components/grinderAI/GrinderAI'
 import Header from '@/components/header/Header'
 import Pool from '@/components/pool/Pool'
 import GRAI from '@/components/grAI/GRAI'
+import CreateInstance from '@/components/instances/CreateInstance'
+import InstancesDashboard from '@/components/instances/InstancesDashboard'
+import InstanceDetail from '@/components/instances/InstanceDetail'
 import { useProtocolContext } from '@/context/ProtocolContext'
 
 type RouterGuardProps = {
@@ -68,6 +71,30 @@ function App() {
               <RouterGuard networkConfig={networkConfig} isConnected={isConnected}>
                 {/* <MintPool /> */}
                 <Create />
+              </RouterGuard>
+            }
+          />
+          <Route
+            path="/instances/create"
+            element={
+              <RouterGuard networkConfig={networkConfig} isConnected={isConnected}>
+                <CreateInstance />
+              </RouterGuard>
+            }
+          />
+          <Route
+            path="/instances"
+            element={
+              <RouterGuard networkConfig={networkConfig} isConnected={isConnected}>
+                <InstancesDashboard />
+              </RouterGuard>
+            }
+          />
+          <Route
+            path="/instances/:instanceId"
+            element={
+              <RouterGuard networkConfig={networkConfig} isConnected={isConnected}>
+                <InstanceDetail />
               </RouterGuard>
             }
           />
